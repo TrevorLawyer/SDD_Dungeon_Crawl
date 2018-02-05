@@ -21,6 +21,7 @@ public class Main
     public static void main(String[] args) {
         
         frame = new Map();
+        frame.addKeyListener(new KeyController());
 
         frame.setTitle("DEMO MAP");
         frame.setLocation(100, 100);

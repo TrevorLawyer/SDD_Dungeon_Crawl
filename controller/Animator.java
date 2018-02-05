@@ -15,9 +15,9 @@ public class Animator implements Runnable {
             
             processCollisions();
 
-            //Main.gameData.update();
-            //Main.gamePanel.gameRender();
-            //Main.gamePanel.printScreen();
+            Main.gameData.update();
+            Main.frame.gameRender();
+            Main.frame.printScreen();
 
             long endTime = System.currentTimeMillis();
             int sleepTime = (int) (1.0 / FRAMES_PER_SECOND * 1000)

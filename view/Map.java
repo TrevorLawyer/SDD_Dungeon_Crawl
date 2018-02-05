@@ -5,25 +5,36 @@
  */
 package view;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+
+
+
+import controller.Main;
 import model.GameFigure;
 /**
  *
  * @author Matthew
  */
 public class Map extends JFrame {
-JPanel panel = new JPanel();
-    int row = 10;
-    int col = 10;
+	JPanel panel = new JPanel();
+    public final static int row = 10, col = 10;
     JLabel[][] grid= new JLabel[row][col];
+    private Graphics2D g2;
+    private Image dbImage = null;  //Taken from OOP project to get the screen to update
+    public static int width, height;
     
     public Map() {
         // contentPane's default layout manager --> Border Layout
@@ -57,6 +68,55 @@ JPanel panel = new JPanel();
     {  
 //       grid[row/2][col/2]
     }
+
+	public void printScreen() {
+		Graphics g;
+        try {
+            g = this.getGraphics();
+            if ((g != null) && (dbImage != null)) {
+                g.drawImage(dbImage, 0, 0, null);
+            }
+            Toolkit.getDefaultToolkit().sync();  // sync the display on some systems
+            if (g != null) {
+                g.dispose();
+            }
+        } catch (Exception e) {
+            System.out.println("Graphics error: " + e);
+        }
+		
+	}
+
+	public void gameRender() {
+		
+		width = getSize().width;
+        height = getSize().height;
+        if (dbImage == null) {
+            // Creates an off-screen drawable image to be used for double buffering
+            dbImage = createImage(width, height);
+            if (dbImage == null) {
+                System.out.println("Critical Error: dbImage is null");
+                System.exit(1);
+            } else {
+                g2 = (Graphics2D) dbImage.getGraphics();
+            }
+        }
+
+        g2.clearRect(0, 0, width, height);
+/*		synchronized (Main.gameData.enemyFigures) {
+            
+            for (GameFigure f : Main.gameData.enemyFigures) {
+                f.render(g2);
+            }
+        }
+*/        synchronized (Main.gameData.friendFigures){
+            for (GameFigure f : Main.gameData.friendFigures) {
+                f.render(g2);
+            }
+          
+		
+	}
+     
+	}
      
      
 }
