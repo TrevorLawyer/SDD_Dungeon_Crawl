@@ -16,12 +16,13 @@ import model.GameData;
 public class Main 
 {
         public static GameData gameData;
-        public static Map test;
+        public static Animator animator;
         public static Map frame;
     public static void main(String[] args) {
         
         frame = new Map();
         frame.addKeyListener(new KeyController());
+        animator = new Animator();
 
         frame.setTitle("DEMO MAP");
         frame.setLocation(100, 100);
@@ -29,7 +30,7 @@ public class Main
         frame.setVisible(true);
         gameData = new GameData();
         
-        
+        new Thread(animator).start();
         
     }
     

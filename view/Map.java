@@ -58,11 +58,11 @@ public class Map extends JFrame {
     {
         BufferedImage image = character.currentPic;
         
-        Image img= image.getScaledInstance(grid[character.x][character.y].getWidth(), grid[character.x][character.y].getHeight(),
+        Image img= image.getScaledInstance(grid[character.y][character.x].getWidth(), grid[character.y][character.x].getHeight(),
         Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(img);
         
-        grid[character.x][character.y].setIcon(imageIcon);
+        grid[character.y][character.x].setIcon(imageIcon);
     }
      public void PlaceEnemy(int x, int y)
     {  
@@ -111,6 +111,7 @@ public class Map extends JFrame {
 */        synchronized (Main.gameData.friendFigures){
             for (GameFigure f : Main.gameData.friendFigures) {
                 f.render(g2);
+                PlaceCharacter(f);
             }
           
 		

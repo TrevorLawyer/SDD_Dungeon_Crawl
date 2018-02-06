@@ -17,12 +17,12 @@ public class KeyController implements KeyListener {
         		}
         		break;
         	case KeyEvent.VK_DOWN:
-        		if(GameData.hero.y<Map.row){
+        		if(GameData.hero.y<Map.row-1){
         			GameData.hero.y++;
         		}
         		break;
         	case KeyEvent.VK_RIGHT:
-        		if(GameData.hero.x<Map.col){
+        		if(GameData.hero.x<Map.col-1){
         			GameData.hero.x++;
         		}
         		break;
@@ -38,6 +38,7 @@ public class KeyController implements KeyListener {
         }
     //move();
 		System.out.println("Hero coords\nx: "+GameData.hero.x+"  y: "+GameData.hero.y);
+		Main.animator.switchTurns();
 	}
 
 	@Override

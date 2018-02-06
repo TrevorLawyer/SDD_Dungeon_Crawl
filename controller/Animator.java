@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Animator implements Runnable {
 
-    public boolean running = true;
+    public boolean running = true, userTurn = true;
     private final int FRAMES_PER_SECOND = 50;
 
     @Override
@@ -30,11 +30,23 @@ public class Animator implements Runnable {
 
                 }
             }
+            if(userTurn){
+            	//Player's Turn
+            } else{
+            	//Enemy's Turn
+            	switchTurns();
+            }
         }
         System.exit(0);
     }
     
-    private void processCollisions() {
+    public void switchTurns() {
+		if(userTurn) userTurn=false;
+		else userTurn=true;
+		
+	}
+
+	private void processCollisions() {
         // detect collisions between friendFigure and enemyFigures
         // if detected, mark it as STATE_DONE, so that
         // they can be removed at update() method

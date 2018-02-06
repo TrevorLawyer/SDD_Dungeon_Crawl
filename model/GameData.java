@@ -33,8 +33,7 @@ public class GameData {
         
     }
     
-    public void update() 
-    {
+    public void update(){
     synchronized (friendFigures) {
             ArrayList<GameFigure> remove = new ArrayList<>();
             GameFigure f;
@@ -48,6 +47,7 @@ public class GameData {
 
             for (GameFigure g : friendFigures) {
                 g.update();
+                Main.frame.PlaceCharacter(g);
             }
         }
     }
