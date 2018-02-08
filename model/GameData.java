@@ -18,7 +18,7 @@ public class GameData {
     
     public static Enemy enemy;
     public static Hero hero;
-    public final List<GameFigure> friendFigures;
+    public final List<GameFigure> friendFigures, enemyFigures;
     
     public GameData()
     {
@@ -26,15 +26,17 @@ public class GameData {
         enemy = new Enemy(5, 5);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
+        enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
         
         friendFigures.add(hero);
         Main.frame.PlaceCharacter(hero);
+        enemyFigures.add(enemy);
         Main.frame.PlaceCharacter(enemy);
         
     }
     
     public void update(){
-    synchronized (friendFigures) {
+    	synchronized (friendFigures) {
             ArrayList<GameFigure> remove = new ArrayList<>();
             GameFigure f;
             for (int i = 0; i < friendFigures.size(); i++) {
@@ -50,5 +52,11 @@ public class GameData {
                 Main.frame.PlaceCharacter(g);
             }
         }
+    	synchronized(enemyFigures){
+    		for(GameFigure g: enemyFigures){
+    			g.update();
+    			Main.frame.PlaceCharacter(g);
+    		}
+    	}
     }
 }
