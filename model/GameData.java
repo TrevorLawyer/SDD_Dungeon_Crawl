@@ -18,18 +18,22 @@ public class GameData {
     
     public static Enemy enemy;
     public static Hero hero;
+    public static Merchant merchant;
     public final List<GameFigure> friendFigures, enemyFigures;
     
     public GameData()
     {
         hero = new Hero(1, 1);
         enemy = new Enemy(5, 5);
+        merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
         
         friendFigures.add(hero);
         Main.frame.PlaceCharacter(hero);
+        friendFigures.add(merchant);
+        Main.frame.PlaceCharacter(merchant);
         enemyFigures.add(enemy);
         Main.frame.PlaceCharacter(enemy);
         
