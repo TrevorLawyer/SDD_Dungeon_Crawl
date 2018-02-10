@@ -24,6 +24,7 @@ import javax.swing.border.LineBorder;
 
 import controller.Main;
 import model.GameFigure;
+import model.Merchant;
 /**
  *
  * @author Matthew
@@ -113,10 +114,17 @@ public class Map extends JFrame {
                 f.render(g2);
                 PlaceCharacter(f);
             }
+            
           
 		
 	}
      
+			synchronized(Merchant.merchant_dialogue){
+				if (Main.gameData.player_dialogue_state) {
+					Main.gameData.merchant_dialogue_window.render(g2);
+				}
+}
+
 	}
      
      
