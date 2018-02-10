@@ -19,17 +19,29 @@ public class GameData {
     public static Enemy enemy;
     public static Hero hero;
     public final List<GameFigure> friendFigures, enemyFigures;
+    public static Weapon weapon;
+    public static Armor armor;
+    public static Consumable potion;
     
     public GameData()
     {
         hero = new Hero(1, 1);
         enemy = new Enemy(5, 5);
+        weapon = new Weapon("sword","a sword",5,9,1);
+        armor = new Armor("steel Armor", "steel armor",5,8,0);
+        potion = new Consumable("health potion", "Health Potion",5,9,0);
+        
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
         
         friendFigures.add(hero);
+        friendFigures.add(weapon);
+        friendFigures.add(armor);
+        friendFigures.add(potion);
         Main.frame.PlaceCharacter(hero);
+        Main.frame.PlaceCharacter(weapon);
+        
         enemyFigures.add(enemy);
         Main.frame.PlaceCharacter(enemy);
         

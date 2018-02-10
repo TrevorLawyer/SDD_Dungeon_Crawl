@@ -26,8 +26,8 @@ public class Hero extends GameFigure{
     public Hero(int x, int y) {
         super(x, y);
         
-        equippedWeapon = new Weapon("Fist", "Your Fists", 1);
-        equippedArmor = new Armor("Clothes", "Basic Clothes", 1);
+        equippedWeapon = new Weapon("Fist", "Your Fists", 1,-1,-1);
+        equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
 
         try 
         {
