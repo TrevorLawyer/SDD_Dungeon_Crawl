@@ -36,27 +36,32 @@ public class GameData {
     }
     
     public void update(){
-    	synchronized (friendFigures) {
-            ArrayList<GameFigure> remove = new ArrayList<>();
-            GameFigure f;
-            for (int i = 0; i < friendFigures.size(); i++) {
-                f = friendFigures.get(i);
-//                if (f.state == GameFigureState.STATE_DONE) {
- //                   remove.add(f);
- //               }
-            }
-            friendFigures.removeAll(remove);
-
-            for (GameFigure g : friendFigures) {
-                g.update();
-                Main.frame.PlaceCharacter(g);
-            }
-        }
-    	synchronized(enemyFigures){
-    		for(GameFigure g: enemyFigures){
-    			g.update();
-    			Main.frame.PlaceCharacter(g);
-    		}
+    	
+    	if(Main.animator.userTurn){
+    		synchronized (friendFigures) {
+	            ArrayList<GameFigure> remove = new ArrayList<>();
+	            GameFigure f;
+	            for (int i = 0; i < friendFigures.size(); i++) {
+	                f = friendFigures.get(i);
+	//                if (f.state == GameFigureState.STATE_DONE) {
+	 //                   remove.add(f);
+	 //               }
+	            }
+	            friendFigures.removeAll(remove);
+	
+	            for (GameFigure g : friendFigures) {
+	                g.update();
+	                Main.frame.PlaceCharacter(g);
+	            }
+	        }
     	}
+    	else{
+	    	synchronized(enemyFigures){
+	    		for(GameFigure g: enemyFigures){
+	    			g.update();
+	    			Main.frame.PlaceCharacter(g);
+	    		}
+	    	}
+	    }
     }
 }
