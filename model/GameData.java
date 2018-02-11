@@ -20,10 +20,13 @@ public class GameData {
     public static Hero hero;
     public final List<GameFigure> friendFigures, enemyFigures;
     
+    
     public GameData()
     {
         hero = new Hero(1, 1);
         enemy = new Enemy(5, 5);
+        
+        
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
