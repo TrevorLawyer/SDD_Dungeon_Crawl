@@ -24,8 +24,12 @@ import javax.swing.border.LineBorder;
 
 import controller.Main;
 import model.GameFigure;
+<<<<<<< HEAD
 import model.GameMapTile;
 import model.MapManager;
+=======
+import model.Merchant;
+>>>>>>> origin/peter_hodgden
 /**
  *
  * @author Matthew
@@ -123,9 +127,22 @@ public class Map extends JFrame {
                 f.render(g2);
                 PlaceCharacter(f);
             }
+            
           
+<<<<<<< HEAD
 		}
         
+=======
+		
+	}
+     
+			synchronized(Merchant.merchant_dialogue){
+				if (Main.gameData.player_dialogue_state) {
+					Main.gameData.merchant_dialogue_window.render(g2);
+				}
+}
+
+>>>>>>> origin/peter_hodgden
 	}
      
      
