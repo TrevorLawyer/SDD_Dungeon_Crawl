@@ -16,6 +16,10 @@ public abstract class GameFigure {
         this.x = x;
         this.y = y;
     }
+    public GameFigure (Coordinate xy) {
+    	this.x = xy.getX();
+    	this.y= xy.getY();
+    }
 
     // how to render on the canvas
     public abstract void render(Graphics2D g);

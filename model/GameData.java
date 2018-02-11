@@ -23,13 +23,18 @@ public class GameData {
     public static Armor armor;
     public static Consumable potion;
     
+    
     public GameData()
     {
         hero = new Hero(1, 1);
         enemy = new Enemy(5, 5);
+<<<<<<< HEAD
         weapon = new Weapon("sword","a sword",5,9,1);
         armor = new Armor("steel Armor", "steel armor",5,8,0);
         potion = new Consumable("health potion", "Health Potion",5,9,0);
+=======
+        
+>>>>>>> origin/TrevorLMapGen
         
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );

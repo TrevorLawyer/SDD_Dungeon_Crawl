@@ -37,6 +37,11 @@ public class KeyController implements KeyListener {
         		break;
         }
     //move();
+		if(GameData.hero.x == Main.gameMap.getExit().x && GameData.hero.y == Main.gameMap.getExit().y) {
+			Main.gameMap.goNext();
+			GameData.hero.x = Main.gameMap.getEntrance().x;
+			GameData.hero.y = Main.gameMap.getEntrance().y;
+		}
 		System.out.println("Hero coords\nx: "+GameData.hero.x+"  y: "+GameData.hero.y);
 		Main.animator.switchTurns();
 	}
