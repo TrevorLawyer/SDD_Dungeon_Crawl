@@ -24,34 +24,23 @@ public class GameData {
     
     public static Enemy enemy;
     public static Hero hero;
-    public static Merchant merchant;
+    //public static Merchant merchant;
     public final List<GameFigure> friendFigures, enemyFigures;
-<<<<<<< HEAD
     public static Weapon weapon;
     public static Armor armor;
     public static Consumable potion;
-    
-=======
-    public static MerchantDialogueWindow merchant_dialogue_window;
->>>>>>> origin/peter_hodgden
+    //public static MerchantDialogueWindow merchant_dialogue_window;
     
     public GameData()
     {
     		
         hero = new Hero(1, 1);
         enemy = new Enemy(5, 5);
-<<<<<<< HEAD
-<<<<<<< HEAD
         weapon = new Weapon("sword","a sword",5,9,1);
         armor = new Armor("steel Armor", "steel armor",5,8,0);
         potion = new Consumable("health potion", "Health Potion",5,9,0);
-=======
-        
->>>>>>> origin/TrevorLMapGen
-        
-=======
-        merchant = new Merchant(6,6);
->>>>>>> origin/peter_hodgden
+
+      //  merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
@@ -62,24 +51,20 @@ public class GameData {
         friendFigures.add(armor);
         friendFigures.add(potion);
         Main.frame.PlaceCharacter(hero);
-<<<<<<< HEAD
         Main.frame.PlaceCharacter(weapon);
         
-=======
-        friendFigures.add(merchant);
-        Main.frame.PlaceCharacter(merchant);
->>>>>>> origin/peter_hodgden
+       // friendFigures.add(merchant);
+       // Main.frame.PlaceCharacter(merchant);
         enemyFigures.add(enemy);
         Main.frame.PlaceCharacter(enemy);
         
         player_dialogue_state = false;
-        player_dialogue_type = Merchant.GREETING;
-        merchant_dialogue_window = Merchant.merchant_dialogue[0];
+       // player_dialogue_type = Merchant.GREETING;
+        //merchant_dialogue_window = Merchant.merchant_dialogue[0];
         
     }
     
     public void update(){
-<<<<<<< HEAD
     	
     	if(Main.animator.userTurn){
     		synchronized (friendFigures) {
@@ -98,7 +83,6 @@ public class GameData {
 	                Main.frame.PlaceCharacter(g);
 	            }
 	        }
-=======
     	synchronized (friendFigures) {
     		if (!player_dialogue_state) {
             ArrayList<GameFigure> remove = new ArrayList<>();
@@ -125,13 +109,12 @@ public class GameData {
     		}
     		}
     	}
-    synchronized(Merchant.merchant_dialogue){
-    		if (player_dialogue_state) {
-    			merchant_dialogue_window.update();
-    		}
->>>>>>> origin/peter_hodgden
-    	}
-    	else{
+//    synchronized(Merchant.merchant_dialogue){
+//    		if (player_dialogue_state) {
+//    			merchant_dialogue_window.update();
+//    		}
+//    	}
+
 	    	synchronized(enemyFigures){
 	    		for(GameFigure g: enemyFigures){
 	    			g.update();

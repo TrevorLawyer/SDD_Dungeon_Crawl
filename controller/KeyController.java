@@ -17,9 +17,9 @@ public class KeyController implements KeyListener {
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.y--;
         		}
-        		else if (Main.gameData.player_dialogue_state) {
-        			Main.gameData.merchant_dialogue_window.moveIndexUp();
-        		}
+//        		else if (Main.gameData.player_dialogue_state) {
+//        			Main.gameData.merchant_dialogue_window.moveIndexUp();
+//        		}
         		break;
         	case KeyEvent.VK_DOWN:
         		if(GameData.hero.y<Map.row-1 && !Main.gameData.player_dialogue_state){
@@ -27,9 +27,9 @@ public class KeyController implements KeyListener {
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.y++;
         		}
-        		else if (Main.gameData.player_dialogue_state) {
-        			Main.gameData.merchant_dialogue_window.moveIndexDown();
-        		}
+//        		else if (Main.gameData.player_dialogue_state) {
+//        			Main.gameData.merchant_dialogue_window.moveIndexDown();
+//        		}
         		break;
         	case KeyEvent.VK_RIGHT:
         		if(GameData.hero.x<Map.col-1 && !Main.gameData.player_dialogue_state){
@@ -49,10 +49,10 @@ public class KeyController implements KeyListener {
 //        		Main.animator.gameState = Main.animator.GAME_OVER;
         		break;
         	case KeyEvent.VK_ENTER:
-        		if (Main.gameData.player_dialogue_state) {
-        			Main.gameData.player_dialogue_state = false;
-        			Main.gameData.merchant_dialogue_window.closeWindow();
-        		}
+//        		if (Main.gameData.player_dialogue_state) {
+//        			Main.gameData.player_dialogue_state = false;
+//        			Main.gameData.merchant_dialogue_window.closeWindow();
+//        		}
         		break;
         		
         	default:

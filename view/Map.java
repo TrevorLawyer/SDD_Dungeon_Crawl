@@ -24,12 +24,10 @@ import javax.swing.border.LineBorder;
 
 import controller.Main;
 import model.GameFigure;
-<<<<<<< HEAD
 import model.GameMapTile;
 import model.MapManager;
-=======
-import model.Merchant;
->>>>>>> origin/peter_hodgden
+//import model.Merchant;
+
 /**
  *
  * @author Matthew
@@ -55,8 +53,6 @@ public class Map extends JFrame {
 	    for (int i = 0; i < row; i++){
 	        for (int j = 0; j < col; j++){
 	            grid[i][j] = gameMap.getCurrent().getTile(j, i);
-	           // if(grid[i][j].tileEmpty) grid[i][j].setBackground(Color.green);
-	           // else grid[i][j].setBackground(Color.black);
 	            grid[i][j].setBorder(new LineBorder(Color.BLACK));
 	            grid[i][j].setOpaque(true);
 	            panel.add(grid[i][j]);
@@ -128,22 +124,16 @@ public class Map extends JFrame {
                 PlaceCharacter(f);
             }
             
-          
-<<<<<<< HEAD
+     
 		}
         
-=======
-		
 	}
      
-			synchronized(Merchant.merchant_dialogue){
-				if (Main.gameData.player_dialogue_state) {
-					Main.gameData.merchant_dialogue_window.render(g2);
-				}
-}
+//			synchronized(Merchant.merchant_dialogue){
+//				if (Main.gameData.player_dialogue_state) {
+//					Main.gameData.merchant_dialogue_window.render(g2);
+//				}
 
->>>>>>> origin/peter_hodgden
-	}
      
      
 }
