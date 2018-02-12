@@ -62,7 +62,7 @@ public class Animator implements Runnable {
         // detect collisions between friendFigure and enemyFigures
         // if detected, mark it as STATE_DONE, so that
         // they can be removed at update() method
-		if (Main.gameData.friendFigures.get(0).x == Main.gameData.friendFigures.get(1).x && Main.gameData.friendFigures.get(0).y == Main.gameData.friendFigures.get(1).y) {
+		if (Main.gameData.friendFigures.get(0).x == Main.gameData.merchant.x && Main.gameData.friendFigures.get(0).y == Main.gameData.merchant.y) {
 			Main.gameData.player_dialogue_state = true;
 			Main.gameData.merchant_dialogue_window.openWindow();
 			GameData.hero.x = Main.gameData.location_memory_min_1_x;
