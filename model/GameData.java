@@ -24,12 +24,12 @@ public class GameData {
     
     public static Enemy enemy;
     public static Hero hero;
-    //public static Merchant merchant;
+    public static Merchant merchant;
     public final List<GameFigure> friendFigures, enemyFigures;
     public static Weapon weapon;
     public static Armor armor;
     public static Consumable potion;
-    //public static MerchantDialogueWindow merchant_dialogue_window;
+    public static MerchantDialogueWindow merchant_dialogue_window;
     
     public GameData()
     {
@@ -40,7 +40,7 @@ public class GameData {
         armor = new Armor("steel Armor", "steel armor",5,8,0);
         potion = new Consumable("health potion", "Health Potion",5,9,0);
 
-      //  merchant = new Merchant(6,6);
+        merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
@@ -53,14 +53,14 @@ public class GameData {
         Main.frame.PlaceCharacter(hero);
         Main.frame.PlaceCharacter(weapon);
         
-       // friendFigures.add(merchant);
-       // Main.frame.PlaceCharacter(merchant);
+        friendFigures.add(merchant);
+        Main.frame.PlaceCharacter(merchant);
         enemyFigures.add(enemy);
         Main.frame.PlaceCharacter(enemy);
         
         player_dialogue_state = false;
-       // player_dialogue_type = Merchant.GREETING;
-        //merchant_dialogue_window = Merchant.merchant_dialogue[0];
+        player_dialogue_type = Merchant.GREETING;
+        merchant_dialogue_window = Merchant.merchant_dialogue[0];
         
     }
     
@@ -109,11 +109,11 @@ public class GameData {
     		}
     		}
     	}
-//    synchronized(Merchant.merchant_dialogue){
-//    		if (player_dialogue_state) {
-//    			merchant_dialogue_window.update();
-//    		}
-//    	}
+    synchronized(Merchant.merchant_dialogue){
+    		if (player_dialogue_state) {
+    			merchant_dialogue_window.update();
+    		}
+    	}
 
 	    	synchronized(enemyFigures){
 	    		for(GameFigure g: enemyFigures){

@@ -26,7 +26,7 @@ import controller.Main;
 import model.GameFigure;
 import model.GameMapTile;
 import model.MapManager;
-//import model.Merchant;
+import model.Merchant;
 
 /**
  *
@@ -127,13 +127,13 @@ public class Map extends JFrame {
      
 		}
         
-	}
+	
      
-//			synchronized(Merchant.merchant_dialogue){
-//				if (Main.gameData.player_dialogue_state) {
-//					Main.gameData.merchant_dialogue_window.render(g2);
-//				}
+			synchronized(Merchant.merchant_dialogue){
+				if (Main.gameData.player_dialogue_state) {
+					Main.gameData.merchant_dialogue_window.render(g2);
+				}
 
-     
-     
+			}
+	}
 }
