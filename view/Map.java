@@ -24,6 +24,10 @@ import javax.swing.border.LineBorder;
 
 import controller.Main;
 import model.GameFigure;
+import model.GameMapTile;
+import model.MapManager;
+import model.Merchant;
+
 /**
  *
  * @author Matthew
@@ -31,27 +35,30 @@ import model.GameFigure;
 public class Map extends JFrame {
 	JPanel panel = new JPanel();
     public final static int row = 10, col = 10;
-    JLabel[][] grid= new JLabel[row][col];
+    GameMapTile[][] grid= new GameMapTile[row][col];
     private Graphics2D g2;
     private Image dbImage = null;  //Taken from OOP project to get the screen to update
     public static int width, height;
+    MapManager gameMap;
     
     public Map() {
-        // contentPane's default layout manager --> Border Layout
-    getContentPane().add(panel);
-
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 500, 500);
-    panel.setLayout(new GridLayout(row, col));
-
-    for (int i = 0; i < row; i++){
-        for (int j = 0; j < col; j++){
-            grid[i][j] = new JLabel();
-            grid[i][j].setBorder(new LineBorder(Color.BLACK));
-            grid[i][j].setOpaque(true);
-            panel.add(grid[i][j]);
-        }
-    }
+	    // contentPane's default layout manager --> Border Layout
+	    getContentPane().add(panel);
+	
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setBounds(100, 100, 500, 500);
+	    panel.setLayout(new GridLayout(row, col));
+	    
+	    gameMap = Main.gameMap;
+	    for (int i = 0; i < row; i++){
+	        for (int j = 0; j < col; j++){
+	            grid[i][j] = gameMap.getCurrent().getTile(j, i);
+	            grid[i][j].setBorder(new LineBorder(Color.BLACK));
+	            grid[i][j].setOpaque(true);
+	            panel.add(grid[i][j]);
+	        }
+	    }
+	    
     }
     
     public void PlaceCharacter(GameFigure character)
@@ -107,17 +114,26 @@ public class Map extends JFrame {
             for (GameFigure f : Main.gameData.enemyFigures) {
                 f.render(g2);
             }
-        }
-*/        synchronized (Main.gameData.friendFigures){
-            for (GameFigure f : Main.gameData.friendFigures) {
+         }
+*/      
+        gameMap.render(g2);
+        synchronized (Main.gameData.friendFigures){
+            
+        	for (GameFigure f : Main.gameData.friendFigures) {
                 f.render(g2);
                 PlaceCharacter(f);
             }
-          
-		
+            
+     
+		}
+        
+	
+     
+			synchronized(Merchant.merchant_dialogue){
+				if (Main.gameData.player_dialogue_state) {
+					Main.gameData.merchant_dialogue_window.render(g2);
+				}
+
+			}
 	}
-     
-	}
-     
-     
 }
