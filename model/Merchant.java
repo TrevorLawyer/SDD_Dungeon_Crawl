@@ -25,14 +25,14 @@ public class Merchant extends GameFigure {
 	
 	public static final int GREETING = 0;
 	public static final int INQUIRY = 1;
-	public static final int FAREWELL = 3;
-	public static final int SELL_TO_PLAYER = 4;
-	public static final int SELL_CONFIRMATION = 5;
-	public static final int NOT_ENOUGH_GOLD = 6;
-	public static final int FULL_INVENTORY = 7;
-	public static final int EMPTY_INVENTORY = 8;
-	public static final int BUY_FROM_PLAYER = 9;
-	public static final int BUY_CONFIRMATION = 10;
+	public static final int FAREWELL = 2;
+	public static final int SELL_TO_PLAYER = 3;
+	public static final int SELL_CONFIRMATION = 4;
+	public static final int NOT_ENOUGH_GOLD = 5;
+	public static final int FULL_INVENTORY = 6;
+	public static final int EMPTY_INVENTORY = 7;
+	public static final int BUY_FROM_PLAYER = 8;
+	public static final int BUY_CONFIRMATION = 9;
 	
 	
 	public static final String[] menu_options_0 = {"Buy Items", "Sell Items", "Leave"};
