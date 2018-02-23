@@ -12,34 +12,40 @@ public class KeyController implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()){
         	case KeyEvent.VK_UP:
-        		if(GameData.hero.y>0 && !Main.gameData.player_dialogue_state){
+        		if(GameData.hero.y>0 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.y--;
         		}
-        		else if (Main.gameData.player_dialogue_state) {
+        		else if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
         			Main.gameData.merchant_dialogue_window.moveIndexUp();
+        		}
+        		else if(Main.gameData.game_state == GameData.GAME_MENU){
+        			Main.gameData.inventory_window.moveIndexUp();
         		}
         		break;
         	case KeyEvent.VK_DOWN:
-        		if(GameData.hero.y<Map.row-1 && !Main.gameData.player_dialogue_state){
+        		if(GameData.hero.y<Map.row-1 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.y++;
         		}
         		else if (Main.gameData.player_dialogue_state) {
         			Main.gameData.merchant_dialogue_window.moveIndexDown();
+        		} 
+        		else if(Main.gameData.game_state == GameData.GAME_MENU){
+        			Main.gameData.inventory_window.moveIndexDown();
         		}
         		break;
         	case KeyEvent.VK_RIGHT:
-        		if(GameData.hero.x<Map.col-1 && !Main.gameData.player_dialogue_state){
+        		if(GameData.hero.x<Map.col-1 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.x++;
         		}
         		break;
         	case KeyEvent.VK_LEFT:
-        		if(GameData.hero.x>0 && !Main.gameData.player_dialogue_state){
+        		if(GameData.hero.x>0 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.x--;
@@ -52,9 +58,23 @@ public class KeyController implements KeyListener {
         		if (Main.gameData.player_dialogue_state) {
         			Main.gameData.player_dialogue_state = false;
         			Main.gameData.merchant_dialogue_window.closeWindow();
+        			Main.gameData.game_state = GameData.GAME_RUNNING;
         		}
         		break;
         		
+        	case KeyEvent.VK_I:
+        		//opens inventory window, switches game state to game_menu
+        		if(Main.gameData.game_state == GameData.GAME_RUNNING){
+        			Main.gameData.game_state = GameData.GAME_MENU;
+        			Main.gameData.inventory_window.openWindow();
+        			Main.gameData.inventory_window.update(Main.gameData.hero.getInventoryNames());
+        		}
+        		else if(Main.gameData.game_state == GameData.GAME_MENU){
+        			Main.gameData.game_state = GameData.GAME_RUNNING;
+        			//close inventory window
+        			Main.gameData.inventory_window.closeWindow();
+        		}
+        	break;		
         	default:
         		break;
         }

@@ -9,6 +9,8 @@ public class MerchantDialogueWindow {
 	private int menu_index;
 	private String menu_header;
 	private String[] menu_options;
+	
+	
 	public MerchantDialogueWindow(String a) {
 		is_open = false;
 		menu_size = 0;
@@ -41,9 +43,11 @@ public class MerchantDialogueWindow {
 	}
 	public void openWindow() {
 		is_open = true;
+		System.out.println("Opening Window");
 	}
 	public void closeWindow() {
 		is_open = false;
+		System.out.println("Closing Window");
 	}
 	public boolean isOpen() {
 		return is_open;
@@ -58,11 +62,19 @@ public class MerchantDialogueWindow {
 			g.setColor(Color.GRAY);
 			g.fill3DRect(50, 50, 200, 200, true);
 			g.setColor(Color.WHITE);
-			g.drawString(menu_header.substring(0,28), 60, 75);
-			g.drawString(menu_header.substring(28,36), 60, 85);
+			if(menu_header.length()>28){
+				g.drawString(menu_header.substring(0,28), 60, 75);
+				g.drawString(menu_header.substring(28,menu_header.length()-1), 60, 85);
+			} else{
+				g.drawString(menu_header, 60, 75);
+			}
 		}
 	}
 	public void update() {
 		
+	}
+	
+	public void update(String[] newStuff){
+		menu_options = newStuff;
 	}
 }

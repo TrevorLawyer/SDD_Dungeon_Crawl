@@ -29,6 +29,7 @@ public class Hero extends GameFigure{
         equippedWeapon = new Weapon("Fist", "Your Fists", 1,-1,-1);
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
 
+        inventory = new ArrayList<Item>();
         try 
         {
             super.currentPic = ImageIO.read(getClass().getResource("pixel_hero.png"));
@@ -50,6 +51,18 @@ public class Hero extends GameFigure{
 
     public void AddItemToInventory(Item i){
     	inventory.add(i);
+    }
+    
+    public String[] getInventoryNames(){
+    	if(inventory.size()>0){
+	    	String[] inventorynames = new String[inventory.size()];
+	    	for(int i=0;i< inventory.size();i++){
+	    		inventorynames[i] = inventory.get(i).name;
+	    	}
+	    	return inventorynames;
+    	}
+    	
+    	return new String[]{""};
     }
     
     public void useItem(Item i){
