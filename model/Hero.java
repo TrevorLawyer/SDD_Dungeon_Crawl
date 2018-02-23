@@ -30,6 +30,7 @@ public class Hero extends GameFigure{
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
 
         inventory = new ArrayList<Item>();
+        inventory.add(new Weapon("Basic Sword","It's a sword",1,0,0));
         try 
         {
             super.currentPic = ImageIO.read(getClass().getResource("pixel_hero.png"));

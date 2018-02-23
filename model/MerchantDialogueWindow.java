@@ -68,6 +68,9 @@ public class MerchantDialogueWindow {
 			} else{
 				g.drawString(menu_header, 60, 75);
 			}
+			for(int i=0;i<menu_options.length;i++){
+				g.drawString(menu_options[i], 60, 95+10*i);
+			}
 		}
 	}
 	public void update() {
