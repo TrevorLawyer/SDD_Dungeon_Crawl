@@ -7,7 +7,7 @@ import view.Map;
 import model.GameData;
 
 public class KeyController implements KeyListener {
-
+	boolean hasLeftEntranceTile = false;
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()){
@@ -59,10 +59,17 @@ public class KeyController implements KeyListener {
         		break;
         }
     //move();
+		hasLeftEntranceTile = true;
 		if(GameData.hero.x == Main.gameMap.getExit().x && GameData.hero.y == Main.gameMap.getExit().y) {
 			Main.gameMap.goNext();
 			GameData.hero.x = Main.gameMap.getEntrance().x;
 			GameData.hero.y = Main.gameMap.getEntrance().y;
+			hasLeftEntranceTile = false;
+		}
+		if(GameData.hero.x == Main.gameMap.getEntrance().x && GameData.hero.y == Main.gameMap.getEntrance().y && hasLeftEntranceTile) {
+			Main.gameMap.goBack();
+			GameData.hero.x = Main.gameMap.getExit().x;
+			GameData.hero.y = Main.gameMap.getExit().y;
 		}
 		System.out.println("Hero coords\nx: "+GameData.hero.x+"  y: "+GameData.hero.y);
 		Main.animator.switchTurns();
