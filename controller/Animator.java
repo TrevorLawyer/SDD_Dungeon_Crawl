@@ -45,7 +45,7 @@ public class Animator implements Runnable {
             	//Player's Turn
             } else{
             	//Enemy's Turn
-                enemyMovements();
+                    enemyMovements();
             	switchTurns();
             }
         }
@@ -80,28 +80,29 @@ public class Animator implements Runnable {
             double[][] map = new double[10][10];
             
             for (int i = 0; i < row; i++){
-        for (int j = 0; j < col; j++){
-            map[i][j] = 0;
-        }
-    }
-System.out.println(eX);
-    		if(eX != hX)
-                {
-                    if(eY != hY)
-                    {
+                for (int j = 0; j < col; j++){
+
+                        map[i][j] = 0;                        
+                }
+            }
+                    map[4][5] = -1; 
+                    map[5][6] = -1; 
+                    map[5][4] = -1; 
+                    map[4][4] = -1; 
+                    map[4][6] = -1; 
+                    Grid2d map2d = new Grid2d(map, false);
+                    System.out.println(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y));
+
                     double totalX = eX - hX;
                     double totalY = eY - hY;
                     System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
                 if(Math.sqrt((totalX*totalX)+(totalY*totalY)) <=range_of_sight)
                 {
-                    Grid2d map2d = new Grid2d(map, false);
                     int x =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(1,2));
                     int y =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(4,5));
                 
                     GameData.enemy.x = x;
                     GameData.enemy.y = y;
-                }
-                }
                 }
                 }
 
