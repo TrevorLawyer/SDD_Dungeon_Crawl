@@ -72,12 +72,12 @@ public class Animator implements Runnable {
         
         public void enemyMovements()
         {
-            double range_of_sight = 5.0;
+            double range_of_sight = 4.0;
             double eX = GameData.enemy.x;
             double eY = GameData.enemy.y;
             double hX = GameData.hero.x;
             double hY = GameData.hero.y;
-            double[][] map = new double[10][10];
+            int[][] map = new int[10][10];
             
             for (int i = 0; i < row; i++){
                 for (int j = 0; j < col; j++){
@@ -85,11 +85,7 @@ public class Animator implements Runnable {
                         map[i][j] = 0;                        
                 }
             }
-                    map[4][5] = -1; 
-                    map[5][6] = -1; 
-                    map[5][4] = -1; 
-                    map[4][4] = -1; 
-                    map[4][6] = -1; 
+
                     Grid2d map2d = new Grid2d(map, false);
                     System.out.println(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y));
 

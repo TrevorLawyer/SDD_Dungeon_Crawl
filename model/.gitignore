@@ -11,8 +11,15 @@
 /Example.class
 /Merchant.class
 /MerchantDialogueWindow.class
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/TrevorLawyer/SDD_Dungeon_Crawl.git
 /Coordinate.class
 /GameMap.class
 /GameMapTile.class
+=======
+/Coordinate.class
+/GameMap.class
+/GameMapTile.class
+/ItemManager.class
+>>>>>>> 7ba5bc05d823884f7a032af1c2c73b67f3728ba1
 /MapManager.class

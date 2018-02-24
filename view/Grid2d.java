@@ -5,7 +5,7 @@ import java.util.Set;
 
 
 public class Grid2d {
-	final double[][] map;
+	public int[][] map1;
         public int length;
 	final boolean allowDiagonal;
 
@@ -15,10 +15,11 @@ public class Grid2d {
 	 */
 	public class MapNode implements Node<MapNode> {
 		private final int x, y;
-
+                public int[][] map;
 		public MapNode(int x, int y) {
 			this.x = x;
 			this.y = y;
+                        this.map = map1;
 		}
 
 		public double getHeuristic(MapNode goal) {
@@ -38,12 +39,11 @@ public class Grid2d {
 //							|| i >= map[j].length) {
 //						continue;
 //					}
-                                        if ((i == x && j == y) || i < 0 || j < 0 || j >= length|| i >= map[j].length)
+                                        if ((i == x && j == y) || i < 0 || j < 0 || j >= 10|| i >= 10)
                                                 {
                                                     continue;
                                                 }
-					if (!allowDiagonal
-							&& ((i < x && j < y) || (i > x && j > y))) {
+					if ((i < x && j < y) || (i > x && j > y)) {
 						continue;
 					}
 
@@ -98,8 +98,8 @@ public class Grid2d {
 
 	}
 
-	public Grid2d(double[][] map, boolean allowDiagonal) {
-		this.map = map;
+	public Grid2d(int[][] map, boolean allowDiagonal) {
+		this.map1 = map;
                 this.length = map.length;
 		this.allowDiagonal = false;
 	}
