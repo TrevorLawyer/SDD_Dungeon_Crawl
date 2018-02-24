@@ -21,24 +21,23 @@ public class GameData {
 	
 	public boolean player_dialogue_state;
 	public int player_dialogue_type;
-    
+    public static ItemManager manager;
+    public static Item item1, item2, item3, item4;
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
     public final List<GameFigure> friendFigures, enemyFigures;
-    public static Weapon weapon;
-    public static Armor armor;
-    public static Consumable potion;
     public static MerchantDialogueWindow merchant_dialogue_window;
     
     public GameData()
     {
-    		
+    	manager = new ItemManager();
+    	item1 = manager.ItemOutput(8, 0);
+    	item2 = manager.ItemOutput(9, 0);
+    	item3 = manager.ItemOutput(8, 1);
+    	item4 = manager.ItemOutput(9, 1);
         hero = new Hero(1, 1);
         enemy = new Enemy(5, 5);
-        weapon = new Weapon("sword","a sword",5,9,1);
-        armor = new Armor("steel Armor", "steel armor",5,8,0);
-        potion = new Consumable("health potion", "Health Potion",5,9,0);
 
         merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
@@ -47,11 +46,11 @@ public class GameData {
      
         
         friendFigures.add(hero);
-        friendFigures.add(weapon);
-        friendFigures.add(armor);
-        friendFigures.add(potion);
+        friendFigures.add(item1);
+        friendFigures.add(item2);
+        friendFigures.add(item3);
+        friendFigures.add(item4);
         Main.frame.PlaceCharacter(hero);
-        Main.frame.PlaceCharacter(weapon);
         
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
