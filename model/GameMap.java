@@ -44,11 +44,11 @@ public class GameMap {
 	}
 	//Returns an X coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
 	public int randXCoord() {
-		return ThreadLocalRandom.current().nextInt(1, mapWidth);
+		return ThreadLocalRandom.current().nextInt(1, mapWidth-1);
 	}
 	//Returns a Y coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
 	public int randYCoord() {
-		return ThreadLocalRandom.current().nextInt(1, mapWidth);
+		return ThreadLocalRandom.current().nextInt(1, mapWidth-1);
 	}
 	private int pickExitSide(){
 		return ThreadLocalRandom.current().nextInt(0, 4);
