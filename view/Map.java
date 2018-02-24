@@ -22,7 +22,9 @@ import javax.swing.border.LineBorder;
 
 
 
+
 import controller.Main;
+import model.GameData;
 import model.GameFigure;
 import model.GameMapTile;
 import model.MapManager;
@@ -118,22 +120,20 @@ public class Map extends JFrame {
 */      
         gameMap.render(g2);
         synchronized (Main.gameData.friendFigures){
-            
         	for (GameFigure f : Main.gameData.friendFigures) {
                 f.render(g2);
                 PlaceCharacter(f);
             }
-            
-     
 		}
-        
-	
-     
-			synchronized(Merchant.merchant_dialogue){
-				if (Main.gameData.player_dialogue_state) {
-					Main.gameData.merchant_dialogue_window.render(g2);
-				}
-
+        synchronized(Merchant.merchant_dialogue){
+			if (Main.gameData.player_dialogue_state) {
+				Main.gameData.merchant_dialogue_window.render(g2);
 			}
+    	}
+        synchronized(Main.gameData.inventory_window){
+        	if(Main.gameData.game_state == GameData.GAME_MENU){
+        		Main.gameData.inventory_window.render(g2);
+        	}
+        }
 	}
 }
