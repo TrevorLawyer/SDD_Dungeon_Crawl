@@ -10,9 +10,6 @@ import java.util.Set;
 
 /**
  * Helper class containing pathfinding algorithms.
- * 
- * @author Ben Ruijl
- * 
  */
 public class Pathfinding {
 
@@ -20,12 +17,6 @@ public class Pathfinding {
 	 * A Star pathfinding. Note that the heuristic has to be monotonic:
 	 * {@code h(x) <=
 	 * d(x, y) + h(y)}.
-	 * 
-	 * @param start
-	 *            Starting node
-	 * @param goal
-	 *            Goal node
-	 * @return Shortest path from start to goal, or null if none found
 	 */
 	public static <T extends Node<T>> List<T> doAStar(T start, T goal) {
 		Set<T> closed = new HashSet<T>();
@@ -33,6 +24,8 @@ public class Pathfinding {
 		List<T> route = new LinkedList<T>();
 		Map<T, Double> gScore = new HashMap<T, Double>();
 		final Map<T, Double> fScore = new HashMap<T, Double>();
+                
+                
 		PriorityQueue<T> open = new PriorityQueue<T>(11, new Comparator<T>() {
 
 			public int compare(T nodeA, T nodeB) {
