@@ -28,6 +28,7 @@ public class Main {
 	public static Animator animator;
 	public static Map frame;
 	public static MapManager gameMap;
+	
 
 	public static void main(String[] args) {
 
@@ -56,8 +57,9 @@ public class Main {
 		frame.setVisible(true);
 		gameData = new GameData();
 
-		new Thread(animator).start();
 
+        
+		new Thread(animator).start();	   
 	}
 
 	// method splash Screen
@@ -75,7 +77,7 @@ public class Main {
 		window.setBounds(100, 100, 600, 400);
 		window.setVisible(true);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
