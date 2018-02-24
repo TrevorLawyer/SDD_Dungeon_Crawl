@@ -3,7 +3,7 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public abstract class GameFigure implements GameDraw {
+public abstract class GameFigure {
 
     // public for a faster access during animation
     public int x;
@@ -22,17 +22,9 @@ public abstract class GameFigure implements GameDraw {
     }
 
     // how to render on the canvas
-    /* (non-Javadoc)
-	 * @see model.GameDraw#render(java.awt.Graphics2D)
-	 */
-    @Override
-	public abstract void render(Graphics2D g);
+    public abstract void render(Graphics2D g);
 
     // changes per frame
-    /* (non-Javadoc)
-	 * @see model.GameDraw#update()
-	 */
-    @Override
-	public abstract void update();
+    public abstract void update();
 
 }
