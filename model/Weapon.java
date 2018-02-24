@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 
 public class Weapon extends Item {
 
-	int power;  //Increases Damage dealt by this amount
+	static int power;  //Increases Damage dealt by this amount
 	
 	public Weapon(String n, String desc, int p, int x, int y) {
 		super(n, desc, x, y);
@@ -24,7 +24,10 @@ public class Weapon extends Item {
             System.exit(-1);
         }
     }
-	
+	// get attack damage power for hero
+	public static int getPower(){
+		return power;
+	}
     public void render(Graphics2D g, int x, int y) {
     	g.drawImage(super.currentPic, x, y, 30, 30, null);
     }

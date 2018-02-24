@@ -16,7 +16,7 @@ import model.GameData;
 public class Animator implements Runnable {
 
     public boolean running = true, userTurn = true;
-    private final int FRAMES_PER_SECOND = 50;
+    private final int FRAMES_PER_SECOND = 20;
 
     @Override
     public void run() {
@@ -31,7 +31,7 @@ public class Animator implements Runnable {
             Main.frame.printScreen();
 
             long endTime = System.currentTimeMillis();
-            int sleepTime = (int) (1.0 / FRAMES_PER_SECOND * 1000)
+            int sleepTime = (int) (1.0 / FRAMES_PER_SECOND*1000)
                     - (int) (endTime - startTime);
 
             if (sleepTime > 0) {

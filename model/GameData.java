@@ -25,7 +25,8 @@ public class GameData {
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
-    public final List<GameFigure> friendFigures, enemyFigures;
+    public final List<GameFigure> friendFigures;
+	public static List<GameFigure> enemyFigures;
     public static Weapon weapon;
     public static Armor armor;
     public static Consumable potion;
@@ -35,7 +36,6 @@ public class GameData {
     {
     		
         hero = new Hero(1, 1);
-        enemy = new Enemy(5, 5);
         weapon = new Weapon("sword","a sword",5,9,1);
         armor = new Armor("steel Armor", "steel armor",5,8,0);
         potion = new Consumable("health potion", "Health Potion",5,9,0);
@@ -55,12 +55,10 @@ public class GameData {
         
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
-        enemyFigures.add(enemy);
-        Main.frame.PlaceCharacter(enemy);
-        
         player_dialogue_state = false;
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
+        spawn();//first enemy created
         
     }
     
@@ -103,6 +101,13 @@ public class GameData {
     	}
     	synchronized(enemyFigures){
     		if (!player_dialogue_state) {
+    			//take life away
+    			 if (enemy.health<1) {
+    				 enemyFigures.remove(enemy);
+    				 hero.xp=+enemy.xp;
+    				 System.out.println(""+hero.xp);
+    			}
+    
     		for(GameFigure g: enemyFigures){
     			g.update();
     			Main.frame.PlaceCharacter(g);
@@ -122,5 +127,16 @@ public class GameData {
 	    		}
 	    	}
 	    }
+    }
+   // add enemy
+    public static void spawn(){
+    	
+        enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
+        enemyFigures.add(enemy);
+        Main.frame.PlaceCharacter(enemy);
+    }
+    // remove all enemies
+    public static void swab() {
+    	enemyFigures.removeAll(enemyFigures);
     }
 }
