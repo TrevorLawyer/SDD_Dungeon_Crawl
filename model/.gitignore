@@ -9,3 +9,8 @@
 /Example.class
 /Merchant.class
 /MerchantDialogueWindow.class
+/Coordinate.class
+/GameMap.class
+/GameMapTile.class
+/ItemManager.class
+/MapManager.class
