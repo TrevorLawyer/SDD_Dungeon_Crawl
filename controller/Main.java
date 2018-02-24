@@ -6,7 +6,12 @@
 package controller;
 
 import view.Map;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JWindow;
+
 import model.GameData;
 import model.MapManager;
 
@@ -27,6 +32,8 @@ public class Main
         frame.addKeyListener(new KeyController());
         animator = new Animator();
         
+        //splash Screen
+        posterPic();
         
         frame.setTitle("DEMO MAP");
         frame.setLocation(100, 100);
@@ -37,6 +44,30 @@ public class Main
         new Thread(animator).start();
         
     }
+    
+  //method splash Screen
+  	private static void posterPic() {
+  		JWindow window = new JWindow();
+  		
+  		ImageIcon posterPic = new ImageIcon("controller/poster.jpg");
+      	JLabel posterTittle = new JLabel ("SDD CAPSTONE PROJECT", posterPic, JLabel.CENTER);
+      	posterTittle.setFont (new java.awt.Font("Arial", java.awt.Font.BOLD, 28));    	
+      	posterTittle.setVerticalTextPosition(JLabel.BOTTOM);
+      	posterTittle.setHorizontalTextPosition(JLabel.CENTER);
+      	    	
+  		window.getContentPane()
+  				.add(posterTittle);		
+  	
+  		window.setBounds(100, 100, 600, 400);
+  		window.setVisible(true);
+  		try {
+  			Thread.sleep(5000);
+  		} catch (InterruptedException e) {
+  			e.printStackTrace();
+  		}
+  		window.setVisible(false);
+  		window.dispose();
+  	}
     
 
 }
