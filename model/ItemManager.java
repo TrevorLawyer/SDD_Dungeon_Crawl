@@ -31,9 +31,9 @@ public class ItemManager {
 		return ItemOutput(x,y,rand.nextInt(3)+1,rand.nextInt(3)+1);
 	}
 	
-	//Allows an item to be generated on screen of a specific level
-	public Item ItemOutput(int x, int y, int level) {
-		return ItemOutput(x,y,level,rand.nextInt(3)+1);
+	//Allows an item to be generated on screen of a specific type but random level
+	public Item ItemOutput(int x, int y, int type) {
+		return ItemOutput(x,y,rand.nextInt(3)+1,type);
 	}
 	
 	//Allows an item to be generated on screen of a specific type and level.
