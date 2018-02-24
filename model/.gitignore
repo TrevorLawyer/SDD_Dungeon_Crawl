@@ -6,6 +6,13 @@
 /Hero.class
 /Item.class
 /Weapon.class
+<<<<<<< HEAD
+=======
 /Example.class
 /Merchant.class
 /MerchantDialogueWindow.class
+>>>>>>> branch 'master' of https://github.com/TrevorLawyer/SDD_Dungeon_Crawl.git
+/Coordinate.class
+/GameMap.class
+/GameMapTile.class
+/MapManager.class

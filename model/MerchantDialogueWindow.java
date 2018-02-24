@@ -25,13 +25,14 @@ public class MerchantDialogueWindow {
 	}
 	public void moveIndexUp() {
 		if (menu_size > 0) {
-			if(menu_index < menu_size-1) menu_index++;
+			if(menu_index > 0) menu_index--;
 			//renderWindow();
 		}
 	}
 	public void moveIndexDown() {
 		if (menu_size > 0) {
-			if(menu_index > 0) menu_index--;
+			
+			if(menu_index < menu_size-1) menu_index++;
 			//renderWindow();
 		}
 	}
@@ -58,8 +59,26 @@ public class MerchantDialogueWindow {
 			g.setColor(Color.GRAY);
 			g.fill3DRect(50, 50, 200, 200, true);
 			g.setColor(Color.WHITE);
-			g.drawString(menu_header.substring(0,28), 60, 75);
-			g.drawString(menu_header.substring(28,36), 60, 85);
+			if (menu_header.length() >= 27 && menu_header.length() < 54) {
+				g.drawString(menu_header.substring(0,27), 60, 75);
+				g.drawString(menu_header.substring(27,menu_header.length()), 60, 90);
+			}
+			else if (menu_header.length() >= 54) {
+				g.drawString(menu_header.substring(0,27), 60, 75);
+				g.drawString(menu_header.substring(27,54), 60, 90);
+				g.drawString(menu_header.substring(54,menu_header.length()), 60, 105);
+			}
+			else {
+				g.drawString(menu_header, 60, 75);
+			}
+			for (int cntr = 0; cntr < menu_size; cntr++) {
+				if (cntr == menu_index) {
+					g.drawString("=>"/* + menu_options[cntr]*/, 60, 120 + (cntr+1)*15);
+				}
+				//else {
+					g.drawString(menu_options[cntr], 60 + 20, 120 + (cntr+1)*15);
+				//}
+			}
 		}
 	}
 	public void update() {
