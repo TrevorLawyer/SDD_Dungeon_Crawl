@@ -11,7 +11,6 @@ public abstract class GameFigure {
     public BufferedImage currentPic;
     public int state;
 
-
     public GameFigure(int x, int y) {
         this.x = x;
         this.y = y;

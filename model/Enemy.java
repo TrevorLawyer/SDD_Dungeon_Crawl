@@ -5,10 +5,13 @@
  */
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,14 +20,21 @@ import javax.swing.JOptionPane;
  */
 public class Enemy extends GameFigure{
     private Image bossImage;
-
+    public int xp = 10;
+    public int health = 6;
+    public int attack = 2;
+    public int pain = 0;
     public Enemy(int x, int y) {
         super(x, y);
-       
+        
         bossImage = null;
-        try 
-        {
-            super.currentPic = ImageIO.read(getClass().getResource("skeleton.png"));
+        try {
+            if (pain==1) {
+            	super.currentPic =ImageIO.read(getClass().getResource("hit.png"));
+            }
+            else {
+            	super.currentPic = ImageIO.read(getClass().getResource("skeleton.png"));
+            }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open skeleton.jpg");
             System.exit(-1);

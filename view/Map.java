@@ -21,6 +21,7 @@ import javax.swing.border.LineBorder;
 
 import controller.Audio;
 import controller.Main;
+import model.GameData;
 import model.GameFigure;
 import model.GameMapTile;
 import model.MapManager;
@@ -46,7 +47,7 @@ public class Map extends JFrame {
         
 	    // contentPane's default layout manager --> Border Layout
 	    getContentPane().add(panel);
-	
+	    
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setBounds(100, 100, 500, 500);
 	    panel.setLayout(new GridLayout(row, col));
@@ -60,6 +61,7 @@ public class Map extends JFrame {
 	            panel.add(grid[i][j]);
 	        }
 	    }
+	    //generate new enemy
 	    
     }
     
@@ -119,16 +121,37 @@ public class Map extends JFrame {
          }
 */      
         gameMap.render(g2);
-        synchronized (Main.gameData.friendFigures){
+        
+        //vvvv taking this out removes top left guys vvvvv
+        
+    /*  synchronized (Main.gameData.friendFigures){
             
         	for (GameFigure f : Main.gameData.friendFigures) {
                 f.render(g2);
                 PlaceCharacter(f);
             }
             
+        }
+        synchronized (Main.gameData.enemyFigures){
+            
+        	for (GameFigure f : Main.gameData.enemyFigures) {
+                f.render(g2);
+                PlaceCharacter(f);
+            }
+            
+        }
+       
      
-		}
+	
         
+            
+        	for (GameFigure f : Main.gameData.friendFigures) {
+                f.render(g2);
+                PlaceCharacter(f);
+            }
+    */ 
+            
+     
 	
      
 			synchronized(Merchant.merchant_dialogue){
