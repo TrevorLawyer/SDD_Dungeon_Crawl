@@ -161,7 +161,11 @@ public class Map extends JFrame {
             
      
 	
-     
+        synchronized(Main.gameData.inventory_window){
+        	if(Main.gameData.game_state == GameData.GAME_MENU){
+        		Main.gameData.inventory_window.render(g2);
+        	}
+        }
 			synchronized(Merchant.merchant_dialogue){
 				if (Main.gameData.player_dialogue_state) {
 					Main.gameData.merchant_dialogue_window.render(g2);

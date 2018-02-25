@@ -86,6 +86,7 @@ public class Animator implements Runnable {
                 }
             }
 
+            map[4][5] = -1;
                     Grid2d map2d = new Grid2d(map, false);
                     System.out.println(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y));
 
