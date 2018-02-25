@@ -121,7 +121,15 @@ public class Map extends JFrame {
          }
 */      
         gameMap.render(g2);
-        
+        synchronized (Main.gameData.friendFigures){
+            
+        	for (GameFigure f : Main.gameData.friendFigures) {
+                f.render(g2);
+                PlaceCharacter(f);
+            }
+            
+     
+		}
         //vvvv taking this out removes top left guys vvvvv
         
     /*  synchronized (Main.gameData.friendFigures){
