@@ -12,13 +12,13 @@ public class MapManager {
 		maps.add(new GameMap());
 		currentMap = 0;
 	}
-	public void goNext() {
-		
-		
-			maps.add(new GameMap(maps.get(currentMap).exit));
-		
+	public void goNext() {				
+		maps.add(new GameMap(maps.get(currentMap).exit));
+		GameData.swab(); // remove old enemies
+		GameData.spawn(); // make new enemy as new map is generated
 		currentMap++;
 	}
+	
 	public void goBack() {
 	    if(currentMap > 0) {
 	    	currentMap--;
@@ -31,7 +31,8 @@ public class MapManager {
 		return maps.get(currentMap).exit;
 	}
 	public Coordinate getEntrance() {
-		return maps.get(currentMap).entrance;
+		if (currentMap == 0) return new Coordinate(0,0);
+		else return maps.get(currentMap).entrance;
 	}
 	public void render(Graphics2D g) {
 		maps.get(currentMap).render(g);
