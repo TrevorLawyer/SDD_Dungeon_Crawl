@@ -77,6 +77,7 @@ public class Animator implements Runnable {
             double eY = GameData.enemy.y;
             double hX = GameData.hero.x;
             double hY = GameData.hero.y;
+            
             int[][] map = new int[10][10];
             
             for (int i = 0; i < row; i++){
@@ -93,13 +94,18 @@ public class Animator implements Runnable {
                     double totalX = eX - hX;
                     double totalY = eY - hY;
                     System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
-                if(Math.sqrt((totalX*totalX)+(totalY*totalY)) <=range_of_sight)
+                    double distance_away = Math.sqrt((totalX*totalX)+(totalY*totalY));
+                if(distance_away <=range_of_sight)
                 {
+                	if(distance_away > 1.9)
+                	{
+                	
                     int x =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(1,2));
                     int y =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(4,5));
                 
                     GameData.enemy.x = x;
                     GameData.enemy.y = y;
+                	}
                 }
                 }
 
