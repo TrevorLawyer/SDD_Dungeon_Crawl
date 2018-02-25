@@ -11,6 +11,7 @@ public abstract class GameFigure {
     public BufferedImage currentPic;
     public int state;
 
+
     public GameFigure(int x, int y) {
         this.x = x;
         this.y = y;
@@ -21,9 +22,15 @@ public abstract class GameFigure {
     }
 
     // how to render on the canvas
-    public abstract void render(Graphics2D g);
+    /* (non-Javadoc)
+	 * @see model.GameDraw#render(java.awt.Graphics2D)
+	 */
+	public abstract void render(Graphics2D g);
 
     // changes per frame
-    public abstract void update();
+    /* (non-Javadoc)
+	 * @see model.GameDraw#update()
+	 */
+	public abstract void update();
 
 }

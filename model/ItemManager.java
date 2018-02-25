@@ -71,7 +71,7 @@ public class ItemManager {
 				//Creates placeholder objects for each type of item.
 				switch(tempType) {
 				case 1:
-					tempWep = new  Weapon(tempName,tempDesc,tempvalue,-1,-1,tempSprite);
+					//tempWep = new  Weapon(tempName,tempDesc,tempvalue,-1,-1,tempSprite);
 					break;
 				case 2: 
 					tempArm = new Armor(tempName,tempDesc,tempvalue,-1,-1,tempSprite);
