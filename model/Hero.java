@@ -22,19 +22,15 @@ public class Hero extends GameFigure{
 	ArrayList<Item> inventory;
 	Weapon equippedWeapon;
 	Armor equippedArmor;
-	public int powerLevel;
-	public int xp;
-	public int health;
-	public int attack;
-	public int wrath = 0;
+
     public Hero(int x, int y) {
         super(x, y);
         
         equippedWeapon = new Weapon("Fist", "Your Fists", 1,-1,-1);
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
-        powerLevel=(int) xp/4;
-        attack = Weapon.getPower()+powerLevel;
-        health = powerLevel + 5;
+
+        inventory = new ArrayList<Item>();
+        inventory.add(new Weapon("Basic Sword","It's a sword",1,0,0));
         try 
         {
             super.currentPic = ImageIO.read(getClass().getResource("pixel_hero.png"));
@@ -43,9 +39,7 @@ public class Hero extends GameFigure{
             System.exit(-1);
         }
     }
-   //public void attack(strength) {
-	   
-  // }
+    
     @Override
     public void render(Graphics2D g) {
     	g.drawImage(currentPic, x, y, 30, 30, null);
@@ -58,6 +52,18 @@ public class Hero extends GameFigure{
 
     public void AddItemToInventory(Item i){
     	inventory.add(i);
+    }
+    
+    public String[] getInventoryNames(){
+    	if(inventory.size()>0){
+	    	String[] inventorynames = new String[inventory.size()];
+	    	for(int i=0;i< inventory.size();i++){
+	    		inventorynames[i] = inventory.get(i).name;
+	    	}
+	    	return inventorynames;
+    	}
+    	
+    	return new String[]{""};
     }
     
     public void useItem(Item i){
