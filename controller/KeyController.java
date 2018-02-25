@@ -5,8 +5,10 @@ import java.awt.event.KeyListener;
 
 import view.Map;
 import model.GameData;
+import model.Merchant;
 
 public class KeyController implements KeyListener {
+	boolean hasLeftEntranceTile = false;
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -56,12 +58,50 @@ public class KeyController implements KeyListener {
         		break;
         	case KeyEvent.VK_ENTER:
         		if (Main.gameData.player_dialogue_state) {
-        			Main.gameData.player_dialogue_state = false;
-        			Main.gameData.merchant_dialogue_window.closeWindow();
+//        			Main.gameData.player_dialogue_state = false;
+//        			Main.gameData.merchant_dialogue_window.closeWindow();
+        			
+        			if (Main.gameData.player_dialogue_type == Merchant.GREETING) {
+        				         				
+        				Main.gameData.merchant_dialogue_window.selectIndex();
+        				Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+        				Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+        				Main.gameData.merchant_dialogue_window.openWindow();
+        			} else if (Main.gameData.player_dialogue_type == Merchant.INQUIRY) {
+        				//Main.gameData.merchant_dialogue_window.closeWindow();
+        				//Main.gameData.player_dialogue_state = false;
+        				int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
+        				if (temp_menu_selection == 2) {
+        				   Main.gameData.player_dialogue_type = Merchant.FAREWELL;
+        				   Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.FAREWELL];
+        				   Main.gameData.merchant_dialogue_window.openWindow();
+        				}
+        				else {
+        				  Main.gameData.player_dialogue_type = Merchant.GREETING;
+        				  Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
+        				  Main.gameData.player_dialogue_state = false;
+        				}
+        			}else if (Main.gameData.player_dialogue_type == Merchant.FAREWELL) {
+        				  Main.gameData.merchant_dialogue_window.selectIndex();
+        				  Main.gameData.player_dialogue_type = Merchant.GREETING;
+        				  Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
+        				  Main.gameData.player_dialogue_state = false;
+        			}	         			
         			Main.gameData.game_state = GameData.GAME_RUNNING;
         		}
         		break;
         		
+        		case KeyEvent.VK_SPACE:
+              		
+        		if(2 > Math.abs(GameData.enemy.x-GameData.hero.x) && 2 > Math.abs(GameData.enemy.y-GameData.hero.y) && !Main.gameData.player_dialogue_state){
+        			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
+        			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
+        			Main.gameData.enemy.health-=Main.gameData.hero.attack;
+        			Main.gameData.enemy.pain = 1;
+        			Main.gameData.hero.wrath = 1;
+        		}
+        		break;
+      
         	case KeyEvent.VK_I:
         		//opens inventory window, switches game state to game_menu
         		if(Main.gameData.game_state == GameData.GAME_RUNNING){
@@ -78,10 +118,18 @@ public class KeyController implements KeyListener {
         	default:
         		break;
         }
+		
+		hasLeftEntranceTile = true;
 		if(GameData.hero.x == Main.gameMap.getExit().x && GameData.hero.y == Main.gameMap.getExit().y) {
 			Main.gameMap.goNext();
 			GameData.hero.x = Main.gameMap.getEntrance().x;
 			GameData.hero.y = Main.gameMap.getEntrance().y;
+			hasLeftEntranceTile = false;
+		}
+		if(GameData.hero.x == Main.gameMap.getEntrance().x && GameData.hero.y == Main.gameMap.getEntrance().y && hasLeftEntranceTile) {
+			Main.gameMap.goBack();
+			GameData.hero.x = Main.gameMap.getExit().x;
+			GameData.hero.y = Main.gameMap.getExit().y;
 		}
 		System.out.println("Hero coords\nx: "+GameData.hero.x+"  y: "+GameData.hero.y);
 		Main.animator.switchTurns();
