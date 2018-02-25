@@ -84,4 +84,9 @@ public class MerchantDialogueWindow {
 	public void update() {
 		
 	}
+	
+	public void update(String[] newStuff){
+		menu_options = newStuff;
+	}
+	
 }
