@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import controller.Audio;
 import controller.Main;
 import model.GameData;
 import model.GameFigure;
@@ -42,8 +41,6 @@ public class Map extends JFrame {
     
     public Map() {
 		//theme song for application
-        Audio a = new Audio();
-        a.playAudio("theme.mid");
         
 	    // contentPane's default layout manager --> Border Layout
 	    getContentPane().add(panel);
@@ -113,51 +110,13 @@ public class Map extends JFrame {
         }
 
         g2.clearRect(0, 0, width, height);
-/*		synchronized (Main.gameData.enemyFigures) {
-            
-            for (GameFigure f : Main.gameData.enemyFigures) {
-                f.render(g2);
-            }
-         }
-*/      
+    
         gameMap.render(g2);
         synchronized (Main.gameData.friendFigures){
             
-        	for (GameFigure f : Main.gameData.friendFigures) {
-                f.render(g2);
-                PlaceCharacter(f);
-            }
-            
+        	 
      
 		}
-        //vvvv taking this out removes top left guys vvvvv
-        
-    /*  synchronized (Main.gameData.friendFigures){
-            
-        	for (GameFigure f : Main.gameData.friendFigures) {
-                f.render(g2);
-                PlaceCharacter(f);
-            }
-            
-        }
-        synchronized (Main.gameData.enemyFigures){
-            
-        	for (GameFigure f : Main.gameData.enemyFigures) {
-                f.render(g2);
-                PlaceCharacter(f);
-            }
-            
-        }
-       
-     
-	
-        
-            
-        	for (GameFigure f : Main.gameData.friendFigures) {
-                f.render(g2);
-                PlaceCharacter(f);
-            }
-    */ 
             
      
 	
