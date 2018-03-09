@@ -25,7 +25,6 @@ public class GameData {
 	public int game_state;
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2;
 	public static ItemManager manager;
-	public static Item item1, item2, item3, item4;
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
@@ -37,15 +36,9 @@ public class GameData {
     public GameData()
     {
     	
-    	 manager = new ItemManager();
-    	 item1 = manager.ItemOutput(8, 1);
-    	 item2 = manager.ItemOutput(9, 0);
-    	 item3 = manager.ItemOutput(8, 0);
-    	 item4 = manager.ItemOutput(9, 1);
+    	manager = new ItemManager();
     	game_state = GAME_RUNNING;
         hero = new Hero(1, 1);
-
-
         merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
@@ -55,10 +48,6 @@ public class GameData {
         friendFigures.add(hero);
 
         Main.frame.PlaceCharacter(hero);
-        friendFigures.add(item1);
-        friendFigures.add(item2);
-        friendFigures.add(item3);
-        friendFigures.add(item4);
         
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
@@ -133,6 +122,7 @@ public class GameData {
 					inventory_window.update();
 				}
 			}
+
 	
 			synchronized(enemyFigures){
 				for(GameFigure g: enemyFigures){

@@ -101,6 +101,14 @@ public class KeyController implements KeyListener {
         			Main.gameData.hero.wrath = 1;
         		}
         		break;
+        	
+        	case KeyEvent.VK_MINUS:
+        		Main.gameData.hero.setHealth(-1);
+        		break;
+        	
+        	case KeyEvent.VK_EQUALS:
+        		Main.gameData.hero.setHealth(1);
+        		break;
       
         	case KeyEvent.VK_I:
         		//opens inventory window, switches game state to game_menu
