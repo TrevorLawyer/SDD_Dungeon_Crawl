@@ -19,7 +19,7 @@ public class GameData {
 	public static int location_memory_min_1_x;
 	public static int location_memory_min_1_y;
 	
-	public boolean player_dialogue_state;
+	//public boolean player_dialogue_state;
 	public int player_dialogue_type;
 	
 	public int game_state;
@@ -54,7 +54,7 @@ public class GameData {
 //        enemyFigures.add(enemy);
 //        Main.frame.PlaceCharacter(enemy);
         
-        player_dialogue_state = false;
+//        player_dialogue_state = false;
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
@@ -83,7 +83,7 @@ public class GameData {
 	            }
 	        }
 	    	synchronized (friendFigures) {
-	    		if (!player_dialogue_state) {
+	    		if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 	            ArrayList<GameFigure> remove = new ArrayList<>();
 	            GameFigure f;
 	            for (int i = 0; i < friendFigures.size(); i++) {
@@ -101,7 +101,7 @@ public class GameData {
 	    		}
 	    	}
 			synchronized(enemyFigures){
-				if (!player_dialogue_state) {
+				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
 					if (enemy.health<1) {
 						enemyFigures.remove(enemy);
@@ -115,7 +115,7 @@ public class GameData {
 				}
 			}
 			synchronized(Merchant.merchant_dialogue){
-				if (player_dialogue_state) {
+				if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
 					merchant_dialogue_window.update();
 				}
 			}
