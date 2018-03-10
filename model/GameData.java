@@ -25,7 +25,7 @@ public class GameData {
 	public int game_state;
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2;
 	public static ItemManager manager;
-	public static Item item1, item2, item3, item4;
+	public static Item item;
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
@@ -37,15 +37,9 @@ public class GameData {
     public GameData()
     {
     	
-    	 manager = new ItemManager();
-    	 item1 = manager.ItemOutput(8, 1);
-    	 item2 = manager.ItemOutput(9, 0);
-    	 item3 = manager.ItemOutput(8, 0);
-    	 item4 = manager.ItemOutput(9, 1);
+    	manager = new ItemManager();
     	game_state = GAME_RUNNING;
         hero = new Hero(1, 1);
-
-
         merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
@@ -55,20 +49,16 @@ public class GameData {
         friendFigures.add(hero);
 
         Main.frame.PlaceCharacter(hero);
-        friendFigures.add(item1);
-        friendFigures.add(item2);
-        friendFigures.add(item3);
-        friendFigures.add(item4);
         
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
-//        enemyFigures.add(enemy);
-//        Main.frame.PlaceCharacter(enemy);
         
         player_dialogue_state = false;
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
+
         spawn();//first enemy created
+        
         inventory_window = new MerchantDialogueWindow("Inventory");
         
     }
@@ -109,15 +99,16 @@ public class GameData {
 	            	}
 	    		}
 	    	}
+
 			synchronized(enemyFigures){
 				if (!player_dialogue_state) {
 					//take life away
 					if (enemy.health<1) {
 					    hero.xp=+enemy.xp;
-					    item4 = manager.ItemOutput(enemy.x, enemy.y);
 					    System.out.println(""+hero.xp);
+			item = manager.ItemOutput(enemy.x, enemy.y);
+		    friendFigures.add(item);
 						enemyFigures.remove(enemy);
-					    friendFigures.add(item4);
 					     			}
 					for(GameFigure g: enemyFigures){
 						g.update();
@@ -135,6 +126,7 @@ public class GameData {
 					inventory_window.update();
 				}
 			}
+
 	
 			synchronized(enemyFigures){
 				for(GameFigure g: enemyFigures){
@@ -145,12 +137,12 @@ public class GameData {
 	    }
     }
  // add enemy
-public static void spawn(){
+    public static void spawn(){
         	
-enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
-enemyFigures.add(enemy);
-Main.frame.PlaceCharacter(enemy);
-        }
+    	enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
+    	enemyFigures.add(enemy);
+    	Main.frame.PlaceCharacter(enemy);
+     }
         // remove all enemies
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);

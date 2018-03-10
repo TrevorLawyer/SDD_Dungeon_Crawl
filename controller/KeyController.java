@@ -8,6 +8,7 @@ import model.GameData;
 import model.Merchant;
 
 public class KeyController implements KeyListener {
+	Audio a = new Audio();
 	boolean hasLeftEntranceTile = false;
 
 	@Override
@@ -18,6 +19,7 @@ public class KeyController implements KeyListener {
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.y--;
+        			a.playAudio("up.wav");
         		}
         		else if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
         			Main.gameData.merchant_dialogue_window.moveIndexUp();
@@ -29,8 +31,9 @@ public class KeyController implements KeyListener {
         	case KeyEvent.VK_DOWN:
         		if(GameData.hero.y<Map.row-1 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
-        			Main.gameData.location_memory_min_1_y = GameData.hero.y;
+        			Main.gameData.location_memory_min_1_y = GameData.hero.y;        			
         			GameData.hero.y++;
+        			a.playAudio("down.mid");
         		}
         		else if (Main.gameData.player_dialogue_state) {
         			Main.gameData.merchant_dialogue_window.moveIndexDown();
@@ -44,6 +47,7 @@ public class KeyController implements KeyListener {
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.x++;
+        			a.playAudio("right.wav");
         		}
         		break;
         	case KeyEvent.VK_LEFT:
@@ -51,6 +55,7 @@ public class KeyController implements KeyListener {
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
         			GameData.hero.x--;
+        			a.playAudio("left.wav");
         		}
         		break;
         	case KeyEvent.VK_ESCAPE:
@@ -111,6 +116,13 @@ public class KeyController implements KeyListener {
         			Main.gameData.enemy.pain = 1;
         			Main.gameData.hero.wrath = 1;
         		}
+        	
+        	case KeyEvent.VK_MINUS:
+        		Main.gameData.hero.setHealth(-1);
+        		break;
+        	
+        	case KeyEvent.VK_EQUALS:
+        		Main.gameData.hero.setHealth(1);
         		break;
       
         	case KeyEvent.VK_I:

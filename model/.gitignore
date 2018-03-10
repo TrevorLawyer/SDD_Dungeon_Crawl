@@ -23,3 +23,7 @@
 /ItemManager.class
 >>>>>>> 7ba5bc05d823884f7a032af1c2c73b67f3728ba1
 /MapManager.class
+/Enemy_Bat.class
+/Enemy_Skeleton.class
+/EnemyType.class
+/HealthBar.class

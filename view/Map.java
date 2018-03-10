@@ -19,10 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import controller.Audio;
 import controller.Main;
 import model.GameData;
 import model.GameFigure;
 import model.GameMapTile;
+import model.HealthBar;
 import model.MapManager;
 import model.Merchant;
 
@@ -31,6 +33,8 @@ import model.Merchant;
  * @author Matthew
  */
 public class Map extends JFrame {
+	private static HealthBar health;
+	int healthleft;
 	JPanel panel = new JPanel();
     public final static int row = 10, col = 10;
     GameMapTile[][] grid= new GameMapTile[row][col];
@@ -44,7 +48,7 @@ public class Map extends JFrame {
         
 	    // contentPane's default layout manager --> Border Layout
 	    getContentPane().add(panel);
-	    
+	    health = new HealthBar();
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setBounds(100, 100, 500, 500);
 	    panel.setLayout(new GridLayout(row, col));
@@ -110,14 +114,12 @@ public class Map extends JFrame {
         }
 
         g2.clearRect(0, 0, width, height);
-    
         gameMap.render(g2);
         synchronized (Main.gameData.friendFigures){
-            
-        	 
-     
-		}
-            
+
+            synchronized(health) {
+            	health.render(g2);
+            }
      
 	
         synchronized(Main.gameData.inventory_window){
@@ -131,5 +133,6 @@ public class Map extends JFrame {
 				}
 
 			}
+        }
 	}
 }
