@@ -68,7 +68,9 @@ public class GameData {
         player_dialogue_state = false;
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
-        spawn();//first enemy created
+
+        	spawn();//first enemy created
+        
         inventory_window = new MerchantDialogueWindow("Inventory");
         
     }
@@ -143,12 +145,12 @@ public class GameData {
 	    }
     }
  // add enemy
-public static void spawn(){
+    public static void spawn(){
         	
-enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
-enemyFigures.add(enemy);
-Main.frame.PlaceCharacter(enemy);
-        }
+    	enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
+    	enemyFigures.add(enemy);
+    	Main.frame.PlaceCharacter(enemy);
+     }
         // remove all enemies
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);

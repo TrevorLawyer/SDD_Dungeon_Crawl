@@ -15,8 +15,11 @@ public class MapManager {
 	public void goNext() {				
 		maps.add(new GameMap(maps.get(currentMap).exit));
 		GameData.swab(); // remove old enemies
-		GameData.spawn(); // make new enemy as new map is generated
-		currentMap++;
+		for(int x = 0; x < Math.random()*2;x++)
+		{
+			GameData.spawn(); // make new enemy as new map is generated
+		}
+			currentMap++;
 	}
 	
 	public void goBack() {

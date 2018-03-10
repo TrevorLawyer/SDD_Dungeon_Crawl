@@ -72,35 +72,49 @@ public class Animator implements Runnable {
         
         public void enemyMovements()
         {
-            double range_of_sight = 4.0;
-            double eX = GameData.enemy.x;
-            double eY = GameData.enemy.y;
-            double hX = GameData.hero.x;
-            double hY = GameData.hero.y;
-            int[][] map = new int[10][10];
+        	
+        	for(int z = 0; z < Main.gameData.enemyFigures.size();z++)
+        	{
+        		
+        		double range_of_sight = 5.0;
+        		double eX = Main.gameData.enemyFigures.get(z).x;
+        		double eY = Main.gameData.enemyFigures.get(z).y;
+        		double hX = GameData.hero.x;
+        		double hY = GameData.hero.y;
             
-            for (int i = 0; i < row; i++){
-                for (int j = 0; j < col; j++){
+        		int[][] map = new int[10][10];
+            
+        		for (int i = 0; i < row; i++){
+        			for (int j = 0; j < col; j++){
 
-                        map[i][j] = 0;                        
+                        	map[i][j] = 0;                        
+        			}
+        		}
+
+//            map[4][5] = -1;
+//            map[4][4] = -1;
+//            map[4][6] = -1;
+//            map[4][7] = -1;
+                Grid2d map2d = new Grid2d(map, false);
+                System.out.println(map2d.findPath(Main.gameData.enemyFigures.get(z).x, Main.gameData.enemyFigures.get(z).y, GameData.hero.x, GameData.hero.y));
+
+                double totalX = eX - hX;
+                double totalY = eY - hY;
+                System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
+                double distance_away = Math.sqrt((totalX*totalX)+(totalY*totalY));
+                if(distance_away <=range_of_sight)
+                {
+                	if(distance_away > 1.9)
+                	{
+                	
+                		int x =Integer.parseInt(map2d.findPath(Main.gameData.enemyFigures.get(z).x, Main.gameData.enemyFigures.get(z).y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(1,2));
+                		int y =Integer.parseInt(map2d.findPath(Main.gameData.enemyFigures.get(z).x, Main.gameData.enemyFigures.get(z).y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(4,5));
+                
+                		Main.gameData.enemyFigures.get(z).x = x;
+                		Main.gameData.enemyFigures.get(z).y = y;
+                	}
                 }
             }
-
-                    Grid2d map2d = new Grid2d(map, false);
-                    System.out.println(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y));
-
-                    double totalX = eX - hX;
-                    double totalY = eY - hY;
-                    System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
-                if(Math.sqrt((totalX*totalX)+(totalY*totalY)) <=range_of_sight)
-                {
-                    int x =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(1,2));
-                    int y =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(4,5));
-                
-                    GameData.enemy.x = x;
-                    GameData.enemy.y = y;
-                }
-                }
-
+        }
 
 }
