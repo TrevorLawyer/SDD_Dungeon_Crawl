@@ -77,7 +77,7 @@ public class Main {
 		window.setBounds(100, 100, 600, 400);
 		window.setVisible(true);
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
