@@ -24,6 +24,7 @@ public class Hero extends GameFigure{
 	Armor equippedArmor;
 	public int powerLevel;
 	public int xp;
+	public int maxHealth;
 	public int health;
 	public int attack;
 	public int wrath = 0;
@@ -35,7 +36,8 @@ public class Hero extends GameFigure{
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
         powerLevel=(int) xp/4;
         attack = Weapon.getPower()+powerLevel;
-        health = powerLevel + 5;
+        maxHealth = powerLevel + 35;
+        health = maxHealth;
         
         inventory = new ArrayList<Item>();
         inventory.add(new Weapon("Basic Sword","It's a sword",1,0,0));
@@ -72,6 +74,29 @@ public class Hero extends GameFigure{
     	}
     	
     	return new String[]{""};
+    }
+    
+    //Send this method how much you want to add or remove health from the hero
+    //Negative numbers remove health, positive numbers add health   
+    public void setHealth(int h) {
+    	if(!(h+health < 0 || h+health > maxHealth)) {
+    		health+=h;
+    	}
+    	else if(h+health < 0) {
+    		health = 0;
+    	}
+    	else if(h+health > maxHealth) {
+    		health = maxHealth;
+    	}
+    	
+    }
+    
+    public int getHealth() {
+    	return health;
+    }
+    
+    public int getMaxHealth() {
+    	return maxHealth;
     }
     
     public void useItem(Item i){
