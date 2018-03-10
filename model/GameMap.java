@@ -3,6 +3,8 @@ package model;
 import java.awt.Graphics2D;
 import java.util.concurrent.ThreadLocalRandom;
 
+import controller.Audio;
+
 public class GameMap {
 	//Game Board width and height
 	public int mapWidth = 10;
@@ -11,6 +13,9 @@ public class GameMap {
 	private Coordinate previousExit;
 	public  Coordinate entrance;
 	public Coordinate exit;
+	
+	public Audio a = new Audio();
+	public Audio b = new Audio();
 	
 	GameMapTile[][] thisMap;
 	
@@ -35,11 +40,10 @@ public class GameMap {
 		}
 		if (previousExit != null) {
 			entrance = getEntrance();
-			thisMap[entrance.x][entrance.y].tileEmpty = true;
+			thisMap[entrance.x][entrance.y].tileEmpty = true;			
 		}
 		exit = makeExit(entrance);
-		thisMap[exit.x][exit.y].tileEmpty = true;
-		
+		thisMap[exit.x][exit.y].tileEmpty = true;	
 		
 	}
 	//Returns an X coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
@@ -61,6 +65,7 @@ public class GameMap {
 		else {
 			int x,y;
 			int randSide;
+			
 			if (entrance.x == 0) {
 				if (pickExitSide() == 0) {
 					x = randXCoord(); y = 0;
@@ -106,13 +111,15 @@ public class GameMap {
 					x = mapWidth -1 ; y = randYCoord();
 				}
 			}
+			
 			return new Coordinate(x,y);
+			
 		}
 	}
 	public Coordinate getEntrance() {
 		int x, y;
 		if(previousExit.x == 0) {
-			x = mapWidth -1; y = previousExit.y;
+			x = mapWidth -1; y = previousExit.y;			
 		}
 		else if(previousExit.x == mapWidth - 1) {
 			x = 0; y = previousExit.y;
@@ -124,6 +131,9 @@ public class GameMap {
 			x = previousExit.x; y = 0;
 		}
 		
+		//sound of New Door		 
+	     a.playAudio("doorOpen.wav");
+
 		return new Coordinate(x,y);
 	}
 	public void render(Graphics2D g) {

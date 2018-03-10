@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import controller.Audio;
 //import controller.Audio;
 import controller.Main;
 import model.GameData;
@@ -45,8 +46,8 @@ public class Map extends JFrame {
     
     public Map() {
 		//theme song for application
-        //Audio a = new Audio();
-        //a.playAudio("theme.mid");
+        Audio a = new Audio();
+        a.playAudio("theme.mid");
         
 	    // contentPane's default layout manager --> Border Layout
 	    getContentPane().add(panel);
