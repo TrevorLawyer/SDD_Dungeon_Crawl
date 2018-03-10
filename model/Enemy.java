@@ -22,7 +22,7 @@ public class Enemy extends GameFigure{
     private Image bossImage;
     public int xp = 10;
     public int health = 6;
-    public int attack = 2;
+    public int power = 2;
     public int pain = 0;
     public Enemy(int x, int y) {
         super(x, y);
@@ -39,8 +39,8 @@ public class Enemy extends GameFigure{
             JOptionPane.showMessageDialog(null, "Error: Cannot open skeleton.jpg");
             System.exit(-1);
         }
-    }
-    
+   }
+
     @Override
     public void render(Graphics2D g) {
         g.drawImage(currentPic, (int)super.x, (int)super.y, 

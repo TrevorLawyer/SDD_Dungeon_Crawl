@@ -1,9 +1,12 @@
 package controller;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
 import view.Grid2d;
 import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import model.GameData;
@@ -34,24 +37,25 @@ public class Animator implements Runnable {
             int sleepTime = (int) (1.0 / FRAMES_PER_SECOND*1000)
                     - (int) (endTime - startTime);
 
-            if (sleepTime > 0) {
+           if (sleepTime > 0) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(sleepTime);
                 } catch (InterruptedException e) {
 
                 }
-            }
-            if(userTurn){
+           }
+            
+       /*     if(userTurn){
             	//Player's Turn
             } else{
             	//Enemy's Turn
-                    enemyMovements();
+                if(GameData.enemy.health>0)enemyMovements();
             	switchTurns();
             }
-        }
-        System.exit(0);
+       // }
+        System.exit(0);*/
     }
-    
+    }
     public void switchTurns() {
 		if(userTurn) userTurn=false;
 		else userTurn=true;
@@ -70,7 +74,7 @@ public class Animator implements Runnable {
 		}
     }
         
-        public void enemyMovements()
+        public void enemyMovements() 
         {
             double range_of_sight = 4.0;
             double eX = GameData.enemy.x;
@@ -107,7 +111,26 @@ public class Animator implements Runnable {
                     GameData.enemy.y = y;
                 	}
                 }
-                }
-
+			/*	while(Math.abs(GameData.hero.x-GameData.enemy.x)<2 && Math.abs(GameData.hero.y-GameData.hero.y)<2) {
+				
+				//	try {
+		//				GameData.enemy.currentPic =ImageIO.read(getClass().getResource("sword.png"));
+			//		} catch (IOException e1) {
+		//				// TODO Auto-generated catch block
+			//			e1.printStackTrace();
+			//		}
+						
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					GameData.hero.health=-GameData.enemy.power;
+					if(GameData.hero.health<1) {
+						   System.out.println("game over. You are dead!");
+					}
+				}*/
+		   }       
 
 }

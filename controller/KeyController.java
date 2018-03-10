@@ -11,7 +11,7 @@ public class KeyController implements KeyListener {
 	boolean hasLeftEntranceTile = false;
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e) { 
 		switch (e.getKeyCode()){
         	case KeyEvent.VK_UP:
         		if(GameData.hero.y>0 && Main.gameData.game_state == GameData.GAME_RUNNING){
@@ -94,6 +94,17 @@ public class KeyController implements KeyListener {
         		case KeyEvent.VK_SPACE:
               		
         		if(2 > Math.abs(GameData.enemy.x-GameData.hero.x) && 2 > Math.abs(GameData.enemy.y-GameData.hero.y) && !Main.gameData.player_dialogue_state){
+        			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
+        			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
+        			Main.gameData.enemy.health-=Main.gameData.hero.attack;
+        			Main.gameData.enemy.pain = 1;
+        			Main.gameData.hero.wrath = 1;
+        		}
+        		break;
+        		
+        		case KeyEvent.VK_A:
+              		
+        		if((GameData.enemy.x==GameData.hero.x || GameData.enemy.y==GameData.hero.y) && !Main.gameData.player_dialogue_state){
         			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
         			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
         			Main.gameData.enemy.health-=Main.gameData.hero.attack;

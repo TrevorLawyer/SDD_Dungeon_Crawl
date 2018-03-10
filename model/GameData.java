@@ -113,9 +113,11 @@ public class GameData {
 				if (!player_dialogue_state) {
 					//take life away
 					if (enemy.health<1) {
-						enemyFigures.remove(enemy);
 					    hero.xp=+enemy.xp;
+					    item4 = manager.ItemOutput(enemy.x, enemy.y);
 					    System.out.println(""+hero.xp);
+						enemyFigures.remove(enemy);
+					    friendFigures.add(item4);
 					     			}
 					for(GameFigure g: enemyFigures){
 						g.update();
