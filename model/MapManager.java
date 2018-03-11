@@ -13,7 +13,7 @@ public class MapManager {
 		currentMap = 0;
 	}
 	public void goNext() {				
-		maps.add(new GameMap(maps.get(currentMap).exit));
+		maps.add(new GameMap(maps.get(currentMap).exit, currentMap));
 		GameData.swab(); // remove old enemies
 		for(int x = 0; x < Math.random()*2;x++)
 		{
@@ -40,5 +40,10 @@ public class MapManager {
 	public void render(Graphics2D g) {
 		maps.get(currentMap).render(g);
 	}
-	
+	public boolean isPassable(int x,int y) {
+		if(maps.get(currentMap).isPassable(x,y)) {
+			return true;
+		}
+		else return false;
+	}
 }

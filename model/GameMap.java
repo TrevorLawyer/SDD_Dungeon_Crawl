@@ -13,6 +13,7 @@ public class GameMap {
 	private Coordinate previousExit;
 	public  Coordinate entrance;
 	public Coordinate exit;
+	public int obstacleLevel = 0; 
 	
 	public Audio a = new Audio();
 	public Audio b = new Audio();
@@ -25,6 +26,11 @@ public class GameMap {
 	}
 	public GameMap(Coordinate previousExit) {
 		this.previousExit = previousExit;
+		generateMap();
+	}
+	public GameMap(Coordinate previousExit, int obstacles) {
+		this.previousExit = previousExit;
+		obstacleLevel = obstacles;
 		generateMap();
 	}
 	private void generateMap() {
@@ -44,15 +50,19 @@ public class GameMap {
 		}
 		exit = makeExit(entrance);
 		thisMap[exit.x][exit.y].tileEmpty = true;	
+		if(obstacleLevel > 0) {
+			generateObstacles(obstacleLevel);
+		}
+		
 		
 	}
 	//Returns an X coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
 	public int randXCoord() {
-		return ThreadLocalRandom.current().nextInt(1, mapWidth);
+		return ThreadLocalRandom.current().nextInt(1, mapWidth-1);
 	}
 	//Returns a Y coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
 	public int randYCoord() {
-		return ThreadLocalRandom.current().nextInt(1, mapWidth);
+		return ThreadLocalRandom.current().nextInt(1, mapWidth-1);
 	}
 	private int pickExitSide(){
 		return ThreadLocalRandom.current().nextInt(0, 4);
@@ -147,6 +157,32 @@ public class GameMap {
 	public GameMapTile getTile(int x, int y) {
 		return thisMap[x][y];
 	}
+	private void generateObstacles(int obstacles) {
+		for(int i = 0; i < obstacles/2; i++) {
+			Coordinate block = new Coordinate(randXCoord(),randYCoord());
+			if (checkExitClear(block.x, block.y) && checkEntranceClear(block.x,block.y)) {
+				thisMap[block.x][block.y].obstacle = true;
+			}
+			else i--;
+		}
+	}
+	public boolean checkExitClear(int x, int y) {
+		if (Math.abs(exit.x - x) <= 1 && Math.abs(exit.y - y) <= 1) {
+			return false;
+		}
+		else return true;
+	}
+	public boolean checkEntranceClear(int x, int y) {
+		if (Math.abs(entrance.x - x) <= 1 && Math.abs(entrance.y - y) <= 1) {
+			return false;
+		}
+		else return true;
+	}
+	public boolean isPassable(int x, int y) {
+		if (thisMap[x][y].isPassable()) return true;
+		else return false;
+	}
+	
 //	public void printToConsole() {
 //		for(int x = 0; x < mapWidth; x++ ) {
 //			for(int y = 0; y < mapHeight; y++) {

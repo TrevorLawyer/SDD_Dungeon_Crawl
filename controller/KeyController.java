@@ -18,7 +18,9 @@ public class KeyController implements KeyListener {
         		if(GameData.hero.y>0 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
-        			GameData.hero.y--;
+        			if(Main.gameMap.isPassable(GameData.hero.x, GameData.hero.y-1)) {
+        				GameData.hero.y--;
+        			}
         			a.playAudio("up.wav");
         		}
         		else if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
@@ -33,7 +35,9 @@ public class KeyController implements KeyListener {
         		if(GameData.hero.y<Map.row-1 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;        			
-        			GameData.hero.y++;
+        			if(Main.gameMap.isPassable(GameData.hero.x, GameData.hero.y+1)) {
+        				GameData.hero.y++;
+        			}
         			a.playAudio("down.mid");
         		}
         		else if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
@@ -48,7 +52,9 @@ public class KeyController implements KeyListener {
         		if(GameData.hero.x<Map.col-1 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
-        			GameData.hero.x++;
+        			if(Main.gameMap.isPassable(GameData.hero.x+1, GameData.hero.y)) {
+        				GameData.hero.x++;
+        			}
         			a.playAudio("right.wav");
         		}
         		else if(Main.gameData.game_state == GameData.MENU_EQUIPMENT){
@@ -60,7 +66,9 @@ public class KeyController implements KeyListener {
         		if(GameData.hero.x>0 && Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.location_memory_min_1_x = GameData.hero.x;
         			Main.gameData.location_memory_min_1_y = GameData.hero.y;
-        			GameData.hero.x--;
+        			if(Main.gameMap.isPassable(GameData.hero.x-1, GameData.hero.y)) {
+        				GameData.hero.x--;
+        			}
         			a.playAudio("left.wav");
         		}
         		else if(Main.gameData.game_state == GameData.GAME_MENU){

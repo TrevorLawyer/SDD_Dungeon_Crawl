@@ -53,7 +53,7 @@ public class Map extends JFrame {
 	    getContentPane().add(panel);
 	    health = new HealthBar();
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setBounds(100, 100, 500, 500);
+	    setBounds(100, 100, 506, 520);
 	    panel.setLayout(new GridLayout(row, col));
 	    
 	    gameMap = Main.gameMap;
@@ -73,7 +73,7 @@ public class Map extends JFrame {
     {
         BufferedImage image = character.currentPic;
         
-        Image img= image.getScaledInstance(grid[character.y][character.x].getWidth(), grid[character.y][character.x].getHeight(),
+        Image img= image.getScaledInstance(grid[character.x][character.y].getWidth(), grid[character.y][character.x].getHeight(),
         Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(img);
         
