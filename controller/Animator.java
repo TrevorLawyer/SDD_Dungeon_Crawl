@@ -114,6 +114,12 @@ public class Animator implements Runnable {
                 		Main.gameData.enemyFigures.get(z).x = x;
                 		Main.gameData.enemyFigures.get(z).y = y;
                 	}
+                	else {
+                		
+                			Main.gameData.hero.setHealth(-3);
+                		
+                			
+                	}
                 }
             }
         }
