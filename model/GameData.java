@@ -26,11 +26,11 @@ public class GameData {
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2;
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
-	public static Item droped;
+	public static Item dropped;
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
-       public final List<GameFigure> friendFigures;
+       public static List<GameFigure> friendFigures;
     public static List<GameFigure> enemyFigures;
 
     public static MerchantDialogueWindow merchant_dialogue_window, inventory_window;
@@ -92,6 +92,7 @@ public class GameData {
 	    		if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 	            ArrayList<GameFigure> remove = new ArrayList<>();
 	            GameFigure f;
+	         
 	            for (int i = 0; i < friendFigures.size(); i++) {
 	                f = friendFigures.get(i);
 	//                if (f.state == GameFigureState.STATE_DONE) {
@@ -109,14 +110,20 @@ public class GameData {
 			synchronized(enemyFigures){
 				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
-					if (enemy.health<1) {
+					if (!(enemy.health>0)) {
 						enemyFigures.remove(enemy);
-						droped = manager.ItemOutput(enemy.x, enemy.y);
-						friendFigures.add(droped);
+
+						
+						dropped = manager.ItemOutput(enemy.x, enemy.y, enemy.x%2+1, enemy.y%2+1);
+						friendFigures.add(dropped);
 					    hero.xp=+enemy.xp;
+					  //  if (hero.x==dropped.x && hero.y==dropped.y) {
+			           // 	friendFigures.remove(dropped);
+			          //  }
 					    //System.out.println(""+hero.xp);
 					     			}
 					for(GameFigure g: enemyFigures){
+						
 						g.update();
 						Main.frame.PlaceCharacter(g);
 					}
@@ -148,9 +155,11 @@ public class GameData {
     	enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
     	enemyFigures.add(enemy);
     	Main.frame.PlaceCharacter(enemy);
+    	//friendFigures.remove(dropped);
      }
         // remove all enemies
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
+        
         }
 }
