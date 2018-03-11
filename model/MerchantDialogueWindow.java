@@ -49,7 +49,11 @@ public class MerchantDialogueWindow {
 		closeWindow();
 		return menu_index;
 	}
+	public int getIndex(){
+		return menu_index;
+	}
 	public void openWindow() {
+		menu_index = 0;
 		is_open = true;
 	}
 	public void closeWindow() {
@@ -94,8 +98,9 @@ public class MerchantDialogueWindow {
 		
 	}
 	
-	public void update(String[] newStuff){
-		menu_options = newStuff;
+	public void update(String[] inventoryNames) {
+		menu_options = inventoryNames;
+		menu_size = inventoryNames.length;
 	}
 	
 }

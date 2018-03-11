@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Hero extends GameFigure{
 	
-	ArrayList<Item> inventory;
+	ArrayList<Item> inventory, equipment;
 	Weapon equippedWeapon;
 	Armor equippedArmor;
 	public int powerLevel;
@@ -38,6 +38,7 @@ public class Hero extends GameFigure{
         attack = Weapon.getPower()+powerLevel;
         maxHealth = powerLevel + 35;
         health = maxHealth;
+        equipment = new ArrayList<Item>();
         
         inventory = new ArrayList<Item>();
         inventory.add(new Weapon("Basic Sword","It's a sword",1,0,0));
@@ -48,7 +49,11 @@ public class Hero extends GameFigure{
             JOptionPane.showMessageDialog(null, "Error: Cannot open pixel_hero.jpg");
             System.exit(-1);
         }
+        equipment.add(equippedWeapon);
+        equipment.add(equippedArmor);
     }
+    
+
     
     @Override
     public void render(Graphics2D g) {
@@ -76,6 +81,17 @@ public class Hero extends GameFigure{
     	return new String[]{""};
     }
     
+    public String[] getEquipmentNames(){
+    	if(equipment.size()>0){
+    	String[] equipmentNames = new String[equipment.size()];
+    	for(int i=0; i<equipment.size();i++){
+    		equipmentNames[i] = equipment.get(i).name;
+    		}
+    		return equipmentNames;
+    	}
+    	return new String[]{""};
+    	}
+    
     //Send this method how much you want to add or remove health from the hero
     //Negative numbers remove health, positive numbers add health   
     public void setHealth(int h) {
@@ -100,17 +116,29 @@ public class Hero extends GameFigure{
     }
     
     public void useItem(Item i){
+    	System.out.println("Using an item "+i.name);
     	if(i instanceof Weapon){
     		inventory.add(equippedWeapon);
+    		equipment.remove(equippedWeapon);
     		equippedWeapon = (Weapon) i;
+    		inventory.remove(i);
+    		equipment.add(i);
     	}
     	else if(i instanceof Armor){
     		inventory.add(equippedArmor);
-    		equippedArmor = (Armor) i;
+    		equipment.remove(equippedArmor);
+     		equippedArmor = (Armor) i;
+    		inventory.remove(i);
+    		equipment.add(i);
     	}
     	else if(i instanceof Consumable){
     		((Consumable) i).use();
+    		inventory.remove(i);
     	}
+    	
+    }
+    public void useItem(int i){
+    	useItem(inventory.get(i));
     }
     
 }

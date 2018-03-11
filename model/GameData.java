@@ -24,6 +24,7 @@ public class GameData {
 	
 	public int game_state;
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2;
+	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
 	public static Item item;
     public static Enemy enemy;
@@ -48,6 +49,10 @@ public class GameData {
         
         friendFigures.add(hero);
 
+        
+        hero.AddItemToInventory(new Weapon("Sword 1","Sword",5,1,1));
+        hero.AddItemToInventory(new Weapon("Sword 2","Sword",5,1,1));
+        hero.AddItemToInventory(new Weapon("Sword 3","Sword",5,1,1));
         Main.frame.PlaceCharacter(hero);
         
         friendFigures.add(merchant);
