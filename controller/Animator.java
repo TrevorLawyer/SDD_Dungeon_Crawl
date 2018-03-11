@@ -72,7 +72,8 @@ public class Animator implements Runnable {
         
         public void enemyMovements()
         {
-        	
+        	if(Main.gameData.enemyFigures.size() > 0)
+        	{
         	for(int z = 0; z < Main.gameData.enemyFigures.size();z++)
         	{
         		
@@ -100,7 +101,7 @@ public class Animator implements Runnable {
 
                 double totalX = eX - hX;
                 double totalY = eY - hY;
-                System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
+   //             System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
                 double distance_away = Math.sqrt((totalX*totalX)+(totalY*totalY));
                 if(distance_away <=range_of_sight)
                 {
@@ -115,6 +116,7 @@ public class Animator implements Runnable {
                 	}
                 }
             }
+        }
         }
 
 }

@@ -47,7 +47,7 @@ public class Enemy extends GameFigure{
             	super.currentPic =ImageIO.read(getClass().getResource("hit.png"));
             }
             else {
-            	System.out.println(chosenEnemy.picString);
+            	
             	super.currentPic = ImageIO.read(getClass().getResource(chosenEnemy.picString));
             }
         } catch (IOException ex) {

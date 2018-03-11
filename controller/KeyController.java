@@ -26,6 +26,7 @@ public class KeyController implements KeyListener {
         		}
         		else if(Main.gameData.game_state == GameData.GAME_MENU){
         			Main.gameData.inventory_window.moveIndexUp();
+        			System.out.println(Main.gameData.inventory_window.getIndex());
         		}
         		break;
         	case KeyEvent.VK_DOWN:
@@ -37,6 +38,7 @@ public class KeyController implements KeyListener {
         		}
         		else if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
         			Main.gameData.merchant_dialogue_window.moveIndexDown();
+        			System.out.println(Main.gameData.inventory_window.getIndex());
         		} 
         		else if(Main.gameData.game_state == GameData.GAME_MENU){
         			Main.gameData.inventory_window.moveIndexDown();
@@ -49,6 +51,10 @@ public class KeyController implements KeyListener {
         			GameData.hero.x++;
         			a.playAudio("right.wav");
         		}
+        		else if(Main.gameData.game_state == GameData.MENU_EQUIPMENT){
+        			Main.gameData.inventory_window.update(Main.gameData.hero.getInventoryNames());
+        			Main.gameData.game_state = GameData.GAME_MENU;
+        		}
         		break;
         	case KeyEvent.VK_LEFT:
         		if(GameData.hero.x>0 && Main.gameData.game_state == GameData.GAME_RUNNING){
@@ -57,6 +63,10 @@ public class KeyController implements KeyListener {
         			GameData.hero.x--;
         			a.playAudio("left.wav");
         		}
+        		else if(Main.gameData.game_state == GameData.GAME_MENU){
+        			Main.gameData.inventory_window.update(Main.gameData.hero.getEquipmentNames());
+        			Main.gameData.game_state = GameData.MENU_EQUIPMENT;
+        		}
         		break;
         	case KeyEvent.VK_ESCAPE:
  //       		Main.animator.gameState = Main.animator.GAME_OVER;
@@ -64,6 +74,10 @@ public class KeyController implements KeyListener {
         	case KeyEvent.VK_ENTER:
         		if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
         			merchantActionProcedures();
+        		}
+        		else if(Main.gameData.game_state == GameData.GAME_MENU){
+        			Main.gameData.hero.useItem(Main.gameData.inventory_window.getIndex());
+        			Main.gameData.inventory_window.update(Main.gameData.hero.getInventoryNames());
         		}
         		break;
         		
@@ -87,13 +101,14 @@ public class KeyController implements KeyListener {
         		break;
       
         	case KeyEvent.VK_I:
+        		System.out.println("Game State: "+Main.gameData.game_state);
         		//opens inventory window, switches game state to game_menu
         		if(Main.gameData.game_state == GameData.GAME_RUNNING){
         			Main.gameData.game_state = GameData.GAME_MENU;
         			Main.gameData.inventory_window.openWindow();
-        		//	Main.gameData.inventory_window.update(Main.gameData.hero.getInventoryNames());
+        			Main.gameData.inventory_window.update(Main.gameData.hero.getInventoryNames());
         		}
-        		else if(Main.gameData.game_state == GameData.GAME_MENU){
+        		else if(Main.gameData.game_state == GameData.GAME_MENU || Main.gameData.game_state == GameData.MENU_EQUIPMENT){
         			Main.gameData.game_state = GameData.GAME_RUNNING;
         			//close inventory window
         			Main.gameData.inventory_window.closeWindow();

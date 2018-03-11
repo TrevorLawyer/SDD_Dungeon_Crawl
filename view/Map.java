@@ -168,8 +168,8 @@ public class Map extends JFrame {
             }
      
 	
-        synchronized(Main.gameData.inventory_window){
-        	if(Main.gameData.game_state == GameData.GAME_MENU){
+            synchronized(Main.gameData.inventory_window){
+            	if(Main.gameData.game_state == GameData.GAME_MENU || Main.gameData.game_state == GameData.MENU_EQUIPMENT){
         		Main.gameData.inventory_window.render(g2);
         	}
         }
