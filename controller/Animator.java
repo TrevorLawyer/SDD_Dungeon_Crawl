@@ -1,9 +1,12 @@
 package controller;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
 import view.Grid2d;
 import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import model.GameData;
@@ -34,24 +37,25 @@ public class Animator implements Runnable {
             int sleepTime = (int) (1.0 / FRAMES_PER_SECOND*1000)
                     - (int) (endTime - startTime);
 
-            if (sleepTime > 0) {
+           if (sleepTime > 0) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(sleepTime);
                 } catch (InterruptedException e) {
 
                 }
-            }
-            if(userTurn){
+           }
+            
+          if(userTurn){
             	//Player's Turn
             } else{
             	//Enemy's Turn
-                    enemyMovements();
+                if(GameData.enemy.health>0)enemyMovements();
             	switchTurns();
             }
-        }
+       
         System.exit(0);
     }
-    
+    }
     public void switchTurns() {
 		if(userTurn) userTurn=false;
 		else userTurn=true;
@@ -63,44 +67,79 @@ public class Animator implements Runnable {
         // if detected, mark it as STATE_DONE, so that
         // they can be removed at update() method
 		if (Main.gameData.friendFigures.get(0).x == Main.gameData.merchant.x && Main.gameData.friendFigures.get(0).y == Main.gameData.merchant.y) {
-			Main.gameData.player_dialogue_state = true;
+			Main.gameData.game_state = GameData.MERCHANT_DIALOG;
 			Main.gameData.merchant_dialogue_window.openWindow();
 			GameData.hero.x = Main.gameData.location_memory_min_1_x;
 			GameData.hero.y = Main.gameData.location_memory_min_1_y;
 		}
     }
         
-        public void enemyMovements()
+        public void enemyMovements() 
         {
-            double range_of_sight = 4.0;
-            double eX = GameData.enemy.x;
-            double eY = GameData.enemy.y;
-            double hX = GameData.hero.x;
-            double hY = GameData.hero.y;
-            int[][] map = new int[10][10];
+        	
+        	for(int z = 0; z < Main.gameData.enemyFigures.size();z++)
+        	{
+        		
+        		double range_of_sight = 5.0;
+        		double eX = Main.gameData.enemyFigures.get(z).x;
+        		double eY = Main.gameData.enemyFigures.get(z).y;
+        		double hX = GameData.hero.x;
+        		double hY = GameData.hero.y;
             
-            for (int i = 0; i < row; i++){
-                for (int j = 0; j < col; j++){
+        		int[][] map = new int[10][10];
+            
+        		for (int i = 0; i < row; i++){
+        			for (int j = 0; j < col; j++){
 
-                        map[i][j] = 0;                        
-                }
-            }
+                        	map[i][j] = 0;                        
+        			}
+        		}
 
-                    Grid2d map2d = new Grid2d(map, false);
-                    System.out.println(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y));
+//            map[4][5] = -1;
+//            map[4][4] = -1;
+//            map[4][6] = -1;
+//            map[4][7] = -1;
+                Grid2d map2d = new Grid2d(map, false);
+                System.out.println(map2d.findPath(Main.gameData.enemyFigures.get(z).x, Main.gameData.enemyFigures.get(z).y, GameData.hero.x, GameData.hero.y));
 
-                    double totalX = eX - hX;
-                    double totalY = eY - hY;
-                    System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
-                if(Math.sqrt((totalX*totalX)+(totalY*totalY)) <=range_of_sight)
+                double totalX = eX - hX;
+                double totalY = eY - hY;
+                System.out.println(Math.sqrt((totalX*totalX)+(totalY*totalY)));
+                double distance_away = Math.sqrt((totalX*totalX)+(totalY*totalY));
+                if(distance_away <=range_of_sight)
                 {
-                    int x =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(1,2));
-                    int y =Integer.parseInt(map2d.findPath(GameData.enemy.x, GameData.enemy.y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(4,5));
+                	if(distance_away > 1.9)
+                	{
+                	
+                		int x =Integer.parseInt(map2d.findPath(Main.gameData.enemyFigures.get(z).x, Main.gameData.enemyFigures.get(z).y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(1,2));
+                		int y =Integer.parseInt(map2d.findPath(Main.gameData.enemyFigures.get(z).x, Main.gameData.enemyFigures.get(z).y, GameData.hero.x, GameData.hero.y).get(1).toString().substring(4,5));
                 
-                    GameData.enemy.x = x;
-                    GameData.enemy.y = y;
+                		Main.gameData.enemyFigures.get(z).x = x;
+                		Main.gameData.enemyFigures.get(z).y = y;
+                	}
                 }
-                }
-
+			/*	while(Math.abs(GameData.hero.x-GameData.enemy.x)<2 && Math.abs(GameData.hero.y-GameData.hero.y)<2) {
+				
+				//	try {
+		//				GameData.enemy.currentPic =ImageIO.read(getClass().getResource("sword.png"));
+			//		} catch (IOException e1) {
+		//				// TODO Auto-generated catch block
+			//			e1.printStackTrace();
+			//		}
+						
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					GameData.hero.health=-GameData.enemy.power;
+					if(GameData.hero.health<1) {
+						   System.out.println("game over. You are dead!");
+					}
+				}*/
+        	}      
+            
+        }
 
 }

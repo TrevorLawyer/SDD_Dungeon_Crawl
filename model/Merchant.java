@@ -30,18 +30,26 @@ public class Merchant extends GameFigure {
 	public static final int SELL_CONFIRMATION = 4;
 	public static final int NOT_ENOUGH_GOLD = 5;
 	public static final int FULL_INVENTORY = 6;
-	public static final int EMPTY_INVENTORY = 7;
+	public static final int THANK_YOU_FOR_PURCHASE = 7;
 	public static final int BUY_FROM_PLAYER = 8;
 	public static final int BUY_CONFIRMATION = 9;
+	public static final int EMPTY_INVENTORY = 10;
+	public static final int THANK_YOU_FOR_SALE = 11;
 	
 	
 	public static final String[] menu_options_0 = {"Buy Items", "Sell Items", "Leave"};
-	
+	public static final String[] menu_options_1 = {"Consumable", "Weapon", "Armor"};
+	public static final String[] menu_options_2 = {"Yes", "No"};
 	
 	public static final MerchantDialogueWindow[] merchant_dialogue = {
 		new MerchantDialogueWindow("Merchant: Hello! Welcome to my shop."),
 		new MerchantDialogueWindow("Merchant: How can I help you today?", menu_options_0),
-		new MerchantDialogueWindow("Merchant: Thank you for comming to my shop. Please come again!")
+		new MerchantDialogueWindow("Merchant: Thank you for comming to my shop. Please come again!"),
+		new MerchantDialogueWindow("Merchant: What would you like to buy?", menu_options_1),
+		new MerchantDialogueWindow("Merchant: Are you sure you would like to buy a ", menu_options_2),
+		new MerchantDialogueWindow("Merchant: I'm sorry, but you do not have enough gold."),
+		new MerchantDialogueWindow("Merchant: I'm sorry, but your inventory is too full."),
+		new MerchantDialogueWindow("Merchant: Thank you for your purchase!")
 	};
 	
 	public Merchant(int x, int y) {

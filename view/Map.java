@@ -24,6 +24,7 @@ import controller.Main;
 import model.GameData;
 import model.GameFigure;
 import model.GameMapTile;
+import model.HealthBar;
 import model.MapManager;
 import model.Merchant;
 
@@ -32,6 +33,8 @@ import model.Merchant;
  * @author Matthew
  */
 public class Map extends JFrame {
+	private static HealthBar health;
+	int healthleft;
 	JPanel panel = new JPanel();
     public final static int row = 10, col = 10;
     GameMapTile[][] grid= new GameMapTile[row][col];
@@ -42,12 +45,10 @@ public class Map extends JFrame {
     
     public Map() {
 		//theme song for application
-        Audio a = new Audio();
-        a.playAudio("theme.mid");
         
 	    // contentPane's default layout manager --> Border Layout
 	    getContentPane().add(panel);
-	    
+	    health = new HealthBar();
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setBounds(100, 100, 500, 500);
 	    panel.setLayout(new GridLayout(row, col));
@@ -113,14 +114,19 @@ public class Map extends JFrame {
         }
 
         g2.clearRect(0, 0, width, height);
-/*		synchronized (Main.gameData.enemyFigures) {
-            
-            for (GameFigure f : Main.gameData.enemyFigures) {
-                f.render(g2);
-            }
-         }
-*/      
         gameMap.render(g2);
+        synchronized (Main.gameData.friendFigures){
+<<<<<<< HEAD
+
+=======
+            
+        	for (GameFigure f : Main.gameData.friendFigures) {
+                f.render(g2);
+                PlaceCharacter(f);
+            }
+            
+     
+		}
         
         //vvvv taking this out removes top left guys vvvvv
         
@@ -140,7 +146,7 @@ public class Map extends JFrame {
             }
             
         }
-       
+       																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	
      
 	
         
@@ -150,15 +156,23 @@ public class Map extends JFrame {
                 PlaceCharacter(f);
             }
     */ 
-            
+>>>>>>> branch 'master' of https://github.com/TrevorLawyer/SDD_Dungeon_Crawl.git
+            synchronized(health) {
+            	health.render(g2);
+            }
      
 	
-     
+        synchronized(Main.gameData.inventory_window){
+        	if(Main.gameData.game_state == GameData.GAME_MENU){
+        		Main.gameData.inventory_window.render(g2);
+        	}
+        }
 			synchronized(Merchant.merchant_dialogue){
-				if (Main.gameData.player_dialogue_state) {
-					Main.gameData.merchant_dialogue_window.render(g2);
-				}
+				if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
+ 					Main.gameData.merchant_dialogue_window.render(g2);
+ 				}
 
 			}
+        }
 	}
 }

@@ -4,6 +4,7 @@ import java.util.*;
 import java.awt.*;
 import java.io.*;
 public class MerchantDialogueWindow {
+	private final String MENU_HEADER_START;
 	private boolean is_open;
 	private int menu_size;
 	private int menu_index;
@@ -14,6 +15,7 @@ public class MerchantDialogueWindow {
 		menu_size = 0;
 		menu_index = 0;
 		menu_header = a;
+		MENU_HEADER_START = a;
 		menu_options = new String[0];
 	}
 	public MerchantDialogueWindow(String a, String[] b) {
@@ -21,8 +23,15 @@ public class MerchantDialogueWindow {
 		menu_size = b.length;
 		menu_index = 0;
 		menu_header = a;
+		MENU_HEADER_START = a;
 		menu_options = b;
 	}
+	public void concatinateStringToMenuHeader(String x) {
+			menu_header = "" + menu_header + x;
+		}
+	public void resetMenuHeader() {
+			menu_header = MENU_HEADER_START;
+		}
 	public void moveIndexUp() {
 		if (menu_size > 0) {
 			if(menu_index > 0) menu_index--;
@@ -84,4 +93,9 @@ public class MerchantDialogueWindow {
 	public void update() {
 		
 	}
+	
+	public void update(String[] newStuff){
+		menu_options = newStuff;
+	}
+	
 }

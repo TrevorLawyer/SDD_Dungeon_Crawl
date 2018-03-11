@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.lang.*;
 
 //Usage: Create the ItemManager object for the object that require an item to be spawned.
 //Run Item item = ItemManager.ItemOutput() in your code using whatever ItemOut() you like.
@@ -28,7 +29,7 @@ public class ItemManager {
 	//Overloaded methods:
 	//Allows an item to be generated on screen using random levels and types
 	public Item ItemOutput(int x, int y) {
-		return ItemOutput(x,y,rand.nextInt(3)+1,rand.nextInt(3)+1);
+		return ItemOutput(x,y,Math.abs(rand.nextInt(3)+1),Math.abs(rand.nextInt(3)+1));
 	}
 	
 	//Allows an item to be generated on screen of a specific type but random level
@@ -71,7 +72,7 @@ public class ItemManager {
 				//Creates placeholder objects for each type of item.
 				switch(tempType) {
 				case 1:
-					//tempWep = new  Weapon(tempName,tempDesc,tempvalue,-1,-1,tempSprite);
+					tempWep = new  Weapon(tempName,tempDesc,tempvalue,-1,-1,tempSprite);
 					break;
 				case 2: 
 					tempArm = new Armor(tempName,tempDesc,tempvalue,-1,-1,tempSprite);
@@ -107,19 +108,19 @@ public class ItemManager {
 			
 			switch(level) {
 			case 1:
-				if(type == 1) {sendback = weapon1.get(rand.nextInt(weapon1.size()));}
-				else if(type == 2) {sendback = armor1.get(rand.nextInt(armor1.size()));}
-				else if(type == 3) {sendback = consume1.get(rand.nextInt(consume1.size()));}
+				if(type == 1) {sendback = weapon1.get(Math.abs(rand.nextInt(weapon1.size())));}
+				else if(type == 2) {sendback = armor1.get(Math.abs(rand.nextInt(armor1.size())));}
+				else if(type == 3) {sendback = consume1.get(Math.abs(rand.nextInt(consume1.size())));}
 				break;
 			case 2:
-				if(type == 1) {sendback = weapon2.get(rand.nextInt(weapon2.size()));}
-				else if(type == 2) {sendback = armor2.get(rand.nextInt(armor2.size()));}
-				else if(type == 3) {sendback = consume2.get(rand.nextInt(consume2.size()));}
+				if(type == 1) {sendback = weapon2.get(Math.abs(rand.nextInt(weapon2.size())));}
+				else if(type == 2) {sendback = armor2.get(Math.abs(rand.nextInt(armor2.size())));}
+				else if(type == 3) {sendback = consume2.get(Math.abs(rand.nextInt(consume2.size())));}
 				break;
 			case 3:
-				if(type == 1) {sendback = weapon3.get(rand.nextInt(weapon3.size()));}
-				else if(type == 2) {sendback = armor3.get(rand.nextInt(armor3.size()));}
-				else if(type == 3) {sendback = consume3.get(rand.nextInt(consume3.size()));}
+				if(type == 1) {sendback = weapon3.get(Math.abs(rand.nextInt(weapon3.size())));}
+				else if(type == 2) {sendback = armor3.get(Math.abs(rand.nextInt(armor3.size())));}
+				else if(type == 3) {sendback = consume3.get(Math.abs(rand.nextInt(consume3.size())));}
 				break;
 			}
 			

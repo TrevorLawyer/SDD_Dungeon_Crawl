@@ -13,6 +13,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.JOptionPane;
+import java.util.Random;
+
 
 /**
  *
@@ -20,27 +22,42 @@ import javax.swing.JOptionPane;
  */
 public class Enemy extends GameFigure{
     private Image bossImage;
-    public int xp = 10;
-    public int health = 6;
-    public int attack = 2;
-    public int pain = 0;
+    public int xp;
+    public int health;
+    public int attack;
+    public int pain;
+
+	Random rand = new Random();
+	int  n = rand.nextInt(2) + 0;
+	
+	public EnemyType[] enemies = {new Enemy_Bat(), new Enemy_Skeleton()};
+	public EnemyType chosenEnemy;
+	
+
+    
     public Enemy(int x, int y) {
         super(x, y);
         
-        bossImage = null;
+        chosenEnemy = enemies[n];
+        xp = chosenEnemy.xp;
+        health = chosenEnemy.health;
+        attack = chosenEnemy.attack;
+        pain = chosenEnemy.pain;
+        
         try {
             if (pain==1) {
             	super.currentPic =ImageIO.read(getClass().getResource("hit.png"));
             }
             else {
-            	super.currentPic = ImageIO.read(getClass().getResource("skeleton.png"));
+            	System.out.println(chosenEnemy.picString);
+            	super.currentPic = ImageIO.read(getClass().getResource(chosenEnemy.picString));
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error: Cannot open skeleton.jpg");
+            JOptionPane.showMessageDialog(null, "Error: Cannot open " + chosenEnemy.picString);
             System.exit(-1);
         }
-    }
-    
+   }
+
     @Override
     public void render(Graphics2D g) {
         g.drawImage(currentPic, (int)super.x, (int)super.y, 
