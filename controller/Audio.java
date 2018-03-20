@@ -24,7 +24,7 @@ public class Audio {
                 c.start();
             } else {
                 Clip clip = AudioSystem.getClip();
-                clip.open(stream);
+                //clip.open(stream); //***********************************************PETER UNBYPASS THIS TOO
                 clip.start();
             }
             stream.close();

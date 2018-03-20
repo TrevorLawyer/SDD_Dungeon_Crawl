@@ -67,6 +67,8 @@ public class MerchantDialogueWindow {
 	}
 	public void render(Graphics2D g) {
 		if (isOpen()) {
+			Font tempFont = g.getFont();
+			g.setFont(new Font("Helevtica", Font.BOLD, 11));
 			g.setColor(Color.BLACK);
 			g.draw3DRect(50, 50, 200, 200, true);
 			g.setColor(Color.GRAY);
@@ -92,6 +94,7 @@ public class MerchantDialogueWindow {
 					g.drawString(menu_options[cntr], 60 + 20, 120 + (cntr+1)*15);
 				//}
 			}
+			g.setFont(tempFont);
 		}
 	}
 	public void update() {

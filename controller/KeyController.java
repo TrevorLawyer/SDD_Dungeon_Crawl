@@ -233,4 +233,15 @@ public class KeyController implements KeyListener {
 				
 			}
 
+	private void transactionActionProcedures(model.Item i, int g, boolean t) {
+		if (t) { // player buys
+			
+			Main.gameData.hero.gold -= g;
+		}
+		else { // player sells
+			
+			Main.gameData.hero.gold += g;
+		}
+	
+	}
 }

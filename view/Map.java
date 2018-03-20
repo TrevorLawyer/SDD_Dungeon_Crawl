@@ -47,7 +47,7 @@ public class Map extends JFrame {
     public Map() {
 		//theme song for application
         Audio a = new Audio();
-        a.playAudio("theme.mid");
+        //a.playAudio("theme.mid"); //**************************************************UNBYPASS THIS PETER
         
 	    // contentPane's default layout manager --> Border Layout
 	    getContentPane().add(panel);
