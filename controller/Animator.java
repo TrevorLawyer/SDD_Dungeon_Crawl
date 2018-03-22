@@ -53,7 +53,6 @@ public class Animator implements Runnable {
             	switchTurns();
             }
        
-        System.exit(0);
     }
     }
     public void switchTurns() {
