@@ -32,6 +32,14 @@ public class MerchantDialogueWindow {
 	public void resetMenuHeader() {
 			menu_header = MENU_HEADER_START;
 		}
+	public void setMenuOptions(String[] a) {
+		menu_size = a.length;
+		menu_options = a;
+	}
+	public void setNoMenuOptions() {
+		menu_size = 0;
+		menu_options = new String[0];
+	}
 	public void moveIndexUp() {
 		if (menu_size > 0) {
 			if(menu_index > 0) menu_index--;

@@ -21,7 +21,7 @@ public class Hero extends GameFigure{
 	
 	public int gold;
 	
-	ArrayList<Item> inventory, equipment;
+	public ArrayList<Item> inventory, equipment;
 	Weapon equippedWeapon;
 	Armor equippedArmor;
 	public int powerLevel;
@@ -72,6 +72,10 @@ public class Hero extends GameFigure{
 
     public void AddItemToInventory(Item i){
     	inventory.add(i);
+    }
+    
+    public void removeItemFromInventory(int i){
+    	inventory.remove(i);
     }
     
     public String[] getInventoryNames(){

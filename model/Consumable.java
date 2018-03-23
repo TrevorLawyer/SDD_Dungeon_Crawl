@@ -13,6 +13,7 @@ public class Consumable extends Item {
 	public Consumable(String n, String desc, int h, int x ,int y) {
 		super(n, desc, x, y);
         super.currentPic = null;
+        super.worth_in_gold = 100;
         healthRestored = h;
         try 
         {
