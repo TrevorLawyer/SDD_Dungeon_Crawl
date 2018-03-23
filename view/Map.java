@@ -43,10 +43,10 @@ public class Map extends JFrame {
     private Image dbImage = null;  //Taken from OOP project to get the screen to update
     public static int width, height;
     MapManager gameMap;
+    public Audio a = new Audio();
     
     public Map() {
 		//theme song for application
-        Audio a = new Audio();
         a.playAudio("theme.mid");
         
 	    // contentPane's default layout manager --> Border Layout
@@ -67,6 +67,10 @@ public class Map extends JFrame {
 	    }
 	    //generate new enemy
 	    
+    }
+    
+    public void stopSound() {
+    	a.stopAudio();
     }
     
     public void PlaceCharacter(GameFigure character)

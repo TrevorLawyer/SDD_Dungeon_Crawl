@@ -34,6 +34,15 @@ public class Audio {
                     .log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void stopAudio() {
+    	try {
+    	c.stop();
+    	}
+    	catch(Exception e){
+    		System.out.println("Error Stopping sound");
+    	}
+    }
 
     public Clip getC() {
         return c;
