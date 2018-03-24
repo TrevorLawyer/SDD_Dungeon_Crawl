@@ -88,17 +88,18 @@ public class GameData {
 			synchronized(enemyFigures){
 				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
-					if (!(enemy.health>0)) {
-						
-
-						
-						dropped = manager.ItemOutput(enemy.x, enemy.y, enemy.x%2+1, enemy.y%2+1);
-						friendFigures.add(dropped);
-					    hero.xp=+enemy.xp;
-					    item = manager.ItemOutput(enemy.x, enemy.y);
-					    friendFigures.add(item);
-					    enemyFigures.remove(enemy);
-					     			}
+					for(int i = 0; i < enemyFigures.size();i++)
+					{
+						if (!(enemyFigures.get(i).health>0)) {
+	
+							dropped = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y, enemyFigures.get(i).x%2+1, enemyFigures.get(i).y%2+1);
+							friendFigures.add(dropped);
+						    hero.xp=+enemyFigures.get(i).xp;
+						    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
+						    friendFigures.add(item);
+						    enemyFigures.remove(enemy);
+						}
+					}
 					for(GameFigure g: enemyFigures){
 						
 						g.update();
@@ -123,7 +124,14 @@ public class GameData {
  // add enemy
     public static void spawn(){
         	
-    	enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
+    	int enemyX = 0;
+    	int enemyY = 0;
+    	while(Main.gameMap.isPassable(enemyX, enemyY) == false)
+    	{
+    		enemyX = (int) Math.ceil(Math.random()*9);
+    		enemyY = (int) Math.ceil(Math.random()*9);
+    	}
+    	enemy = new Enemy(enemyX, enemyY);
     	enemyFigures.add(enemy);
     	Main.frame.PlaceCharacter(enemy);
     	//friendFigures.remove(dropped);

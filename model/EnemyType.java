@@ -7,4 +7,5 @@ public abstract class EnemyType
     public int attack;
     public int pain;
     public String picString;
+    public int range_of_sight;
 }
