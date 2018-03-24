@@ -60,6 +60,7 @@ public class KeyController implements KeyListener {
         		else if(Main.gameData.game_state == GameData.MENU_EQUIPMENT){
         			Main.gameData.inventory_window.update(Main.gameData.hero.getInventoryNames());
         			Main.gameData.game_state = GameData.GAME_MENU;
+        			Main.gameData.inventory_window.setMenu_header("Inventory");
         		}
         		break;
         	case KeyEvent.VK_LEFT:
@@ -74,6 +75,7 @@ public class KeyController implements KeyListener {
         		else if(Main.gameData.game_state == GameData.GAME_MENU){
         			Main.gameData.inventory_window.update(Main.gameData.hero.getEquipmentNames());
         			Main.gameData.game_state = GameData.MENU_EQUIPMENT;
+        			Main.gameData.inventory_window.setMenu_header("Equipment");
         		}
         		break;
         	case KeyEvent.VK_ESCAPE:
@@ -103,12 +105,12 @@ public class KeyController implements KeyListener {
     		case KeyEvent.VK_A:
 				Main.gameData.game_state = GameData.GAME_RUNNING;
     			if((GameData.enemy.x == GameData.hero.x) || (GameData.enemy.y==GameData.hero.y)){
-    			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
-    			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
-    			Main.gameData.enemy.health-=Main.gameData.hero.attack;
-    			Main.gameData.enemy.pain = 1;
-    			Main.gameData.hero.wrath = 1;
-				  Main.gameData.game_state = GameData.GAME_IDLE;
+    				Main.gameData.location_memory_min_1_x = GameData.enemy.x;
+    				Main.gameData.location_memory_min_1_y = GameData.enemy.y;
+    				Main.gameData.enemy.health-=Main.gameData.hero.attack;
+    				Main.gameData.enemy.pain = 1;
+    				Main.gameData.hero.wrath = 1;
+    				Main.gameData.game_state = GameData.GAME_IDLE;
     		}
     		break;
     	
@@ -133,7 +135,12 @@ public class KeyController implements KeyListener {
         			//close inventory window
         			Main.gameData.inventory_window.closeWindow();
         		}
-        	break;		
+        		
+        		break;
+        		case KeyEvent.VK_L:
+        		if(Main.gameData.game_state == GameData.GAME_RUNNING){
+        		Main.gameData.hero.gainEXP(25);
+        		}		
         	default:
         		break;
         }

@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.util.List;
 import view.Grid2d;
 import java.util.concurrent.TimeUnit;
-
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
@@ -47,7 +48,7 @@ public class Animator implements Runnable {
             	//Player's Turn
             } else{
             	//Enemy's Turn
-                    enemyMovements();
+            	if(GameData.enemyFigures.size()>0)enemyMovements();
             	switchTurns();
             }
             //If the hero's health reaches zero, stop animation, dispose of the window, and stop audio.
@@ -59,7 +60,6 @@ public class Animator implements Runnable {
             }
             
         }
-        System.exit(0);
         
     }
     

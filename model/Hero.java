@@ -23,7 +23,7 @@ public class Hero extends GameFigure{
 	public ArrayList<Item> inventory, equipment;
 	Weapon equippedWeapon;
 	Armor equippedArmor;
-	public int powerLevel;
+	public int level;
 	public int xp;
 	public int maxHealth;
 	public int health;
@@ -35,9 +35,11 @@ public class Hero extends GameFigure{
         
         equippedWeapon = new Weapon("Fist", "Your Fists", 1,-1,-1);
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
-        powerLevel=(int) xp/4;
-        attack = Weapon.getPower()+powerLevel;
-        maxHealth = powerLevel + 35;
+        
+        attack = Weapon.getPower();
+        maxHealth = 35;
+        xp = 0;
+        level=1;
         health = maxHealth;
         equipment = new ArrayList<Item>();
         
@@ -56,7 +58,25 @@ public class Hero extends GameFigure{
         gold = 10000;
     }
     
-
+    public void levelUp(){
+    	level++;
+    	    	
+    	    	if(level%5 == 0){
+    	    		maxHealth+=5;
+    	    	}
+    	    	if(level%10 == 0){
+    	    		
+    	    	}
+    	    	health = maxHealth;
+    	    }
+    	    
+    	    public void gainEXP(int expGained){
+    	    	xp = xp + expGained;
+    	    	if(xp > 99){
+    	    		xp-=100;
+    	    		levelUp();
+    	    	}
+    	    }
     
     @Override
     public void render(Graphics2D g) {

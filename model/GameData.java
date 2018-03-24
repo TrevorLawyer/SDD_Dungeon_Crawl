@@ -26,6 +26,7 @@ public class GameData {
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2, GAME_IDLE=3;
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
+	public static Item item;
 	public static Item dropped;
     public static Enemy enemy;
     public static Hero hero;
@@ -88,12 +89,15 @@ public class GameData {
 				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
 					if (!(enemy.health>0)) {
-						enemyFigures.remove(enemy);
+						
 
 						
 						dropped = manager.ItemOutput(enemy.x, enemy.y, enemy.x%2+1, enemy.y%2+1);
 						friendFigures.add(dropped);
 					    hero.xp=+enemy.xp;
+					    item = manager.ItemOutput(enemy.x, enemy.y);
+					    friendFigures.add(item);
+					    enemyFigures.remove(enemy);
 					     			}
 					for(GameFigure g: enemyFigures){
 						

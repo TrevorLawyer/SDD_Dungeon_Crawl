@@ -26,6 +26,7 @@ import model.GameData;
 import model.GameFigure;
 import model.GameMapTile;
 import model.HealthBar;
+import model.Hero;
 import model.MapManager;
 import model.Merchant;
 
@@ -129,7 +130,18 @@ public class Map extends JFrame {
          }
 */
         gameMap.render(g2);
-       
+        synchronized (Main.gameData.friendFigures){
+
+            
+        	for (GameFigure f : Main.gameData.friendFigures) {
+                f.render(g2);
+                PlaceCharacter(f);
+                if(f instanceof Hero){
+                	g2.setColor(Color.white);
+                	g2.drawString("Level "+Main.gameData.hero.level, width-100, 460);
+                	g2.drawString("Exp: "+Main.gameData.hero.xp+"/100", width-125, 480);
+                }
+            }
      
             synchronized(health) {
             	health.render(g2);
@@ -148,4 +160,5 @@ public class Map extends JFrame {
 
 			}
 	}
+}
 }

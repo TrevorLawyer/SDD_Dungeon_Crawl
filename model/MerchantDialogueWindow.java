@@ -14,7 +14,7 @@ public class MerchantDialogueWindow {
 		is_open = false;
 		menu_size = 0;
 		menu_index = 0;
-		menu_header = a;
+		setMenu_header(a);
 		MENU_HEADER_START = a;
 		menu_options = new String[0];
 	}
@@ -22,15 +22,15 @@ public class MerchantDialogueWindow {
 		is_open = false;
 		menu_size = b.length;
 		menu_index = 0;
-		menu_header = a;
+		setMenu_header(a);
 		MENU_HEADER_START = a;
 		menu_options = b;
 	}
 	public void concatinateStringToMenuHeader(String x) {
-			menu_header = "" + menu_header + x;
+			setMenu_header("" + getMenu_header() + x);
 		}
 	public void resetMenuHeader() {
-			menu_header = MENU_HEADER_START;
+			setMenu_header(MENU_HEADER_START);
 		}
 	
 	public void setMenuOptions(String[] a) {
@@ -84,17 +84,17 @@ public class MerchantDialogueWindow {
 			g.setColor(Color.GRAY);
 			g.fill3DRect(50, 50, 200, 200, true);
 			g.setColor(Color.WHITE);
-			if (menu_header.length() >= 27 && menu_header.length() < 54) {
-				g.drawString(menu_header.substring(0,27), 60, 75);
-				g.drawString(menu_header.substring(27,menu_header.length()), 60, 90);
+			if (getMenu_header().length() >= 27 && getMenu_header().length() < 54) {
+				g.drawString(getMenu_header().substring(0,27), 60, 75);
+				g.drawString(getMenu_header().substring(27,getMenu_header().length()), 60, 90);
 			}
-			else if (menu_header.length() >= 54) {
-				g.drawString(menu_header.substring(0,27), 60, 75);
-				g.drawString(menu_header.substring(27,54), 60, 90);
-				g.drawString(menu_header.substring(54,menu_header.length()), 60, 105);
+			else if (getMenu_header().length() >= 54) {
+				g.drawString(getMenu_header().substring(0,27), 60, 75);
+				g.drawString(getMenu_header().substring(27,54), 60, 90);
+				g.drawString(getMenu_header().substring(54,getMenu_header().length()), 60, 105);
 			}
 			else {
-				g.drawString(menu_header, 60, 75);
+				g.drawString(getMenu_header(), 60, 75);
 			}
 			for (int cntr = 0; cntr < menu_size; cntr++) {
 				if (cntr == menu_index) {
@@ -115,5 +115,10 @@ public class MerchantDialogueWindow {
 		menu_options = inventoryNames;
 		menu_size = inventoryNames.length;
 	}
-	
+	public String getMenu_header() {
+				return menu_header;
+			}
+			public void setMenu_header(String menu_header) {
+				this.menu_header = menu_header;
+		}
 }
