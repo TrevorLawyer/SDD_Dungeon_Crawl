@@ -35,18 +35,18 @@ public class Grid2d {
 
 			for (int i = x - 1; i <= x + 1; i++) {
 				for (int j = y - 1; j <= y + 1; j++) {
-
-                    if ((i == x && j == y) || i < 0 || j < 0 || j >= length|| i >= map[j].length)
-                    {
-                    	continue;
-                    }
+//					if ((i == x && j == y) || i < 0 || j < 0 || j >= length
+//							|| i >= map[j].length) {
+//						continue;
+//					}
+                                        if ((i == x && j == y) || i < 0 || j < 0 || j >= 10|| i >= 10)
+                                                {
+                                                    continue;
+                                                }
 					if ((i < x && j < y) || (i > x && j > y)) {
 						continue;
 					}
-					if((i == x-1 && (j ==y+1 ||j == y-1)) || (i ==x+1 &&  (j ==y+1 ||j == y-1)))
-					{
-						continue;
-					}
+
 					if (map[j][i] < 0) {
 						continue;
 					}

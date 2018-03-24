@@ -16,6 +16,7 @@ public class Weapon extends Item {
 		power=p;
 		
         super.currentPic = null;
+        super.worth_in_gold = 300;
         try 
         {
           super.currentPic = ImageIO.read(getClass().getResource("sword.png"));

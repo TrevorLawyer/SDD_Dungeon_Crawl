@@ -15,6 +15,7 @@ public class Armor extends Item {
 		defense = def;
 		
         super.currentPic = null;
+        super.worth_in_gold = 200;
         try 
         {
           super.currentPic = ImageIO.read(getClass().getResource("armor.png"));

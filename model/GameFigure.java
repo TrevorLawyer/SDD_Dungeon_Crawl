@@ -10,11 +10,7 @@ public abstract class GameFigure {
     public int y;
     public BufferedImage currentPic;
     public int state;
-    public int range = 0;
-    public int xp;
-    public int health=2;
-    public int attack;
-    public int pain;
+
 
     public GameFigure(int x, int y) {
         this.x = x;

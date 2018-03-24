@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 import view.Map;
 import model.GameData;
-import model.GameFigure;
 import model.Merchant;
 
 public class KeyController implements KeyListener {
@@ -90,22 +89,29 @@ public class KeyController implements KeyListener {
         		}
         		break;
         		
-        		case KeyEvent.VK_SPACE:
-        			synchronized(Main.gameData.enemyFigures){
-        				for(GameFigure g: Main.gameData.enemyFigures){
-		        			if(2 > Math.abs(g.x-GameData.hero.x) && 2 > Math.abs(g.y-GameData.hero.y) && (Main.gameData.game_state == GameData.GAME_RUNNING)){
-			        			
-		        				Main.gameData.location_memory_min_1_x = g.x;
-			        			Main.gameData.location_memory_min_1_y = g.y;
-			        			g.health-=Main.gameData.hero.attack;
-			        			g.pain = 1;
-			        			Main.gameData.hero.wrath = 1;
-			        			System.out.println(g.health);
-		        			}
-	        			}
-        			}
-        		break;
-        	
+    		case KeyEvent.VK_SPACE:
+          		
+    			if(2 > Math.abs(GameData.enemy.x-GameData.hero.x) && 2 > Math.abs(GameData.enemy.y-GameData.hero.y) ){
+    			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
+    			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
+    			Main.gameData.enemy.health-=Main.gameData.hero.attack;
+    			Main.gameData.enemy.pain = 1;
+    			Main.gameData.hero.wrath = 1;
+    		}
+    		break;
+    		
+    		case KeyEvent.VK_A:
+				Main.gameData.game_state = GameData.GAME_RUNNING;
+    			if((GameData.enemy.x == GameData.hero.x) || (GameData.enemy.y==GameData.hero.y)){
+    			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
+    			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
+    			Main.gameData.enemy.health-=Main.gameData.hero.attack;
+    			Main.gameData.enemy.pain = 1;
+    			Main.gameData.hero.wrath = 1;
+				  Main.gameData.game_state = GameData.GAME_IDLE;
+    		}
+    		break;
+    	
         	case KeyEvent.VK_MINUS:
         		Main.gameData.hero.setHealth(-1);
         		break;
@@ -159,92 +165,215 @@ public class KeyController implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
+	private model.Item temp_item;
+	private int temp_index;
+	private static String[] temp_menu_options;
 	
-	private void merchantActionProcedures() {
-				
-		//			Main.gameData.player_dialogue_state = false;
-		//			Main.gameData.merchant_dialogue_window.closeWindow();
-					
-					if (Main.gameData.player_dialogue_type == Merchant.GREETING) {
-						         				
-						Main.gameData.merchant_dialogue_window.selectIndex();
-					Main.gameData.player_dialogue_type = Merchant.INQUIRY;
-						Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
-						Main.gameData.merchant_dialogue_window.openWindow();
-					} else if (Main.gameData.player_dialogue_type == Merchant.INQUIRY) {
-						//Main.gameData.merchant_dialogue_window.closeWindow();
-						//Main.gameData.player_dialogue_state = false;
-						int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
-						if (temp_menu_selection == 2) {
-						   Main.gameData.player_dialogue_type = Merchant.FAREWELL;
-						   Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.FAREWELL];
-						   Main.gameData.merchant_dialogue_window.openWindow();
-						}
-						else if (temp_menu_selection == 1) {
-							Main.gameData.player_dialogue_type = Merchant.SELL_TO_PLAYER;
-		 				   	Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.SELL_TO_PLAYER];
-		 				   	Main.gameData.merchant_dialogue_window.openWindow();
-						}
-						else if (temp_menu_selection == 0) {
-							
-						}
-						else {
-						  Main.gameData.player_dialogue_type = Merchant.GREETING;
-						  Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
-					  //Main.gameData.player_dialogue_state = false;
-						  Main.gameData.game_state = GameData.GAME_RUNNING;
-						}
-					}else if (Main.gameData.player_dialogue_type == Merchant.FAREWELL) {
-						  Main.gameData.merchant_dialogue_window.selectIndex();
-						  Main.gameData.player_dialogue_type = Merchant.GREETING;
-						  Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
-						  Main.gameData.game_state = GameData.GAME_RUNNING;
-					}
-					else if (Main.gameData.player_dialogue_type == Merchant.SELL_TO_PLAYER) {
-						int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
-						Main.gameData.player_dialogue_type = Merchant.SELL_CONFIRMATION;
-						Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.SELL_CONFIRMATION];
-						Main.gameData.merchant_dialogue_window.resetMenuHeader();
-						Main.gameData.merchant_dialogue_window.concatinateStringToMenuHeader("" + Merchant.menu_options_1[temp_menu_selection] + "?");
-						Main.gameData.merchant_dialogue_window.openWindow();
-						
-						/*else {
-							Main.gameData.merchant_dialogue_window.selectIndex();
-		  				  	Main.gameData.player_dialogue_type = Merchant.GREETING;
-		  				  	Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
-		 				  	Main.gameData.game_state = GameData.GAME_RUNNING;
-					}*/
-				}
-				else if (Main.gameData.player_dialogue_type == Merchant.SELL_CONFIRMATION) {
-					int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
-						if (temp_menu_selection == 0) {
-							if (false) { // if not enough gold
-								
-							}
-							else if (false) { // if not enough inventory space
-								
-							}
-							else {
-								Main.gameData.player_dialogue_type = Merchant.THANK_YOU_FOR_PURCHASE;
-			 				   	Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.THANK_YOU_FOR_PURCHASE];
-			 				   	Main.gameData.merchant_dialogue_window.openWindow();
-							}
-						}
-						else if (temp_menu_selection == 1) {
-							Main.gameData.merchant_dialogue_window.selectIndex();
-							Main.gameData.player_dialogue_type = Merchant.INQUIRY;
-							Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
-							Main.gameData.merchant_dialogue_window.openWindow();
-						}
-					}
-					else if (Main.gameData.player_dialogue_type == Merchant.THANK_YOU_FOR_PURCHASE) {
-						Main.gameData.merchant_dialogue_window.selectIndex();
-						Main.gameData.player_dialogue_type = Merchant.INQUIRY;
-						Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
-						Main.gameData.merchant_dialogue_window.openWindow();
-					}
-					//Main.gameData.game_state = GameData.GAME_RUNNING;
-				
+private void merchantActionProcedures() {
+		
+		// GREETING
+		
+		if (Main.gameData.player_dialogue_type == Merchant.GREETING) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+			Main.gameData.merchant_dialogue_window.openWindow();
+		} 
+		
+		// INQUIRY
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.INQUIRY) {
+			int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
+			if (temp_menu_selection == 2) {
+				Main.gameData.player_dialogue_type = Merchant.FAREWELL;
+				Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.FAREWELL];
+				Main.gameData.merchant_dialogue_window.openWindow();
 			}
-
+			else if (temp_menu_selection == 1) {
+				//System.out.println("Inventory Size: " + Main.gameData.hero.inventory.size());
+				if (Main.gameData.hero.inventory.size() > 0) {
+					temp_menu_options = new String[Main.gameData.hero.inventory.size()];
+					for (int cntr = 0; cntr < Main.gameData.hero.inventory.size(); cntr++) {
+						temp_menu_options[cntr] = "" + Main.gameData.hero.inventory.get(cntr).name + " for " + Main.gameData.hero.inventory.get(cntr).worth_in_gold + " gold";
+					}
+					Main.gameData.player_dialogue_type = Merchant.BUY_FROM_PLAYER;
+			 		Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.BUY_FROM_PLAYER];
+			 		Main.gameData.merchant_dialogue_window.setNoMenuOptions();
+			 		Main.gameData.merchant_dialogue_window.setMenuOptions(temp_menu_options);
+			 		Main.gameData.merchant_dialogue_window.openWindow();
+				}
+				else {
+					Main.gameData.player_dialogue_type = Merchant.EMPTY_INVENTORY;
+			 		Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.EMPTY_INVENTORY];
+			 		Main.gameData.merchant_dialogue_window.openWindow();
+				}
+			}
+			else if (temp_menu_selection == 0) {
+				Main.gameData.player_dialogue_type = Merchant.SELL_TO_PLAYER;
+		 		Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.SELL_TO_PLAYER];
+		 		Main.gameData.merchant_dialogue_window.resetMenuHeader();
+		 		Main.gameData.merchant_dialogue_window.concatinateStringToMenuHeader(" | You have " + model.GameData.hero.gold + " gold.");
+		 		Main.gameData.merchant_dialogue_window.openWindow();
+			}
+			else {
+				Main.gameData.player_dialogue_type = Merchant.GREETING;
+				Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
+				Main.gameData.game_state = GameData.GAME_RUNNING;
+			}
+		}
+		
+		// FARWELL
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.FAREWELL) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.GREETING;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.GREETING];
+			Main.gameData.game_state = GameData.GAME_RUNNING;
+		}
+		
+		// SELL TO PLAYER
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.SELL_TO_PLAYER) {
+			int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
+			temp_item = model.Merchant.stock[temp_menu_selection];
+			Main.gameData.player_dialogue_type = Merchant.SELL_CONFIRMATION;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.SELL_CONFIRMATION];
+			Main.gameData.merchant_dialogue_window.resetMenuHeader();
+			Main.gameData.merchant_dialogue_window.concatinateStringToMenuHeader("" + Merchant.menu_options_1[temp_menu_selection] + "?");
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+		// SELL CONFIRMATION
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.SELL_CONFIRMATION) {
+			int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
+			if (temp_menu_selection == 0) {
+				switch (transactionActionProcedures(temp_item)) {
+					case 0:											// NOT ENOUGH GOLD
+						Main.gameData.player_dialogue_type = Merchant.NOT_ENOUGH_GOLD;
+			 			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.NOT_ENOUGH_GOLD];
+			 			Main.gameData.merchant_dialogue_window.openWindow();	
+						break;
+					case -1:										// INVENTORY FULL
+						Main.gameData.player_dialogue_type = Merchant.FULL_INVENTORY;
+			 			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.FULL_INVENTORY];
+			 			Main.gameData.merchant_dialogue_window.openWindow();
+						break;
+					case 1:
+						Main.gameData.player_dialogue_type = Merchant.THANK_YOU_FOR_PURCHASE;
+			 			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.THANK_YOU_FOR_PURCHASE];
+			 			Main.gameData.merchant_dialogue_window.openWindow();
+			 			break;	
+				}
+			}
+			else if (temp_menu_selection == 1) {
+				Main.gameData.merchant_dialogue_window.selectIndex();
+				Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+				Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+				Main.gameData.merchant_dialogue_window.openWindow();
+			}
+		}
+		
+		// THANK YOU FOR PURCHASE
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.THANK_YOU_FOR_PURCHASE) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+		// NOT_ENOUGH_GOLD
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.NOT_ENOUGH_GOLD) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+		// FULL_INVENTORY
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.FULL_INVENTORY) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+		// BUY_FROM_PLAYER
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.BUY_FROM_PLAYER) {
+			int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
+			temp_index = temp_menu_selection;
+			Main.gameData.player_dialogue_type = Merchant.BUY_CONFIRMATION;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.BUY_CONFIRMATION];
+			Main.gameData.merchant_dialogue_window.resetMenuHeader();
+			Main.gameData.merchant_dialogue_window.concatinateStringToMenuHeader("" + temp_menu_options[temp_menu_selection] + "?");
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+		// BUY CONFIRMATION
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.BUY_CONFIRMATION) {
+			int temp_menu_selection = Main.gameData.merchant_dialogue_window.selectIndex();
+			if (temp_menu_selection == 0) {
+				transactionActionProcedures(temp_index);
+				Main.gameData.player_dialogue_type = Merchant.THANK_YOU_FOR_SALE;
+	 			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.THANK_YOU_FOR_SALE];
+	 			Main.gameData.merchant_dialogue_window.openWindow();
+			}
+			else if (temp_menu_selection == 1) {
+				Main.gameData.merchant_dialogue_window.selectIndex();
+				Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+				Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+				Main.gameData.merchant_dialogue_window.openWindow();
+			}
+		}
+		
+		// EMPTY_INVENTORY
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.EMPTY_INVENTORY) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+		// THANK YOU FOR SALE
+		
+		else if (Main.gameData.player_dialogue_type == Merchant.THANK_YOU_FOR_SALE) {
+			Main.gameData.merchant_dialogue_window.selectIndex();
+			Main.gameData.player_dialogue_type = Merchant.INQUIRY;
+			Main.gameData.merchant_dialogue_window = Merchant.merchant_dialogue[Merchant.INQUIRY];
+			Main.gameData.merchant_dialogue_window.openWindow();
+		}
+		
+	}
+								
+private int transactionActionProcedures(model.Item i) {			// player buys
+	if (Main.gameData.hero.gold >= i.worth_in_gold) {
+		if (Main.gameData.hero.inventory.size() < 8) {
+			Main.gameData.hero.gold -= i.worth_in_gold;
+			Main.gameData.hero.AddItemToInventory(i);
+		}
+		else {
+			return -1;
+		}
+	}
+	else {
+		return 0;
+	}
+	return 1;
+}
+private boolean transactionActionProcedures(int i) {			// player sells
+	if (Main.gameData.hero.inventory.size() > 0) {
+		Main.gameData.hero.gold += Main.gameData.hero.inventory.get(i).worth_in_gold;
+		Main.gameData.hero.removeItemFromInventory(i);
+	}
+	else {
+		return false;
+	}
+	return true;
+}
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.concurrent.ThreadLocalRandom;
 
 import controller.Audio;
+import controller.Main;
 
 public class GameMap {
 	//Game Board width and height
@@ -21,6 +22,7 @@ public class GameMap {
 	GameMapTile[][] thisMap;
 	
 	public GameMap() {
+
 		generateMap();
 		
 	}

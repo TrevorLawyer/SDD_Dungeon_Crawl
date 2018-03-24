@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class Hero extends GameFigure{
 	
-	ArrayList<Item> inventory, equipment;
+	public int gold;
+	public ArrayList<Item> inventory, equipment;
 	Weapon equippedWeapon;
 	Armor equippedArmor;
 	public int powerLevel;
@@ -51,6 +52,8 @@ public class Hero extends GameFigure{
         }
         equipment.add(equippedWeapon);
         equipment.add(equippedArmor);
+        
+        gold = 10000;
     }
     
 
@@ -67,6 +70,9 @@ public class Hero extends GameFigure{
 
     public void AddItemToInventory(Item i){
     	inventory.add(i);
+    }
+    public void removeItemFromInventory(int i){
+    	inventory.remove(i);
     }
     
     public String[] getInventoryNames(){
