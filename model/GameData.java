@@ -108,11 +108,16 @@ public class GameData {
 			synchronized(enemyFigures){
 				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
-					if (enemy.health<1) {
-						enemyFigures.remove(enemy);
-					    hero.xp=+enemy.xp;
-					    System.out.println(""+hero.xp);
-					     			}
+					for(int i = 0; i < enemyFigures.size();i++)
+        			{
+						if (enemyFigures.get(i).health<1) {
+							hero.xp=+enemyFigures.get(i).xp;
+							enemyFigures.remove(enemyFigures.get(i));
+						    
+						    System.out.println(""+hero.xp);
+						     			}
+
+        			}
 					for(GameFigure g: enemyFigures){
 						g.update();
 						Main.frame.PlaceCharacter(g);
@@ -141,8 +146,14 @@ public class GameData {
     }
  // add enemy
     public static void spawn(){
-        	
-    	enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
+        int enemyX = 0;
+        int enemyY = 0;
+        while(Main.gameMap.isPassable(enemyX, enemyY) == false)
+        {
+        	enemyX = (int) Math.ceil(Math.random()*9);
+        	enemyY = (int) Math.ceil(Math.random()*9);
+        }
+    	enemy = new Enemy(enemyX, enemyY);
     	enemyFigures.add(enemy);
     	Main.frame.PlaceCharacter(enemy);
      }

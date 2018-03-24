@@ -23,11 +23,13 @@ import java.util.Random;
 public class Enemy extends GameFigure{
 	
 	Random rand = new Random();
-	int  n = rand.nextInt(2) + 0;
 	
-	public EnemyType[] enemies = {new Enemy_Bat(), new Enemy_Skeleton()};
+	
+	public EnemyType[] enemies = {new Enemy_Bat(), new Enemy_Skeleton(), new Enemy_Orc(), new Enemy_DarkElf()};
+	int  n = rand.nextInt(enemies.length) + 0;
 	public EnemyType chosenEnemy;
 	
+	public int range_of_sight;
     public int xp;
     public int health;
     public int attack;
@@ -37,11 +39,11 @@ public class Enemy extends GameFigure{
         super(x, y);
         
         chosenEnemy = enemies[n];
-        xp = chosenEnemy.xp;
-        health = chosenEnemy.health;
-        attack = chosenEnemy.attack;
-        pain = chosenEnemy.pain;
-        
+        super.range = chosenEnemy.range_of_sight;
+        super.xp = chosenEnemy.xp;
+        super.health = chosenEnemy.health;
+        super.attack = chosenEnemy.attack;
+        super.pain = chosenEnemy.pain;
         try {
             if (pain==1) {
             	super.currentPic =ImageIO.read(getClass().getResource("hit.png"));
@@ -54,6 +56,8 @@ public class Enemy extends GameFigure{
             JOptionPane.showMessageDialog(null, "Error: Cannot open " + chosenEnemy.picString);
             System.exit(-1);
         }
+        
+
     }
     
     @Override

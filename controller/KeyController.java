@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import view.Map;
 import model.GameData;
+import model.GameFigure;
 import model.Merchant;
 
 public class KeyController implements KeyListener {
@@ -90,14 +91,19 @@ public class KeyController implements KeyListener {
         		break;
         		
         		case KeyEvent.VK_SPACE:
-              		
-        			if(2 > Math.abs(GameData.enemy.x-GameData.hero.x) && 2 > Math.abs(GameData.enemy.y-GameData.hero.y) && (Main.gameData.game_state == GameData.GAME_RUNNING)){
-        			Main.gameData.location_memory_min_1_x = GameData.enemy.x;
-        			Main.gameData.location_memory_min_1_y = GameData.enemy.y;
-        			Main.gameData.enemy.health-=Main.gameData.hero.attack;
-        			Main.gameData.enemy.pain = 1;
-        			Main.gameData.hero.wrath = 1;
-        		}
+        			synchronized(Main.gameData.enemyFigures){
+        				for(GameFigure g: Main.gameData.enemyFigures){
+		        			if(2 > Math.abs(g.x-GameData.hero.x) && 2 > Math.abs(g.y-GameData.hero.y) && (Main.gameData.game_state == GameData.GAME_RUNNING)){
+			        			
+		        				Main.gameData.location_memory_min_1_x = g.x;
+			        			Main.gameData.location_memory_min_1_y = g.y;
+			        			g.health-=Main.gameData.hero.attack;
+			        			g.pain = 1;
+			        			Main.gameData.hero.wrath = 1;
+			        			System.out.println(g.health);
+		        			}
+	        			}
+        			}
         		break;
         	
         	case KeyEvent.VK_MINUS:
