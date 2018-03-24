@@ -23,7 +23,7 @@ public class GameData {
 	public int player_dialogue_type;
 	
 	public int game_state;
-	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2;
+	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2, GAME_IDLE=3;
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
 	public static Item dropped;
@@ -57,10 +57,6 @@ public class GameData {
         
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
-//        enemyFigures.add(enemy);
-//        Main.frame.PlaceCharacter(enemy);
-        
-//        player_dialogue_state = false;
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
@@ -72,22 +68,6 @@ public class GameData {
     
     public void update(){
     	if(Main.animator.userTurn){
-    		synchronized (friendFigures) {
-	            ArrayList<GameFigure> remove = new ArrayList<>();
-	            GameFigure f;
-	            for (int i = 0; i < friendFigures.size(); i++) {
-	                f = friendFigures.get(i);
-	//                if (f.state == GameFigureState.STATE_DONE) {
-	 //                   remove.add(f);
-	 //               }
-	            }
-	            friendFigures.removeAll(remove);
-	
-	            for (GameFigure g : friendFigures) {
-	                g.update();
-	                Main.frame.PlaceCharacter(g);
-	            }
-	        }
 	    	synchronized (friendFigures) {
 	    		if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 	            ArrayList<GameFigure> remove = new ArrayList<>();
@@ -95,9 +75,6 @@ public class GameData {
 	         
 	            for (int i = 0; i < friendFigures.size(); i++) {
 	                f = friendFigures.get(i);
-	//                if (f.state == GameFigureState.STATE_DONE) {
-	 //                   remove.add(f);
-	 //               }
 	            	}
 	            	friendFigures.removeAll(remove);
 	
@@ -117,10 +94,6 @@ public class GameData {
 						dropped = manager.ItemOutput(enemy.x, enemy.y, enemy.x%2+1, enemy.y%2+1);
 						friendFigures.add(dropped);
 					    hero.xp=+enemy.xp;
-					  //  if (hero.x==dropped.x && hero.y==dropped.y) {
-			           // 	friendFigures.remove(dropped);
-			          //  }
-					    //System.out.println(""+hero.xp);
 					     			}
 					for(GameFigure g: enemyFigures){
 						
@@ -141,12 +114,6 @@ public class GameData {
 			}
 
 	
-			synchronized(enemyFigures){
-				for(GameFigure g: enemyFigures){
-	    			g.update();
-	    			Main.frame.PlaceCharacter(g);
-	    		}
-	    	}
 	    }
     }
  // add enemy
