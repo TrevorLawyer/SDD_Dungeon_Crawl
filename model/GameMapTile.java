@@ -2,7 +2,11 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -17,16 +21,21 @@ public class GameMapTile extends JLabel{
 	private int xTiles = 10;
 	private int yTiles = 10;
 	public boolean obstacle = false;
-	
-	
+	private Image boulder = Main.textures.boulder;
+	private Image grass = Main.textures.grass;
+	private Image treeBoundary = Main.textures.treeBoundary;
     private int xInc= 500/xTiles- 1;
     private int yInc = 500/yTiles - 1;
-    private Color c;
+    public boolean ladderTile = false;
+  
     
 	
 	public GameMapTile(Coordinate xy) {
 		loc = xy;
 		tileEmpty = false;
+		
+	
+		 
 	}
 	
 	
@@ -44,15 +53,27 @@ public class GameMapTile extends JLabel{
 		return loc.y;
 	}
 
-	public void render(Graphics2D g) {
-		if(obstacle) {
-			g.setColor(Color.GRAY);
+	public void render(Graphics2D g) throws IOException {
+			
+		
+		if(obstacle) {			
+						
+			g.drawImage(boulder, this.loc.x* xInc +8, this.loc.y* yInc +28, xInc, yInc, null);
+		}
+		else if (ladderTile) {
+			Image ladderDown = Main.textures.ladderDown;
+			g.drawImage(ladderDown, this.loc.x* xInc +8, this.loc.y* yInc +28, xInc, yInc, null);
+			
 		}
 		else if(tileEmpty) {
-			g.setColor(Color.GREEN);
+			
+			g.drawImage(grass, this.loc.x* xInc +8, this.loc.y* yInc +28, xInc, yInc, null);
 		}
-		else g.setColor(Color.BLACK);
-		g.fillRect(this.getX() * xInc +8, this.getY() * yInc +28, xInc, yInc);
+		else {
+			
+			g.drawImage(treeBoundary, this.loc.x* xInc +8, this.loc.y* yInc +28, xInc, yInc, null);
+		}
+		//g.fillRect(this.getX() * xInc +8, this.getY() * yInc +28, xInc, yInc);
 	}
 	public boolean isPassable() {
 		if (!tileEmpty || obstacle) {

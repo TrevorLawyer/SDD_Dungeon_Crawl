@@ -20,7 +20,7 @@ import model.GameData;
 public class Animator implements Runnable {
 
     public boolean running = true, userTurn = true;
-    private final int FRAMES_PER_SECOND = 20;
+    private final int FRAMES_PER_SECOND = 60;
 
     @Override
     public void run() {

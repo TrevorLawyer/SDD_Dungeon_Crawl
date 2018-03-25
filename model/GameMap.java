@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Graphics2D;
+import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 import controller.Audio;
@@ -15,6 +16,7 @@ public class GameMap {
 	public  Coordinate entrance;
 	public Coordinate exit;
 	public int obstacleLevel = 0; 
+	public boolean transition = false;
 	
 	public Audio a = new Audio();
 	public Audio b = new Audio();
@@ -35,6 +37,11 @@ public class GameMap {
 		obstacleLevel = obstacles;
 		generateMap();
 	}
+	public GameMap(Coordinate previousExit, boolean transition) {
+		this.previousExit = previousExit;
+		this.transition = transition;
+		generateMap();
+	}
 	private void generateMap() {
 		thisMap = new GameMapTile[mapWidth][mapHeight];
 		for(int x = 0; x < mapWidth; x++ ) {
@@ -50,7 +57,13 @@ public class GameMap {
 			entrance = getEntrance();
 			thisMap[entrance.x][entrance.y].tileEmpty = true;			
 		}
-		exit = makeExit(entrance);
+		if (!transition) {
+			exit = makeExit(entrance);
+		}
+		else {
+			placeTransition();
+		}
+		
 		thisMap[exit.x][exit.y].tileEmpty = true;	
 		if(obstacleLevel > 0) {
 			generateObstacles(obstacleLevel);
@@ -152,7 +165,12 @@ public class GameMap {
 		//printToConsole();
 		for(int x = 0; x < mapWidth; x++ ) {
 			for(int y = 0; y < mapHeight; y++) {
-				thisMap[x][y].render(g);
+				try {
+					thisMap[x][y].render(g);
+				}
+				catch (IOException ioe) {
+					
+				}
 			}
 		}
 	}
@@ -183,6 +201,10 @@ public class GameMap {
 	public boolean isPassable(int x, int y) {
 		if (thisMap[x][y].isPassable()) return true;
 		else return false;
+	}
+	public void placeTransition() {
+		thisMap[5][5].ladderTile = true;
+		this.exit = new Coordinate(5,5);
 	}
 	
 //	public void printToConsole() {

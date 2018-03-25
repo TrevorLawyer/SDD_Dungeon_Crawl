@@ -6,14 +6,19 @@ import java.util.ArrayList;
 public class MapManager {
 	private int currentMap;
 	private ArrayList<GameMap> maps;
+	public MapTextures textures;
 	
 	public MapManager() {
+		textures = new MapTextures();
 		maps = new ArrayList<>();
-		maps.add(new GameMap());
+		
 		currentMap = 0;
+		
+		maps.add(new GameMap());
 	}
-	public void goNext() {				
+	public void goNext() {	
 		maps.add(new GameMap(maps.get(currentMap).exit, currentMap));
+		
 		GameData.swab(); // remove old enemies
 		for(int x = 0; x < Math.random()*2;x++)
 		{

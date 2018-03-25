@@ -18,6 +18,7 @@ import javax.swing.JWindow;
 
 import model.GameData;
 import model.MapManager;
+import model.MapTextures;
 
 /**
  *
@@ -28,10 +29,11 @@ public class Main {
 	public static Animator animator;
 	public static Map frame;
 	public static MapManager gameMap;
+	public static MapTextures textures;
 	
 
 	public static void main(String[] args) {
-
+		textures = new MapTextures();
 		gameMap = new MapManager();
 		frame = new Map();
 		frame.addKeyListener(new KeyController());
