@@ -26,7 +26,7 @@ public class GameData {
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2, GAME_IDLE=3;
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
-	public static Item item;
+//	public static Item item;
 	public static Item dropped;
     public static Enemy enemy;
     public static Hero hero;
@@ -95,8 +95,8 @@ public class GameData {
 							dropped = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y, enemyFigures.get(i).x%2+1, enemyFigures.get(i).y%2+1);
 							friendFigures.add(dropped);
 						    hero.xp=+enemyFigures.get(i).xp;
-						    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
-						    friendFigures.add(item);
+					//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
+						   // friendFigures.add(item);
 						    enemyFigures.remove(enemy);
 						}
 					}
@@ -121,6 +121,7 @@ public class GameData {
 	
 	    }
     }
+
  // add enemy
     public static void spawn(){
         	
@@ -139,6 +140,7 @@ public class GameData {
         // remove all enemies
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
+        	friendFigures.remove(dropped);
         
         }
 }

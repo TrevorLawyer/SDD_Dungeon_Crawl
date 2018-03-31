@@ -20,7 +20,7 @@ import model.GameData;
 public class Animator implements Runnable {
 
     public boolean running = true, userTurn = true;
-    private final int FRAMES_PER_SECOND = 60;
+    private final int FRAMES_PER_SECOND = 5;
 
     @Override
     public void run() {
@@ -34,7 +34,7 @@ public class Animator implements Runnable {
             Main.frame.printScreen();
 
             long endTime = System.currentTimeMillis();
-            int sleepTime = (int) (1.0 / FRAMES_PER_SECOND*1000)
+            int sleepTime = (int) (1.0 / FRAMES_PER_SECOND)
                     - (int) (endTime - startTime);
 
             if (sleepTime > 0) {
@@ -102,7 +102,8 @@ public class Animator implements Runnable {
 			GameData.hero.y = Main.gameData.location_memory_min_1_y;
 		}
     }
-        
+    
+    
 	public void enemyMovements()
     {
     	synchronized(Main.gameData.enemyFigures)
@@ -197,6 +198,7 @@ public class Animator implements Runnable {
                 			
                 	}
                 }
+	           
             }
         }
         }
