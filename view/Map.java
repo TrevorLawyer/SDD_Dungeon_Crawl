@@ -5,6 +5,7 @@
  */
 package view;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -160,9 +161,12 @@ public class Map extends JFrame {
 	
             synchronized(Main.gameData.inventory_window){
             	if(Main.gameData.game_state == GameData.GAME_MENU || Main.gameData.game_state == GameData.MENU_EQUIPMENT){
-        		Main.gameData.inventory_window.render(g2);
-        	}
-        }
+            		Main.gameData.inventory_window.render(g2);
+        			g2.setFont(new Font("Helevtica", Font.BOLD, 11));
+            		g2.setColor(Color.WHITE);
+            		g2.drawString(Main.gameData.hero.gold+" Gold",150,75);
+            	}
+            }
 			synchronized(Merchant.merchant_dialogue){
 				if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
  					Main.gameData.merchant_dialogue_window.render(g2);

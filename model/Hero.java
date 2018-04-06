@@ -98,13 +98,14 @@ public class Hero extends GameFigure{
     public String[] getInventoryNames(){
     	if(inventory.size()>0){
 	    	String[] inventorynames = new String[inventory.size()];
+	    	//inventorynames[0] = gold+" Gold";
 	    	for(int i=0;i< inventory.size();i++){
 	    		inventorynames[i] = inventory.get(i).name;
 	    	}
 	    	return inventorynames;
     	}
     	
-    	return new String[]{""};
+    	return new String[]{};
     }
     
     public String[] getEquipmentNames(){
