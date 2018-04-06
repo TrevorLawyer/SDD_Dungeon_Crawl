@@ -84,6 +84,9 @@ public class KeyController implements KeyListener {
         		break;
         	case KeyEvent.VK_ENTER:
         		if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
+        			if (Main.animator.turnOffset) {
+            			Main.animator.turnOffset = false;
+            		}
         			merchantActionProcedures();
         		}
         		else if(Main.gameData.game_state == GameData.GAME_MENU){

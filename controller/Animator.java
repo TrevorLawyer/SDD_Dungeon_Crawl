@@ -19,6 +19,7 @@ import model.GameData;
 
 public class Animator implements Runnable {
 
+	public boolean turnOffset = true;
     public boolean running = true, userTurn = true;
     private final int FRAMES_PER_SECOND = 5;
 
@@ -106,8 +107,14 @@ public class Animator implements Runnable {
     
 	public void enemyMovements()
     {
+		
     	synchronized(Main.gameData.enemyFigures)
     	{
+    		if (!turnOffset) {
+    			turnOffset = true;
+    		}
+    		else if (Main.gameData.game_state == GameData.GAME_RUNNING && turnOffset) {
+    		
     	if(Main.gameData.enemyFigures.size() > 0)
         {
 	        for(int z = 0; z < Main.gameData.enemyFigures.size();z++)
@@ -185,6 +192,7 @@ public class Animator implements Runnable {
 	                
 	            		Main.gameData.enemyFigures.get(z).x = x;
 	            		Main.gameData.enemyFigures.get(z).y = y;
+	            		//System.out.println("Enemy moved.");
 	            		}
 	            		catch(Exception e) 
 	            		{
@@ -202,5 +210,6 @@ public class Animator implements Runnable {
             }
         }
         }
+		}
     }
 }
