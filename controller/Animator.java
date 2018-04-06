@@ -101,6 +101,13 @@ public class Animator implements Runnable {
 			GameData.hero.x = Main.gameData.location_memory_min_1_x;
 			GameData.hero.y = Main.gameData.location_memory_min_1_y;
 		}
+		
+		if(Main.gameData.hero.x == Main.gameData.chest.x && Main.gameData.hero.y == Main.gameData.chest.y){
+			Main.gameData.chest.setOpened(true);
+			Main.gameData.hero.gold += Main.gameData.chest.getGold();
+			GameData.hero.x = Main.gameData.location_memory_min_1_x;
+			GameData.hero.y = Main.gameData.location_memory_min_1_y;
+		}
     }
     
     

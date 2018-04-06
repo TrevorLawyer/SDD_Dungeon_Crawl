@@ -153,7 +153,8 @@ public class Map extends JFrame {
      
             synchronized(Main.gameData.chest){
             	if(Main.gameData.chest.isOnMap()){
-            		Main.gameData.chest.render(g2);
+	        		Main.gameData.chest.render(g2);
+	        		PlaceCharacter(Main.gameData.chest);
             	}
         	}
 	

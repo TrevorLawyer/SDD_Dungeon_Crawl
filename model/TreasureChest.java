@@ -25,11 +25,15 @@ public class TreasureChest extends GameFigure {
             JOptionPane.showMessageDialog(null, "Error: Cannot open chest_unopened.png");
             System.exit(-1);
         }
+
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(currentPic, x, y, 30, 30, null);		
+		if(onMap){
+			g.drawImage(currentPic, x, y, 30, 30, null);	
+		}
+		//System.out.println("Drawing Chest");
 	}
 
 	@Override
@@ -39,5 +43,13 @@ public class TreasureChest extends GameFigure {
 	
 	public boolean isOnMap() {
 		return onMap;
+	}
+
+	public void setOpened(boolean b) {
+		opened = b;
+	}
+	
+	public int getGold(){
+		return gold_amount;
 	}
 }
