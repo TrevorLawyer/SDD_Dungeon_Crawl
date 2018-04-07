@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import controller.Main;
+
 public class Consumable extends Item {
 	
 	int healthRestored; //What the item does
@@ -42,6 +44,6 @@ public class Consumable extends Item {
 	}
 	
 	public void use(){
-		//empty placeholder function
+		Main.gameData.hero.setHealth(healthRestored);
 	}
 }
