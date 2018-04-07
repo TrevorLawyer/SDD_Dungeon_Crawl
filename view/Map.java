@@ -140,7 +140,7 @@ public class Map extends JFrame {
         	//if (Main.gameData.game_state == GameData.GAME_RUNNING) {
         	for (GameFigure f : Main.gameData.friendFigures) {
                 f.render(g2);
-                PlaceCharacter(f);
+              //  PlaceCharacter(f);
                 if(f instanceof Hero){
                 	g2.setColor(Color.white);
                 	g2.drawString("Level "+Main.gameData.hero.level, width-100, 460);
@@ -187,7 +187,7 @@ public class Map extends JFrame {
 		//			g.update();
 					
 					g.render(g2);
-					PlaceCharacter(g);
+					//PlaceCharacter(g);
 					//Main.frame.PlaceCharacter(g);
 				}
 			} 
