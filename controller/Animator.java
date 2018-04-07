@@ -19,8 +19,9 @@ import model.GameData;
 
 public class Animator implements Runnable {
 
+	public boolean turnOffset = true;
     public boolean running = true, userTurn = true;
-    private final int FRAMES_PER_SECOND = 60;
+    private final int FRAMES_PER_SECOND = 5;
 
     @Override
     public void run() {
@@ -34,7 +35,7 @@ public class Animator implements Runnable {
             Main.frame.printScreen();
 
             long endTime = System.currentTimeMillis();
-            int sleepTime = (int) (1.0 / FRAMES_PER_SECOND*1000)
+            int sleepTime = (int) (1.0 / FRAMES_PER_SECOND)
                     - (int) (endTime - startTime);
 
             if (sleepTime > 0) {
@@ -95,18 +96,27 @@ public class Animator implements Runnable {
         // detect collisions between friendFigure and enemyFigures
         // if detected, mark it as STATE_DONE, so that
         // they can be removed at update() method
+		if (Main.gameData.merchant.present) {
 		if (Main.gameData.friendFigures.get(0).x == Main.gameData.merchant.x && Main.gameData.friendFigures.get(0).y == Main.gameData.merchant.y) {
 			Main.gameData.game_state = GameData.MERCHANT_DIALOG;
 			Main.gameData.merchant_dialogue_window.openWindow();
 			GameData.hero.x = Main.gameData.location_memory_min_1_x;
 			GameData.hero.y = Main.gameData.location_memory_min_1_y;
 		}
+		}
     }
-        
+    
+    
 	public void enemyMovements()
     {
+		
     	synchronized(Main.gameData.enemyFigures)
     	{
+    		if (!turnOffset) {
+    			turnOffset = true;
+    		}
+    		else if (Main.gameData.game_state == GameData.GAME_RUNNING && turnOffset) {
+    		
     	if(Main.gameData.enemyFigures.size() > 0)
         {
 	        for(int z = 0; z < Main.gameData.enemyFigures.size();z++)
@@ -184,21 +194,23 @@ public class Animator implements Runnable {
 	                
 	            		Main.gameData.enemyFigures.get(z).x = x;
 	            		Main.gameData.enemyFigures.get(z).y = y;
+	            		//System.out.println("Enemy moved.");
 	            		}
 	            		catch(Exception e) 
 	            		{
-	            			System.out.println("encountered a " + e.toString());
+	            			System.out.println("encountered a " + e.toString() + " while trying to move an enemy.");
 	            		}
                 	}
                 	else {
                 		
                 			Main.gameData.hero.setHealth(-3);
-                		
-                			
+
                 	}
                 }
+	           
             }
         }
         }
+		}
     }
 }

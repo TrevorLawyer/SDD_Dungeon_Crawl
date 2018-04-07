@@ -84,6 +84,9 @@ public class KeyController implements KeyListener {
         		break;
         	case KeyEvent.VK_ENTER:
         		if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
+        			if (Main.animator.turnOffset) {
+            			Main.animator.turnOffset = false;
+            		}
         			merchantActionProcedures();
         		}
         		else if(Main.gameData.game_state == GameData.GAME_MENU){
@@ -99,6 +102,7 @@ public class KeyController implements KeyListener {
 		    			Main.gameData.location_memory_min_1_x = g.x;
 		    			Main.gameData.location_memory_min_1_y = g.y;
 		    			g.health-=Main.gameData.hero.attack;
+	    			//	Main.frame.swoosh();
 		    			g.pain = 1;
 		    		//	g.wrath = 1;
 	    			}
@@ -114,8 +118,9 @@ public class KeyController implements KeyListener {
 	    				Main.gameData.location_memory_min_1_y = g.y;
 	    				g.health-=Main.gameData.hero.attack;
 	    				g.pain = 1;
+	    				//Main.frame.swoosh();
 	    			//	g.wrath = 1;
-	    				Main.gameData.game_state = GameData.GAME_IDLE;
+	    		// 		Main.gameData.game_state = GameData.GAME_IDLE;
 	    			}
 				}
     		break;

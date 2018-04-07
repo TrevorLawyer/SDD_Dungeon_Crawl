@@ -9,7 +9,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
@@ -106,6 +109,7 @@ public class Map extends JFrame {
 		
 	}
 
+	
 	public void gameRender() {
 		
 		width = getSize().width;

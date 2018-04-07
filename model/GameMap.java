@@ -206,7 +206,7 @@ public class GameMap {
 		thisMap[5][5].ladderTile = true;
 		this.exit = new Coordinate(5,5);
 	}
-	
+
 //	public void printToConsole() {
 //		for(int x = 0; x < mapWidth; x++ ) {
 //			for(int y = 0; y < mapHeight; y++) {

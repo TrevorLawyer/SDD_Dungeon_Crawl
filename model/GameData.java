@@ -26,13 +26,14 @@ public class GameData {
 	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2, GAME_IDLE=3;
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
-	public static Item item;
+//	public static Item item;
 	public static Item dropped;
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
-       public static List<GameFigure> friendFigures;
+    public static List<GameFigure> friendFigures;
     public static List<GameFigure> enemyFigures;
+    public static TreasureChest chest;
 
     public static MerchantDialogueWindow merchant_dialogue_window, inventory_window;
     
@@ -47,17 +48,17 @@ public class GameData {
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
      
-        
+        chest = new TreasureChest((int)(Math.random()*9+1),(int)(Math.random()*9+1));
         friendFigures.add(hero);
 
-        
-        hero.AddItemToInventory(new Weapon("Sword 1","Sword",5,1,1));
-        hero.AddItemToInventory(new Weapon("Sword 2","Sword",5,1,1));
-        hero.AddItemToInventory(new Weapon("Sword 3","Sword",5,1,1));
+         
         Main.frame.PlaceCharacter(hero);
         
-        friendFigures.add(merchant);
-        Main.frame.PlaceCharacter(merchant);
+        if (Merchant.randomWithRange(0,2) == 0) {
+        	merchant.present = true;
+        	friendFigures.add(merchant);
+        	Main.frame.PlaceCharacter(merchant);
+        }
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
@@ -95,9 +96,9 @@ public class GameData {
 							dropped = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y, enemyFigures.get(i).x%2+1, enemyFigures.get(i).y%2+1);
 							friendFigures.add(dropped);
 						    hero.xp=+enemyFigures.get(i).xp;
-						    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
-						    friendFigures.add(item);
-						    enemyFigures.remove(enemy);
+					//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
+						   // friendFigures.add(item);
+						    enemyFigures.remove(enemyFigures.get(i));
 						}
 					}
 					for(GameFigure g: enemyFigures){
@@ -121,6 +122,7 @@ public class GameData {
 	
 	    }
     }
+
  // add enemy
     public static void spawn(){
         	
@@ -135,10 +137,13 @@ public class GameData {
     	enemyFigures.add(enemy);
     	Main.frame.PlaceCharacter(enemy);
     	//friendFigures.remove(dropped);
+    	chest = new TreasureChest((int)(Math.random()*9+1),(int)(Math.random()*9+1));
+    	System.out.println("Chest x: "+chest.x+", y: "+chest.y);
      }
         // remove all enemies
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
+        	friendFigures.remove(dropped);
         
         }
 }

@@ -28,15 +28,17 @@ public class Hero extends GameFigure{
 	public int maxHealth;
 	public int health;
 	public int attack;
+	public int armor;
 	public int wrath = 0;
 
     public Hero(int x, int y) {
         super(x, y);
         
-        equippedWeapon = new Weapon("Fist", "Your Fists", 1,-1,-1);
+        equippedWeapon = new Weapon("Fist", "Your Fists", 1 ,-1,-1);
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
         
         attack = Weapon.getPower();
+        armor = equippedArmor.defense;
         maxHealth = 35;
         xp = 0;
         level=1;
@@ -44,7 +46,7 @@ public class Hero extends GameFigure{
         equipment = new ArrayList<Item>();
         
         inventory = new ArrayList<Item>();
-        inventory.add(new Weapon("Basic Sword","It's a sword",1,0,0));
+        inventory.add(new Weapon("Basic Sword","It's a sword",5,0,0));
         try 
         {
             super.currentPic = ImageIO.read(getClass().getResource("pixel_hero.png"));
@@ -122,7 +124,12 @@ public class Hero extends GameFigure{
     //Negative numbers remove health, positive numbers add health   
     public void setHealth(int h) {
     	if(!(h+health < 0 || h+health > maxHealth)) {
-    		health+=h;
+    		if(h<0) {
+    			if(armor+h<0) {
+    				health += armor+h;
+    			}
+    		}
+    		else {health+=h;}
     	}
     	else if(h+health < 0) {
     		health = 0;
@@ -147,6 +154,7 @@ public class Hero extends GameFigure{
     		inventory.add(equippedWeapon);
     		equipment.remove(equippedWeapon);
     		equippedWeapon = (Weapon) i;
+    		attack = equippedWeapon.getPower();
     		inventory.remove(i);
     		equipment.add(i);
     	}
@@ -154,6 +162,7 @@ public class Hero extends GameFigure{
     		inventory.add(equippedArmor);
     		equipment.remove(equippedArmor);
      		equippedArmor = (Armor) i;
+     		armor = equippedArmor.defense;
     		inventory.remove(i);
     		equipment.add(i);
     	}
