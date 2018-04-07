@@ -50,10 +50,7 @@ public class GameData {
         
         friendFigures.add(hero);
 
-        
-        hero.AddItemToInventory(new Weapon("Sword 1","Sword",5,1,1));
-        hero.AddItemToInventory(new Weapon("Sword 2","Sword",5,1,1));
-        hero.AddItemToInventory(new Weapon("Sword 3","Sword",5,1,1));
+         
         Main.frame.PlaceCharacter(hero);
         
         friendFigures.add(merchant);
