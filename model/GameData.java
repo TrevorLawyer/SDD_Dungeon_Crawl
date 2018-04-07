@@ -53,8 +53,11 @@ public class GameData {
          
         Main.frame.PlaceCharacter(hero);
         
-        friendFigures.add(merchant);
-        Main.frame.PlaceCharacter(merchant);
+        if (Merchant.randomWithRange(0,2) == 0) {
+        	merchant.present = true;
+        	friendFigures.add(merchant);
+        	Main.frame.PlaceCharacter(merchant);
+        }
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
