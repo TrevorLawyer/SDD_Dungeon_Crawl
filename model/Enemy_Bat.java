@@ -9,7 +9,8 @@ public class Enemy_Bat extends EnemyType
 	    super.health = 6;
 	    super.attack = 2;
 	    super.pain = 0;
-	    super.picString = "bat.jpg";
+	    if(pain==0)super.picString = "bat.jpg";
+	    if(pain==1)super.picString = "hit.png";
 	    super.range_of_sight = 3;
 	}
 }

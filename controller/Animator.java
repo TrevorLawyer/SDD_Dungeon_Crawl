@@ -21,7 +21,7 @@ public class Animator implements Runnable {
 
     public boolean running = true, userTurn = true;
     private final int FRAMES_PER_SECOND = 5;
-
+    public int noDeath=0;
     @Override
     public void run() {
 
@@ -29,7 +29,7 @@ public class Animator implements Runnable {
             long startTime = System.currentTimeMillis();
             
             processCollisions();         
-            Main.gameData.update();
+        //    Main.gameData.update();
             Main.frame.gameRender();
             Main.frame.printScreen();
 
@@ -193,7 +193,7 @@ public class Animator implements Runnable {
                 	}
                 	else {
                 		
-                			Main.gameData.hero.setHealth(-3);
+                			if(Main.gameData.game_state == GameData.GAME_RUNNING && noDeath==0)Main.gameData.hero.setHealth(-1);
                 		
                 			
                 	}

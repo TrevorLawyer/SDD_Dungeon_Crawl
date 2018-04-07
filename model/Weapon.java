@@ -15,11 +15,11 @@ public class Weapon extends Item {
 		super(n, desc, x, y);
 		power=p;
 		
-        super.currentPic = null;
+        super.currentPic[1] = null;
         super.worth_in_gold = 300;
         try 
         {
-          super.currentPic = ImageIO.read(getClass().getResource("sword.png"));
+          super.currentPic[1] = ImageIO.read(getClass().getResource("sword.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open sword.png");
             System.exit(-1);
@@ -33,10 +33,10 @@ public class Weapon extends Item {
 			super(n, desc, x, y);
 			power=p;
 			 		
-			super.currentPic = null;
+			super.currentPic[1] = null;
 			try 
 			{
-			    super.currentPic = ImageIO.read(getClass().getResource(spriteLocation));
+			    super.currentPic[1] = ImageIO.read(getClass().getResource(spriteLocation));
 			} catch (IOException ex) {
 			    JOptionPane.showMessageDialog(null, "Error: Cannot open " + spriteLocation);
 			     System.exit(-1);
@@ -47,7 +47,7 @@ public class Weapon extends Item {
 			     }
 		
 		
-    public void render(Graphics2D g, int x, int y) {
-    	g.drawImage(super.currentPic, x, y, 30, 30, null);
+    public void render(int a,Graphics2D g, int x, int y) {
+    	g.drawImage(super.currentPic[a], x, y, 30, 30, null);
     }
 }

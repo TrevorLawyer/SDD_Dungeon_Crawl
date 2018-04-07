@@ -14,11 +14,11 @@ public class Armor extends Item {
 		super(n, desc, x, y);
 		defense = def;
 		
-        super.currentPic = null;
+        super.currentPic[0] = null;
         super.worth_in_gold = 200;
         try 
         {
-          super.currentPic = ImageIO.read(getClass().getResource("armor.png"));
+          super.currentPic[0] = ImageIO.read(getClass().getResource("armor.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open armor.png");
             System.exit(-1);
@@ -34,7 +34,7 @@ public class Armor extends Item {
         super.currentPic = null;
         try 
         {
-          super.currentPic = ImageIO.read(getClass().getResource(spriteLocation));
+          super.currentPic[0] = ImageIO.read(getClass().getResource(spriteLocation));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open"+spriteLocation);
             System.exit(-1);

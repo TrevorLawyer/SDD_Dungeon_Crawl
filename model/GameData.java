@@ -33,7 +33,6 @@ public class GameData {
     public static Merchant merchant;
        public static List<GameFigure> friendFigures;
     public static List<GameFigure> enemyFigures;
-
     public static MerchantDialogueWindow merchant_dialogue_window, inventory_window;
     
     public GameData()
@@ -42,7 +41,7 @@ public class GameData {
     	manager = new ItemManager();
     	game_state = GAME_RUNNING;
         hero = new Hero(1, 1);
-        merchant = new Merchant(6,6);
+        
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
@@ -54,10 +53,10 @@ public class GameData {
         hero.AddItemToInventory(new Weapon("Sword 1","Sword",5,1,1));
         hero.AddItemToInventory(new Weapon("Sword 2","Sword",5,1,1));
         hero.AddItemToInventory(new Weapon("Sword 3","Sword",5,1,1));
-        Main.frame.PlaceCharacter(hero);
+    //    Main.frame.PlaceCharacter(hero);
         
-        friendFigures.add(merchant);
-        Main.frame.PlaceCharacter(merchant);
+      //  friendFigures.add(merchant);
+    //    Main.frame.PlaceCharacter(merchant);
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
@@ -67,9 +66,9 @@ public class GameData {
         
     }
     
-    public void update(){
-    	if(Main.animator.userTurn){
-	    	synchronized (friendFigures) {
+  //  public void update(){
+    	//if(Main.animator.userTurn){
+	   /* 	synchronized (friendFigures) {
 	    		if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 	            ArrayList<GameFigure> remove = new ArrayList<>();
 	            GameFigure f;
@@ -83,8 +82,8 @@ public class GameData {
 	                	g.update();
 	                	Main.frame.PlaceCharacter(g);
 	            	}
-	    		}
-	    	}
+	    		
+	    	
 			synchronized(enemyFigures){
 				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
@@ -102,12 +101,12 @@ public class GameData {
 					}
 					for(GameFigure g: enemyFigures){
 						
-						g.update();
+			//			g.update();
 						Main.frame.PlaceCharacter(g);
 					}
 				}
 			}
-			synchronized(Merchant.merchant_dialogue){
+		synchronized(Merchant.merchant_dialogue){
 				if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
 					merchant_dialogue_window.update();
 				}
@@ -117,23 +116,26 @@ public class GameData {
 					inventory_window.update();
 				}
 			}
-
+	    	}*/
 	
-	    }
-    }
+	    
+    
 
- // add enemy
+ // add enemy and reset merchant
     public static void spawn(){
         	
     	int enemyX = 0;
     	int enemyY = 0;
     	while(Main.gameMap.isPassable(enemyX, enemyY) == false)
     	{
-    		enemyX = (int) Math.ceil(Math.random()*9);
-    		enemyY = (int) Math.ceil(Math.random()*9);
+    		enemyX = (int) Math.ceil(Math.random()*8);
+    		enemyY = (int) Math.ceil(Math.random()*8);
     	}
     	enemy = new Enemy(enemyX, enemyY);
     	enemyFigures.add(enemy);
+    	friendFigures.remove(merchant);
+    	merchant = new Merchant((int) Math.ceil(Math.random()*8),(int) Math.ceil(Math.random()*8));
+    	friendFigures.add(merchant);
     	Main.frame.PlaceCharacter(enemy);
     	//friendFigures.remove(dropped);
      }
@@ -141,6 +143,7 @@ public class GameData {
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
         	friendFigures.remove(dropped);
+        	friendFigures.remove(merchant);
         
         }
 }

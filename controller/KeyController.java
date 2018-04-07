@@ -93,17 +93,19 @@ public class KeyController implements KeyListener {
         		break;
         		
     		case KeyEvent.VK_SPACE:
+		    			GameData.hero.wrath = 1;
     			synchronized(Main.gameData.enemyFigures){
     				for(GameFigure g: Main.gameData.enemyFigures){
 	    			if(2 > Math.abs(g.x-GameData.hero.x) && 2 > Math.abs(g.y-GameData.hero.y) ){
-		    			Main.gameData.location_memory_min_1_x = g.x;
-		    			Main.gameData.location_memory_min_1_y = g.y;
+		    		//	Main.gameData.location_memory_min_1_x = g.x;
+		    		//	Main.gameData.location_memory_min_1_y = g.y;
 		    			g.health-=Main.gameData.hero.attack;
 	    			//	Main.frame.swoosh();
 		    			g.pain = 1;
-		    		//	g.wrath = 1;
-	    			}
+		    	//		GameData.hero.wrath = 1;
+	    			
     				}
+    			}
     			}
     		break;
     		
@@ -111,8 +113,8 @@ public class KeyController implements KeyListener {
 				Main.gameData.game_state = GameData.GAME_RUNNING;
 				for(GameFigure g: Main.gameData.enemyFigures){
 	    			if((g.x == GameData.hero.x) || (g.y==GameData.hero.y)){
-	    				Main.gameData.location_memory_min_1_x = g.x;
-	    				Main.gameData.location_memory_min_1_y = g.y;
+	    			//	Main.gameData.location_memory_min_1_x = g.x;
+	    			//	Main.gameData.location_memory_min_1_y = g.y;
 	    				g.health-=Main.gameData.hero.attack;
 	    				g.pain = 1;
 	    				//Main.frame.swoosh();
@@ -151,8 +153,11 @@ public class KeyController implements KeyListener {
         		}		
         	default:
         		break;
-        }
-		
+        
+		case KeyEvent.VK_9:
+			Main.animator.noDeath=1;
+			break;
+		}	
 		hasLeftEntranceTile = true;
 		if(GameData.hero.x == Main.gameMap.getExit().x && GameData.hero.y == Main.gameMap.getExit().y) {
 			Main.gameMap.goNext();

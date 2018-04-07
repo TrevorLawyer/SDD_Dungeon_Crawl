@@ -16,6 +16,7 @@ public abstract class Item extends GameFigure {
 	
 	
 	public void render(Graphics2D g) {		
+		
 	}
 
 	

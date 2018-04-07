@@ -62,7 +62,7 @@ public class Merchant extends GameFigure {
 	public Merchant(int x, int y) {
 		super(x, y);
 		try {
-            super.currentPic = ImageIO.read(getClass().getResource("merchant.png"));
+           super.currentPic[0] = ImageIO.read(getClass().getResource("merchant.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open merchant.png");
             System.exit(-1);
@@ -84,8 +84,8 @@ public class Merchant extends GameFigure {
 		return y*GRID_CELL_SIZE;
 	}
 	@Override
-	public void render(Graphics2D g) {
-		g.drawImage(currentPic, x, y, 30, 30, null);
+	public void render(Graphics2D g){
+		g.drawImage(currentPic[0], super.x, super.y, 30, 30, null);
 	}
 	public void update() {
 		

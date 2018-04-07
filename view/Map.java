@@ -79,8 +79,9 @@ public class Map extends JFrame {
     
     public void PlaceCharacter(GameFigure character)
     {
-        BufferedImage image = character.currentPic;
-        
+        BufferedImage image = character.currentPic[0];
+       // if (character.pain==1) {image = character.currentPic[1];}
+      //  if (character.wrath==1) {image = character.currentPic[1];}
         Image img= image.getScaledInstance(grid[character.x][character.y].getWidth(), grid[character.y][character.x].getHeight(),
         Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(img);
@@ -136,7 +137,7 @@ public class Map extends JFrame {
         gameMap.render(g2);
         synchronized (Main.gameData.friendFigures){
 
-            
+        	//if (Main.gameData.game_state == GameData.GAME_RUNNING) {
         	for (GameFigure f : Main.gameData.friendFigures) {
                 f.render(g2);
                 PlaceCharacter(f);
@@ -146,7 +147,7 @@ public class Map extends JFrame {
                 	g2.drawString("Exp: "+Main.gameData.hero.xp+"/100", width-125, 480);
                 }
             }
-     
+        	//}
             synchronized(health) {
             	health.render(g2);
             }
@@ -164,5 +165,32 @@ public class Map extends JFrame {
 
 			}
 	}
-}
+        synchronized(Main.gameData.enemyFigures){
+			if (Main.gameData.game_state == GameData.GAME_RUNNING) {
+				//take life away
+				for(int i = 0; i < Main.gameData.enemyFigures.size();i++)
+				{
+					if (!(Main.gameData.enemyFigures.get(i).health>0)) {
+						// adds item where enemy was killed
+					/*	Main.gameData.dropped = Main.gameData.manager.ItemOutput(
+								Main.gameData.enemyFigures.get(i).x, Main.gameData.enemyFigures.get(i).y,
+								Main.gameData.enemyFigures.get(i).x%2+1, Main.gameData.enemyFigures.get(i).y%2+1);
+						Main.gameData.friendFigures.add(Main.gameData.dropped);*/
+						Main.gameData.hero.xp=+Main.gameData.enemyFigures.get(i).xp;
+				//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
+					   // friendFigures.add(item);
+						Main.gameData.enemyFigures.remove(Main.gameData.enemy);
+					}
+				}
+				for(GameFigure g: Main.gameData.enemyFigures){
+					
+		//			g.update();
+					
+					g.render(g2);
+					PlaceCharacter(g);
+					//Main.frame.PlaceCharacter(g);
+				}
+			} 
+        }
+	}
 }
