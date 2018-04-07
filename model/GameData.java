@@ -98,7 +98,7 @@ public class GameData {
 						    hero.xp=+enemyFigures.get(i).xp;
 					//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
 						   // friendFigures.add(item);
-						    enemyFigures.remove(enemyFigures.get(i));
+						    enemyFigures.remove(enemyFigures.get(i) );
 						}
 					}
 					for(GameFigure g: enemyFigures){
