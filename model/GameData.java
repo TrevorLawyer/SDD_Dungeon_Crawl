@@ -90,6 +90,12 @@ public class GameData {
 					//take life away
 					for(int i = 0; i < enemyFigures.size();i++)
 					{
+						
+						if(enemyFigures.get(i).health<0)
+						{
+							System.out.println(enemyFigures.get(i).health);
+							
+						}
 						if (!(enemyFigures.get(i).health>0)) {
 	
 							dropped = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y, enemyFigures.get(i).x%2+1, enemyFigures.get(i).y%2+1);
@@ -97,8 +103,10 @@ public class GameData {
 						    hero.xp=+enemyFigures.get(i).xp;
 						    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
 						    friendFigures.add(item);
-						    enemyFigures.remove(enemy);
+						    enemyFigures.remove(enemyFigures.get(i));
 						}
+
+						
 					}
 					for(GameFigure g: enemyFigures){
 						

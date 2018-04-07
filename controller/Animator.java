@@ -187,14 +187,13 @@ public class Animator implements Runnable {
 	            		}
 	            		catch(Exception e) 
 	            		{
-	            			System.out.println("encountered a " + e.toString());
+	            			System.out.println("encountered a " + e.toString() + " while trying to move an enemy.");
 	            		}
                 	}
                 	else {
                 		
                 			Main.gameData.hero.setHealth(-3);
                 		
-                			
                 	}
                 }
             }
