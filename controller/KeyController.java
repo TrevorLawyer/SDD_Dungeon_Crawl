@@ -80,7 +80,7 @@ public class KeyController implements KeyListener {
         		}
         		break;
         	case KeyEvent.VK_ESCAPE:
- //       		Main.animator.gameState = Main.animator.GAME_OVER;
+       		Main.gameData.game_state = GameData.GAME_RUNNING;
         		break;
         	case KeyEvent.VK_ENTER:
         		if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
@@ -123,7 +123,8 @@ public class KeyController implements KeyListener {
 	    			}
 				}
     		break;
-    	
+    		
+    		
         	case KeyEvent.VK_MINUS:
         		Main.gameData.hero.setHealth(-1);
         		break;
