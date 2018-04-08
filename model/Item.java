@@ -16,7 +16,7 @@ public abstract class Item extends GameFigure {
 	
 	
 	public void render(Graphics2D g) {		
-		g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
+		g.drawImage(currentPic[0], super.x*47, super.y*50, 50, 50, null);
 	}
 
 	
