@@ -93,8 +93,9 @@ public class KeyController implements KeyListener {
         		break;
         		
     		case KeyEvent.VK_SPACE:
-		    			GameData.hero.wrath = 1;
+		    	GameData.hero.wrath = 1;
     			synchronized(Main.gameData.enemyFigures){
+    				Main.gameData.hero.wrath=1;
     				for(GameFigure g: Main.gameData.enemyFigures){
 	    			if(2 > Math.abs(g.x-GameData.hero.x) && 2 > Math.abs(g.y-GameData.hero.y) ){
 		    		//	Main.gameData.location_memory_min_1_x = g.x;
@@ -110,6 +111,7 @@ public class KeyController implements KeyListener {
     		break;
     		
     		case KeyEvent.VK_A:
+    			Main.gameData.hero.wrath=1;
 				Main.gameData.game_state = GameData.GAME_RUNNING;
 				for(GameFigure g: Main.gameData.enemyFigures){
 	    			if((g.x == GameData.hero.x) || (g.y==GameData.hero.y)){

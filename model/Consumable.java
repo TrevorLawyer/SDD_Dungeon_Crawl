@@ -26,7 +26,7 @@ public class Consumable extends Item {
 	//Overloaded constructor allows us to specify where the sprite is located.
 	public Consumable(String n, String desc, int h, int x ,int y, String spriteLocation) {
 		super(n, desc, x, y);
-        super.currentPic = null;
+        super.currentPic[0] = null;
         healthRestored = h;
         try 
         {

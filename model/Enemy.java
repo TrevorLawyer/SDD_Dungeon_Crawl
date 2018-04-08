@@ -66,7 +66,19 @@ public class Enemy extends GameFigure{
     }
     @Override
     public void update() {
-    	//Empty for now
+    	//Enemy(super.x,super.y);
+    	try {
+            if (pain==1) {
+            	super.currentPic[0] =ImageIO.read(getClass().getResource(chosenEnemy.picString="hit.png"));
+            }
+            else {
+            	
+            	super.currentPic[0] = ImageIO.read(getClass().getResource(chosenEnemy.picString));
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error: Cannot open " + chosenEnemy.picString);
+            System.exit(-1);
+        }
     }
 
 }

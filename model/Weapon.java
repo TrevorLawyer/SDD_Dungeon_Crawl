@@ -33,10 +33,10 @@ public class Weapon extends Item {
 			super(n, desc, x, y);
 			power=p;
 			 		
-			super.currentPic[1] = null;
+			super.currentPic[0] = null;
 			try 
 			{
-			    super.currentPic[1] = ImageIO.read(getClass().getResource(spriteLocation));
+			    super.currentPic[0] = ImageIO.read(getClass().getResource(spriteLocation));
 			} catch (IOException ex) {
 			    JOptionPane.showMessageDialog(null, "Error: Cannot open " + spriteLocation);
 			     System.exit(-1);
