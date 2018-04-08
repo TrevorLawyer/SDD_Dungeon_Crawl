@@ -14,12 +14,11 @@ public class Consumable extends Item {
 	//Deprecated, use other constructor if possible. Kept for backwards compatibility.
 	public Consumable(String n, String desc, int h, int x ,int y) {
 		super(n, desc, x, y);
-        super.currentPic = null;
+       // super.currentPic = null;
         super.worth_in_gold = 100;
         healthRestored = h;
         try 
-        {
-          super.currentPic = ImageIO.read(getClass().getResource("consumable.png"));
+        {          super.currentPic[0] = ImageIO.read(getClass().getResource("consumable.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open consumable.png");
             System.exit(-1);
@@ -33,7 +32,7 @@ public class Consumable extends Item {
         healthRestored = h;
         try 
         {
-          super.currentPic = ImageIO.read(getClass().getResource(spriteLocation));
+          super.currentPic[0] = ImageIO.read(getClass().getResource(spriteLocation));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open"+spriteLocation);
             System.exit(-1);

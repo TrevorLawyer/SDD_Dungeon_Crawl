@@ -47,13 +47,26 @@ public class Hero extends GameFigure{
         
         inventory = new ArrayList<Item>();
         inventory.add(new Weapon("Basic Sword","It's a sword",5,0,0));
+        if (wrath==1){
+        	try 
+        	        
+        	{
+        	super.currentPic[1] = ImageIO.read(getClass().getResource("hit.png"));
+        	} catch (IOException ex) {
+        	JOptionPane.showMessageDialog(null, "Error: Cannot open pixel_hero.jpg");
+        	System.exit(-1);
+        	}
+        	}else {
         try 
         {
-            super.currentPic = ImageIO.read(getClass().getResource("pixel_hero.png"));
+        	super.currentPic[0] = ImageIO.read(getClass().getResource("pixel_hero.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open pixel_hero.jpg");
             System.exit(-1);
         }
+        }
+        	equipment.add(equippedWeapon);
+        	equipment.add(equippedArmor);
         equipment.add(equippedWeapon);
         equipment.add(equippedArmor);
         
@@ -82,7 +95,7 @@ public class Hero extends GameFigure{
     
     @Override
     public void render(Graphics2D g) {
-    	g.drawImage(currentPic, x, y, 30, 30, null);
+    	g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
     }
 
     @Override

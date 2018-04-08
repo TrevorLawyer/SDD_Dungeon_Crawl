@@ -43,7 +43,7 @@ public class GameData {
     	manager = new ItemManager();
     	game_state = GAME_RUNNING;
         hero = new Hero(1, 1);
-        merchant = new Merchant(6,6);
+ //       merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
@@ -68,73 +68,22 @@ public class GameData {
         
     }
     
-    public void update(){
-    	if(Main.animator.userTurn){
-	    	synchronized (friendFigures) {
-	    		if (Main.gameData.game_state == GameData.GAME_RUNNING) {
-	            ArrayList<GameFigure> remove = new ArrayList<>();
-	            GameFigure f;
-	         
-	            for (int i = 0; i < friendFigures.size(); i++) {
-	                f = friendFigures.get(i);
-	            	}
-	            	friendFigures.removeAll(remove);
-	
-	            	for (GameFigure g : friendFigures) {
-	                	g.update();
-	                	Main.frame.PlaceCharacter(g);
-	            	}
-	    		}
-	    	}
-			synchronized(enemyFigures){
-				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
-					//take life away
-					for(int i = 0; i < enemyFigures.size();i++)
-					{
-						if (!(enemyFigures.get(i).health>0)) {
-	
-							dropped = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y, enemyFigures.get(i).x%2+1, enemyFigures.get(i).y%2+1);
-							friendFigures.add(dropped);
-						    hero.xp=+enemyFigures.get(i).xp;
-					//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
-						   // friendFigures.add(item);
-						    enemyFigures.remove(enemyFigures.get(i) );
-						}
-					}
-					for(GameFigure g: enemyFigures){
-						
-						g.update();
-						Main.frame.PlaceCharacter(g);
-					}
-				}
-			}
-			synchronized(Merchant.merchant_dialogue){
-				if (Main.gameData.game_state == GameData.MERCHANT_DIALOG) {
-					merchant_dialogue_window.update();
-				}
-			}
-			synchronized(Main.gameData.inventory_window){
-				if(Main.gameData.game_state == GAME_MENU){
-					inventory_window.update();
-				}
-			}
 
-	
-	    }
-    }
-
- // add enemy
+ // add enemy and reset merchant
     public static void spawn(){
         	
     	int enemyX = 0;
     	int enemyY = 0;
     	while(Main.gameMap.isPassable(enemyX, enemyY) == false)
     	{
-    		enemyX = (int) Math.ceil(Math.random()*9);
-    		enemyY = (int) Math.ceil(Math.random()*9);
+    		enemyX = (int) Math.ceil(Math.random()*8);
+    		enemyY = (int) Math.ceil(Math.random()*8);
     	}
     	enemy = new Enemy(enemyX, enemyY);
     	enemyFigures.add(enemy);
+    	friendFigures.remove(merchant);
+    	merchant = new Merchant((int) Math.ceil(Math.random()*8),(int) Math.ceil(Math.random()*8));
+    	friendFigures.add(merchant);
     	Main.frame.PlaceCharacter(enemy);
     	//friendFigures.remove(dropped);
     	chest = new TreasureChest((int)(Math.random()*9+1),(int)(Math.random()*9+1));
@@ -144,6 +93,7 @@ public class GameData {
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
         	friendFigures.remove(dropped);
+        	friendFigures.remove(merchant);
         
         }
 }

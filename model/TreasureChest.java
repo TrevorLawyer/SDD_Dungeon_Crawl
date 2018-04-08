@@ -20,7 +20,7 @@ public class TreasureChest extends GameFigure {
 		onMap = false;
 		try 
         {
-            super.currentPic = ImageIO.read(getClass().getResource("chest_unopened.png"));
+            super.currentPic[0] = ImageIO.read(getClass().getResource("chest_unopened.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open chest_unopened.png");
             System.exit(-1);
@@ -31,7 +31,7 @@ public class TreasureChest extends GameFigure {
 	@Override
 	public void render(Graphics2D g) {
 		if(onMap){
-			g.drawImage(currentPic, x, y, 30, 30, null);	
+			g.drawImage(currentPic[0], x, y, 30, 30, null);	
 		}
 		//System.out.println("Drawing Chest");
 	}

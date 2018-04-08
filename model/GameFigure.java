@@ -8,7 +8,7 @@ public abstract class GameFigure {
     // public for a faster access during animation
     public int x;
     public int y;
-    public BufferedImage currentPic;
+    public BufferedImage currentPic[] = new BufferedImage[3];
     public int state;
     public int range = 0;
     public int xp;
