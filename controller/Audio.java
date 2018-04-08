@@ -24,7 +24,7 @@ public class Audio {
                 c.start();
             } else {
                 Clip clip = AudioSystem.getClip();
-                clip.open(stream);
+              //clip.open(stream); //***********************************************PETER UNBYPASS THIS TOO
                 clip.start();
             }
             stream.close();
@@ -33,6 +33,15 @@ public class Audio {
             Logger.getLogger(KeyController.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void stopAudio() {
+    	try {
+    	c.stop();
+    	}
+    	catch(Exception e){
+    		System.out.println("Error Stopping sound");
+    	}
     }
 
     public Clip getC() {

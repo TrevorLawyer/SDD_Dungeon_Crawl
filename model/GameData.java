@@ -23,15 +23,21 @@ public class GameData {
 	public int player_dialogue_type;
 	
 	public int game_state;
-	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2;
+	public static final int GAME_RUNNING=0, GAME_MENU=1, MERCHANT_DIALOG=2, GAME_IDLE=3;
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
+<<<<<<< HEAD
 	public static Item item;
+=======
+//	public static Item item;
+	public static Item dropped;
+>>>>>>> devronhanks_final2
     public static Enemy enemy;
     public static Hero hero;
     public static Merchant merchant;
-       public final List<GameFigure> friendFigures;
+    public static List<GameFigure> friendFigures;
     public static List<GameFigure> enemyFigures;
+    public static TreasureChest chest;
 
     public static MerchantDialogueWindow merchant_dialogue_window, inventory_window;
     
@@ -41,24 +47,29 @@ public class GameData {
     	manager = new ItemManager();
     	game_state = GAME_RUNNING;
         hero = new Hero(1, 1);
-        merchant = new Merchant(6,6);
+ //       merchant = new Merchant(6,6);
         friendFigures = Collections.synchronizedList(
         new ArrayList<GameFigure>() );
         enemyFigures = Collections.synchronizedList(new ArrayList<GameFigure>());
      
-        
+        chest = new TreasureChest((int)(Math.random()*9+1),(int)(Math.random()*9+1));
         friendFigures.add(hero);
 
-        
-        hero.AddItemToInventory(new Weapon("Sword 1","Sword",5,1,1));
-        hero.AddItemToInventory(new Weapon("Sword 2","Sword",5,1,1));
-        hero.AddItemToInventory(new Weapon("Sword 3","Sword",5,1,1));
+         
         Main.frame.PlaceCharacter(hero);
         
+<<<<<<< HEAD
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
         
 //        player_dialogue_state = false;
+=======
+        if (Merchant.randomWithRange(0,2) == 0) {
+        	merchant.present = true;
+        	friendFigures.add(merchant);
+        	Main.frame.PlaceCharacter(merchant);
+        }
+>>>>>>> devronhanks_final2
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
@@ -68,6 +79,7 @@ public class GameData {
         
     }
     
+<<<<<<< HEAD
     public void update(){
     	if(Main.animator.userTurn){
     		synchronized (friendFigures) {
@@ -131,25 +143,34 @@ public class GameData {
 					inventory_window.update();
 				}
 			}
+=======
+>>>>>>> devronhanks_final2
 
-	
-			synchronized(enemyFigures){
-				for(GameFigure g: enemyFigures){
-	    			g.update();
-	    			Main.frame.PlaceCharacter(g);
-	    		}
-	    	}
-	    }
-    }
- // add enemy
+ // add enemy and reset merchant
     public static void spawn(){
         	
-    	enemy = new Enemy((int)(Math.random()*9), (int)(Math.random()*9));
+    	int enemyX = 0;
+    	int enemyY = 0;
+    	while(Main.gameMap.isPassable(enemyX, enemyY) == false)
+    	{
+    		enemyX = (int) Math.ceil(Math.random()*8);
+    		enemyY = (int) Math.ceil(Math.random()*8);
+    	}
+    	enemy = new Enemy(enemyX, enemyY);
     	enemyFigures.add(enemy);
+    	friendFigures.remove(merchant);
+    	merchant = new Merchant((int) Math.ceil(Math.random()*8),(int) Math.ceil(Math.random()*8));
+    	friendFigures.add(merchant);
     	Main.frame.PlaceCharacter(enemy);
+    	//friendFigures.remove(dropped);
+    	chest = new TreasureChest((int)(Math.random()*9+1),(int)(Math.random()*9+1));
+    	System.out.println("Chest x: "+chest.x+", y: "+chest.y);
      }
         // remove all enemies
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
+        	friendFigures.remove(dropped);
+        	friendFigures.remove(merchant);
+        
         }
 }

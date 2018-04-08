@@ -19,45 +19,83 @@ import javax.swing.JOptionPane;
  */
 public class Hero extends GameFigure{
 	
-	ArrayList<Item> inventory, equipment;
+	public int gold;
+	public ArrayList<Item> inventory, equipment;
 	Weapon equippedWeapon;
 	Armor equippedArmor;
-	public int powerLevel;
+	public int level;
 	public int xp;
 	public int maxHealth;
 	public int health;
 	public int attack;
+	public int armor;
 	public int wrath = 0;
 
     public Hero(int x, int y) {
         super(x, y);
         
-        equippedWeapon = new Weapon("Fist", "Your Fists", 1,-1,-1);
+        equippedWeapon = new Weapon("Fist", "Your Fists", 1 ,-1,-1);
         equippedArmor = new Armor("Clothes", "Basic Clothes", 1,-1,-1);
-        powerLevel=(int) xp/4;
-        attack = Weapon.getPower()+powerLevel;
-        maxHealth = powerLevel + 35;
+        
+        attack = Weapon.getPower();
+        armor = equippedArmor.defense;
+        maxHealth = 35;
+        xp = 0;
+        level=1;
         health = maxHealth;
         equipment = new ArrayList<Item>();
         
         inventory = new ArrayList<Item>();
-        inventory.add(new Weapon("Basic Sword","It's a sword",1,0,0));
+        inventory.add(new Weapon("Basic Sword","It's a sword",5,0,0));
+        if (wrath==1){
+        	try 
+        	        
+        	{
+        	super.currentPic[1] = ImageIO.read(getClass().getResource("hit.png"));
+        	} catch (IOException ex) {
+        	JOptionPane.showMessageDialog(null, "Error: Cannot open pixel_hero.jpg");
+        	System.exit(-1);
+        	}
+        	}else {
         try 
         {
-            super.currentPic = ImageIO.read(getClass().getResource("pixel_hero.png"));
+        	super.currentPic[0] = ImageIO.read(getClass().getResource("pixel_hero.png"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open pixel_hero.jpg");
             System.exit(-1);
         }
+        }
+        	equipment.add(equippedWeapon);
+        	equipment.add(equippedArmor);
         equipment.add(equippedWeapon);
         equipment.add(equippedArmor);
+        
+        gold = 10000;
     }
     
-
+    public void levelUp(){
+    	level++;
+    	    	
+    	    	if(level%5 == 0){
+    	    		maxHealth+=5;
+    	    	}
+    	    	if(level%10 == 0){
+    	    		
+    	    	}
+    	    	health = maxHealth;
+    	    }
+    	    
+    	    public void gainEXP(int expGained){
+    	    	xp = xp + expGained;
+    	    	if(xp > 99){
+    	    		xp-=100;
+    	    		levelUp();
+    	    	}
+    	    }
     
     @Override
     public void render(Graphics2D g) {
-    	g.drawImage(currentPic, x, y, 30, 30, null);
+    	g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
     }
 
     @Override
@@ -67,6 +105,9 @@ public class Hero extends GameFigure{
 
     public void AddItemToInventory(Item i){
     	inventory.add(i);
+    }
+    public void removeItemFromInventory(int i){
+    	inventory.remove(i);
     }
     
     public String[] getInventoryNames(){
@@ -96,7 +137,12 @@ public class Hero extends GameFigure{
     //Negative numbers remove health, positive numbers add health   
     public void setHealth(int h) {
     	if(!(h+health < 0 || h+health > maxHealth)) {
-    		health+=h;
+    		if(h<0) {
+    			if(armor+h<0) {
+    				health += armor+h;
+    			}
+    		}
+    		else {health+=h;}
     	}
     	else if(h+health < 0) {
     		health = 0;
@@ -121,6 +167,7 @@ public class Hero extends GameFigure{
     		inventory.add(equippedWeapon);
     		equipment.remove(equippedWeapon);
     		equippedWeapon = (Weapon) i;
+    		attack = equippedWeapon.getPower();
     		inventory.remove(i);
     		equipment.add(i);
     	}
@@ -128,6 +175,7 @@ public class Hero extends GameFigure{
     		inventory.add(equippedArmor);
     		equipment.remove(equippedArmor);
      		equippedArmor = (Armor) i;
+     		armor = equippedArmor.defense;
     		inventory.remove(i);
     		equipment.add(i);
     	}

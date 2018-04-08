@@ -1,9 +1,11 @@
 package model;
 
 import java.awt.Graphics2D;
+import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 import controller.Audio;
+import controller.Main;
 
 public class GameMap {
 	//Game Board width and height
@@ -13,6 +15,8 @@ public class GameMap {
 	private Coordinate previousExit;
 	public  Coordinate entrance;
 	public Coordinate exit;
+	public int obstacleLevel = 0; 
+	public boolean transition = false;
 	
 	public Audio a = new Audio();
 	public Audio b = new Audio();
@@ -20,11 +24,22 @@ public class GameMap {
 	GameMapTile[][] thisMap;
 	
 	public GameMap() {
+
 		generateMap();
 		
 	}
 	public GameMap(Coordinate previousExit) {
 		this.previousExit = previousExit;
+		generateMap();
+	}
+	public GameMap(Coordinate previousExit, int obstacles) {
+		this.previousExit = previousExit;
+		obstacleLevel = obstacles;
+		generateMap();
+	}
+	public GameMap(Coordinate previousExit, boolean transition) {
+		this.previousExit = previousExit;
+		this.transition = transition;
 		generateMap();
 	}
 	private void generateMap() {
@@ -42,17 +57,27 @@ public class GameMap {
 			entrance = getEntrance();
 			thisMap[entrance.x][entrance.y].tileEmpty = true;			
 		}
-		exit = makeExit(entrance);
+		if (!transition) {
+			exit = makeExit(entrance);
+		}
+		else {
+			placeTransition();
+		}
+		
 		thisMap[exit.x][exit.y].tileEmpty = true;	
+		if(obstacleLevel > 0) {
+			generateObstacles(obstacleLevel);
+		}
+		
 		
 	}
 	//Returns an X coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
 	public int randXCoord() {
-		return ThreadLocalRandom.current().nextInt(1, mapWidth);
+		return ThreadLocalRandom.current().nextInt(1, mapWidth-1);
 	}
 	//Returns a Y coord between 1 and Map Width -1. This prevents corners and boundaries from being selected.
 	public int randYCoord() {
-		return ThreadLocalRandom.current().nextInt(1, mapWidth);
+		return ThreadLocalRandom.current().nextInt(1, mapWidth-1);
 	}
 	private int pickExitSide(){
 		return ThreadLocalRandom.current().nextInt(0, 4);
@@ -140,13 +165,48 @@ public class GameMap {
 		//printToConsole();
 		for(int x = 0; x < mapWidth; x++ ) {
 			for(int y = 0; y < mapHeight; y++) {
-				thisMap[x][y].render(g);
+				try {
+					thisMap[x][y].render(g);
+				}
+				catch (IOException ioe) {
+					
+				}
 			}
 		}
 	}
 	public GameMapTile getTile(int x, int y) {
 		return thisMap[x][y];
 	}
+	private void generateObstacles(int obstacles) {
+		for(int i = 0; i < obstacles/2; i++) {
+			Coordinate block = new Coordinate(randXCoord(),randYCoord());
+			if (checkExitClear(block.x, block.y) && checkEntranceClear(block.x,block.y)) {
+				thisMap[block.x][block.y].obstacle = true;
+			}
+			else i--;
+		}
+	}
+	public boolean checkExitClear(int x, int y) {
+		if (Math.abs(exit.x - x) <= 1 && Math.abs(exit.y - y) <= 1) {
+			return false;
+		}
+		else return true;
+	}
+	public boolean checkEntranceClear(int x, int y) {
+		if (Math.abs(entrance.x - x) <= 1 && Math.abs(entrance.y - y) <= 1) {
+			return false;
+		}
+		else return true;
+	}
+	public boolean isPassable(int x, int y) {
+		if (thisMap[x][y].isPassable()) return true;
+		else return false;
+	}
+	public void placeTransition() {
+		thisMap[5][5].ladderTile = true;
+		this.exit = new Coordinate(5,5);
+	}
+
 //	public void printToConsole() {
 //		for(int x = 0; x < mapWidth; x++ ) {
 //			for(int y = 0; y < mapHeight; y++) {

@@ -28,41 +28,56 @@ public class Enemy extends GameFigure{
     public int pain;
 
 	Random rand = new Random();
-	int  n = rand.nextInt(2) + 0;
 	
-	public EnemyType[] enemies = {new Enemy_Bat(), new Enemy_Skeleton()};
+	
+	public EnemyType[] enemies = {new Enemy_Bat(), new Enemy_Skeleton(), new Enemy_Orc(), new Enemy_DarkElf()};
+	int  n = rand.nextInt(enemies.length) + 0;
 	public EnemyType chosenEnemy;
 	
+<<<<<<< HEAD
 
+=======
+	public int range_of_sight;
+    public int xp;
+    public int health;
+    public int attack;
+    public int pain;
+>>>>>>> devronhanks_final2
     
     public Enemy(int x, int y) {
         super(x, y);
         
         chosenEnemy = enemies[n];
-        xp = chosenEnemy.xp;
-        health = chosenEnemy.health;
-        attack = chosenEnemy.attack;
-        pain = chosenEnemy.pain;
-        
+        super.range = chosenEnemy.range_of_sight;
+        super.xp = chosenEnemy.xp;
+        super.health = chosenEnemy.health;
+        super.attack = chosenEnemy.attack;
+        super.pain = chosenEnemy.pain;
         try {
             if (pain==1) {
-            	super.currentPic =ImageIO.read(getClass().getResource("hit.png"));
+            	super.currentPic[0] =ImageIO.read(getClass().getResource(chosenEnemy.picString="hit.png"));
             }
             else {
             	
-            	super.currentPic = ImageIO.read(getClass().getResource(chosenEnemy.picString));
+            	super.currentPic[0] = ImageIO.read(getClass().getResource(chosenEnemy.picString));
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error: Cannot open " + chosenEnemy.picString);
             System.exit(-1);
         }
+<<<<<<< HEAD
    }
 
+=======
+        
+
+    }
+    
+>>>>>>> devronhanks_final2
     @Override
     public void render(Graphics2D g) {
-        g.drawImage(currentPic, (int)super.x, (int)super.y, 
-                80, 80, null);    }
-
+        g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
+    }
     @Override
     public void update() {
     	//Empty for now
