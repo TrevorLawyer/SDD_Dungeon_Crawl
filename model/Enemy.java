@@ -62,9 +62,8 @@ public class Enemy extends GameFigure{
     
     @Override
     public void render(Graphics2D g) {
-        g.drawImage(currentPic[0], (int)super.x, (int)super.y, 
-                80, 80, null);    }
-
+        g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
+    }
     @Override
     public void update() {
     	//Empty for now
