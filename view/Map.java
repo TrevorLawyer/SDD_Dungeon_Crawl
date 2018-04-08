@@ -179,7 +179,7 @@ public class Map extends JFrame {
 						Main.gameData.hero.xp=+Main.gameData.enemyFigures.get(i).xp;
 				//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
 					   // friendFigures.add(item);
-						Main.gameData.enemyFigures.remove(Main.gameData.enemy);
+						Main.gameData.enemyFigures.remove(Main.gameData.enemyFigures.get(i));
 					}
 				}
 				for(GameFigure g: Main.gameData.enemyFigures){

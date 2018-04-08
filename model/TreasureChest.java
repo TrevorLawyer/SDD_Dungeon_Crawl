@@ -31,7 +31,7 @@ public class TreasureChest extends GameFigure {
 	@Override
 	public void render(Graphics2D g) {
 		if(onMap){
-			g.drawImage(currentPic[0], x, y, 30, 30, null);	
+			g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
 		}
 		//System.out.println("Drawing Chest");
 	}

@@ -14,9 +14,9 @@ public abstract class Item extends GameFigure {
 		this.worth_in_gold = 0;
 	}
 	
-	
 	public void render(Graphics2D g) {		
-	}
+		g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
+ 	}
 
 	
 	public void update() {		

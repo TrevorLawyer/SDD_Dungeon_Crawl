@@ -46,7 +46,7 @@ public class Enemy extends GameFigure{
         super.pain = chosenEnemy.pain;
         try {
             if (pain==1) {
-            	super.currentPic[0] =ImageIO.read(getClass().getResource("hit.png"));
+            	super.currentPic[0] =ImageIO.read(getClass().getResource(chosenEnemy.picString="hit.png"));
             }
             else {
             	
