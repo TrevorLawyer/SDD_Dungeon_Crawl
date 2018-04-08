@@ -46,32 +46,23 @@ public class Merchant extends GameFigure {
 	
 	public static final MerchantDialogueWindow[] merchant_dialogue = {
 		new MerchantDialogueWindow("Merchant: Hello! Welcome to my shop."),
-		new MerchantDialogueWindow("Merchant: How can I help   you today?", menu_options_0),
-		new MerchantDialogueWindow("Merchant: Thank you for    comming to my shop. Please come again!"),
-		new MerchantDialogueWindow("Merchant: What would you   like to buy?", menu_options_1),
+		new MerchantDialogueWindow("Merchant: How can I help you today?", menu_options_0),
+		new MerchantDialogueWindow("Merchant: Thank you for comming to my shop. Please come again!"),
+		new MerchantDialogueWindow("Merchant: What would you like to buy?", menu_options_1),
 		new MerchantDialogueWindow("Merchant: Are you sure you would like to buy a ", menu_options_2),
-		new MerchantDialogueWindow("Merchant: I'm sorry, but   you do not have enough     gold."),
-		new MerchantDialogueWindow("Merchant: I'm sorry, but   your inventory is too full."),
-		new MerchantDialogueWindow("Merchant: Thank you for    your purchase!"),
-		new MerchantDialogueWindow("Merchant: What would you   like to sell?", menu_options_3),
+		new MerchantDialogueWindow("Merchant: I'm sorry, but you do not have enough gold."),
+		new MerchantDialogueWindow("Merchant: I'm sorry, but your inventory is too full."),
+		new MerchantDialogueWindow("Merchant: Thank you for your purchase!"),
+		new MerchantDialogueWindow("Merchant: What would you like to sell?", menu_options_3),
 		new MerchantDialogueWindow("Merchant: Are you sure you would like to sell your ", menu_options_2),
-		new MerchantDialogueWindow("Merchant: I'm sorry, but   your inventory is empty."),
-		new MerchantDialogueWindow("Merchant: Thank you for    your sale!")
+		new MerchantDialogueWindow("Merchant: I'm sorry, but your inventory is empty."),
+		new MerchantDialogueWindow("Merchant: Thank you for your sale!")
 	};
 
 	public boolean present;
 	
-	public boolean present;
-	
 	public Merchant(int x, int y) {
-		super(randomWithRange(2,7), randomWithRange(2,7));
-		/*if (randomWithRange(0,3) == 0) {
-			present = true;
-		}
-		else {
-			present = false;
-		}*/
-		present = false;
+		super(x, y);
 		try {
            super.currentPic[0] = ImageIO.read(getClass().getResource("merchant.png"));
         } catch (IOException ex) {
@@ -95,34 +86,17 @@ public class Merchant extends GameFigure {
 		return y*GRID_CELL_SIZE;
 	}
 	@Override
-<<<<<<< HEAD
 	public void render(Graphics2D g){
 	//	g.drawImage(currentPic[0], super.x, super.y, 30, 30, null);
 		g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
-=======
-	public void render(Graphics2D g) {
-		//if (present) {
-			g.drawImage(currentPic, x, y, 30, 30, null);
-			//System.out.println("poopypoopypoop");
-		//}
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
 	}
 	public void update() {
 		
 	}
 	public Rectangle2D getCollisionBox() {
-		//if (present) {
-			return new Rectangle2D.Double(x*GRID_CELL_SIZE, y*GRID_CELL_SIZE, SPRITE_SIZE, SPRITE_SIZE);
-		//}
-		//else {
-		//	return new Rectangle2D.Double(0,0,0,0);
-		//}
+		return new Rectangle2D.Double(x*GRID_CELL_SIZE, y*GRID_CELL_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 	}
-<<<<<<< HEAD
 	static int randomWithRange(int min, int max) {
-=======
-	public static int randomWithRange(int min, int max) {
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
 		int range = (max - min) + 1;     
 		return (int)(Math.random() * range) + min;
 	}

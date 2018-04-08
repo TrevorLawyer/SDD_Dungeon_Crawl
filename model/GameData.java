@@ -27,11 +27,8 @@ public class GameData {
 	public static final int MENU_EQUIPMENT=3;
 	public static ItemManager manager;
 <<<<<<< HEAD
-<<<<<<< HEAD
 	public static Item item;
 =======
-=======
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
 //	public static Item item;
 	public static Item dropped;
 >>>>>>> devronhanks_final2
@@ -62,23 +59,17 @@ public class GameData {
         Main.frame.PlaceCharacter(hero);
         
 <<<<<<< HEAD
-<<<<<<< HEAD
         friendFigures.add(merchant);
         Main.frame.PlaceCharacter(merchant);
         
 //        player_dialogue_state = false;
 =======
-=======
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
         if (Merchant.randomWithRange(0,2) == 0) {
         	merchant.present = true;
         	friendFigures.add(merchant);
         	Main.frame.PlaceCharacter(merchant);
         }
-<<<<<<< HEAD
 >>>>>>> devronhanks_final2
-=======
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
         player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
@@ -129,7 +120,6 @@ public class GameData {
 			synchronized(enemyFigures){
 				if (Main.gameData.game_state == GameData.GAME_RUNNING) {
 					//take life away
-<<<<<<< HEAD
 					if (enemy.health<1) {
 					    hero.xp=+enemy.xp;
 					    System.out.println(""+hero.xp);
@@ -137,20 +127,6 @@ public class GameData {
 					    friendFigures.add(item);
 						enemyFigures.remove(enemy);
 					     			}
-=======
-					for(int i = 0; i < enemyFigures.size();i++)
-					{
-						if (!(enemyFigures.get(i).health>0)) {
-	
-							dropped = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y, enemyFigures.get(i).x%2+1, enemyFigures.get(i).y%2+1);
-							friendFigures.add(dropped);
-						    hero.xp=+enemyFigures.get(i).xp;
-					//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
-						   // friendFigures.add(item);
-						    enemyFigures.remove(enemy);
-						}
-					}
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
 					for(GameFigure g: enemyFigures){
 						g.update();
 						Main.frame.PlaceCharacter(g);
@@ -170,15 +146,7 @@ public class GameData {
 =======
 >>>>>>> devronhanks_final2
 
-<<<<<<< HEAD
  // add enemy and reset merchant
-=======
-	
-	    }
-    }
-
- // add enemy
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
     public static void spawn(){
         	
     	int enemyX = 0;
@@ -202,10 +170,7 @@ public class GameData {
         public static void swab() {
         	enemyFigures.removeAll(enemyFigures);
         	friendFigures.remove(dropped);
-<<<<<<< HEAD
         	friendFigures.remove(merchant);
-=======
->>>>>>> 524930628c183aba4d7e2e0ee8924cc4e441e5c0
         
         }
 }
