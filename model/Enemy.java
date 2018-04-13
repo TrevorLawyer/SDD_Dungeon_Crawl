@@ -21,12 +21,7 @@ import java.util.Random;
  * @author Matthew
  */
 public class Enemy extends GameFigure{
-    private Image bossImage;
-    public int xp;
-    public int health;
-    public int attack;
-    public int pain;
-
+	
 	Random rand = new Random();
 	
 	
@@ -34,15 +29,11 @@ public class Enemy extends GameFigure{
 	int  n = rand.nextInt(enemies.length) + 0;
 	public EnemyType chosenEnemy;
 	
-<<<<<<< HEAD
-
-=======
 	public int range_of_sight;
     public int xp;
     public int health;
     public int attack;
     public int pain;
->>>>>>> devronhanks_final2
     
     public Enemy(int x, int y) {
         super(x, y);
@@ -65,15 +56,10 @@ public class Enemy extends GameFigure{
             JOptionPane.showMessageDialog(null, "Error: Cannot open " + chosenEnemy.picString);
             System.exit(-1);
         }
-<<<<<<< HEAD
-   }
-
-=======
         
 
     }
     
->>>>>>> devronhanks_final2
     @Override
     public void render(Graphics2D g) {
         g.drawImage(currentPic[0], super.x*47, super.y*50, 80, 80, null);
