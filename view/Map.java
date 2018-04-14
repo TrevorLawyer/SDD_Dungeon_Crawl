@@ -151,7 +151,12 @@ public class Map extends JFrame {
             synchronized(health) {
             	health.render(g2);
             }
-     
+            synchronized(Main.gameData.chest){
+            	if(Main.gameData.chest.isOnMap()){
+	        		Main.gameData.chest.render(g2);
+	        		PlaceCharacter(Main.gameData.chest);
+            	}
+        	}
 	
             synchronized(Main.gameData.inventory_window){
             	if(Main.gameData.game_state == GameData.GAME_MENU || Main.gameData.game_state == GameData.MENU_EQUIPMENT){
