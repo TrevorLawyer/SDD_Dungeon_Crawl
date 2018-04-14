@@ -31,7 +31,7 @@ public class Armor extends Item {
 		super(n, desc, x, y);
 		defense = def;
 		
-        super.currentPic = null;
+        super.currentPic[0] = null;
         try 
         {
           super.currentPic[0] = ImageIO.read(getClass().getResource(spriteLocation));

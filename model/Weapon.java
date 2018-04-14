@@ -15,7 +15,7 @@ public class Weapon extends Item {
 		super(n, desc, x, y);
 		power=p;
 		
-        super.currentPic[1] = null;
+        super.currentPic[0] = null;
         super.worth_in_gold = 300;
         try 
         {
@@ -33,7 +33,7 @@ public class Weapon extends Item {
 			super(n, desc, x, y);
 			power=p;
 			 		
-			super.currentPic[1] = null;
+			super.currentPic[0] = null;
 			try 
 			{
 			    super.currentPic[1] = ImageIO.read(getClass().getResource(spriteLocation));

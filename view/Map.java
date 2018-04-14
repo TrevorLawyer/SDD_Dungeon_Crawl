@@ -180,10 +180,10 @@ public class Map extends JFrame {
 				{
 					if (!(Main.gameData.enemyFigures.get(i).health>0)) {
 						// adds item where enemy was killed
-					/*	Main.gameData.dropped = Main.gameData.manager.ItemOutput(
+						Main.gameData.dropped = Main.gameData.manager.ItemOutput(
 								Main.gameData.enemyFigures.get(i).x, Main.gameData.enemyFigures.get(i).y,
 								Main.gameData.enemyFigures.get(i).x%2+1, Main.gameData.enemyFigures.get(i).y%2+1);
-						Main.gameData.friendFigures.add(Main.gameData.dropped);*/
+						Main.gameData.friendFigures.add(Main.gameData.dropped);
 						Main.gameData.hero.xp=+Main.gameData.enemyFigures.get(i).xp;
 				//	    item = manager.ItemOutput(enemyFigures.get(i).x, enemyFigures.get(i).y);
 					   // friendFigures.add(item);

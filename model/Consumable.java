@@ -14,7 +14,7 @@ public class Consumable extends Item {
 	//Deprecated, use other constructor if possible. Kept for backwards compatibility.
 	public Consumable(String n, String desc, int h, int x ,int y) {
 		super(n, desc, x, y);
-       // super.currentPic = null;
+        super.currentPic[0] = null;
         super.worth_in_gold = 100;
         healthRestored = h;
         try 
@@ -28,7 +28,7 @@ public class Consumable extends Item {
 	//Overloaded constructor allows us to specify where the sprite is located.
 	public Consumable(String n, String desc, int h, int x ,int y, String spriteLocation) {
 		super(n, desc, x, y);
-        super.currentPic = null;
+        super.currentPic[0] = null;
         healthRestored = h;
         try 
         {
