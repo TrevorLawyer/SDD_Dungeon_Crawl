@@ -216,7 +216,7 @@ public class Animator implements Runnable {
                 	}
                 	else {
                 		
-                		if(Main.gameData.game_state == GameData.GAME_RUNNING && noDeath==0)Main.gameData.hero.setHealth(-1);
+                		Main.gameData.hero.setHealth(-3); 
 
                 	}
                 }
