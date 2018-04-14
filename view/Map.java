@@ -14,7 +14,7 @@ import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-
+import java.awt.Font;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -161,6 +161,9 @@ public class Map extends JFrame {
             synchronized(Main.gameData.inventory_window){
             	if(Main.gameData.game_state == GameData.GAME_MENU || Main.gameData.game_state == GameData.MENU_EQUIPMENT){
         		Main.gameData.inventory_window.render(g2);
+    			g2.setFont(new Font("Helevtica", Font.BOLD, 11));
+        		g2.setColor(Color.WHITE);
+        		g2.drawString(Main.gameData.hero.gold+" Gold",150,75);
         	}
         }
 			synchronized(Merchant.merchant_dialogue){
