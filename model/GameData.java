@@ -56,11 +56,11 @@ public class GameData {
         Main.frame.PlaceCharacter(hero);
         
         if (Merchant.randomWithRange(0,2) == 0) {
-        	merchant.present = true;
-        	friendFigures.add(merchant);
-        	Main.frame.PlaceCharacter(merchant);
+  //      	merchant.present = true;
+ //       	friendFigures.add(merchant);
+ //       	Main.frame.PlaceCharacter(merchant);
         }
-        player_dialogue_type = Merchant.GREETING;
+ //       player_dialogue_type = Merchant.GREETING;
         merchant_dialogue_window = Merchant.merchant_dialogue[0];
 
         	spawn();//first enemy created
