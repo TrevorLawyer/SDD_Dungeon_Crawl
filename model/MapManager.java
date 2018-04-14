@@ -25,6 +25,9 @@ public class MapManager {
 			GameData.spawn(); // make new enemy as new map is generated
 		}
 			currentMap++;
+			if(currentMap%2 == 1){    //Odd level
+                GameData.chest.onMap = true;
+}
 	}
 	
 	public void goBack() {
