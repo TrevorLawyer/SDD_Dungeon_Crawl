@@ -11,7 +11,7 @@ import model.Merchant;
 public class KeyController implements KeyListener {
 	Audio a = new Audio();
 	boolean hasLeftEntranceTile = false;
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()){

@@ -86,7 +86,7 @@ public class GameData {
     	merchant = new Merchant((int) Math.ceil(Math.random()*8),(int) Math.ceil(Math.random()*8));
     	friendFigures.add(merchant);
     	Main.frame.PlaceCharacter(enemy);
-    	//friendFigures.remove(dropped);
+    	friendFigures.remove(dropped);
     	chest = new TreasureChest((int)(Math.random()*9+1),(int)(Math.random()*9+1));
     	System.out.println("Chest x: "+chest.x+", y: "+chest.y);
      }
